@@ -2,11 +2,11 @@ import "./Nav-Public.css";
 import logo from "../../assets/logo.png";
 import "./Nav-Public.css";
 import { Typography, Link, Button } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 
 const Nav = () => {
   return (
-    <Typography>
+    <Typography component={'div'}>
       <nav className="navbar navbar-expand-md nav">
         <div className="d-flex flex-grow-1">
           <a className="navbar-brand" href="#">
@@ -19,11 +19,11 @@ const Nav = () => {
               data-toggle="collapse"
               data-target="#myNavbar7"
             >
-              <MenuIcon
+              <MenuRoundedIcon
                 color="primary"
                 style={{ fontSize: 40 }}
                 className="icon"
-              ></MenuIcon>
+              ></MenuRoundedIcon>
             </Button>
           </div>
         </div>

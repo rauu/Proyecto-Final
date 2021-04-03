@@ -9,13 +9,15 @@ import theme from "./CoustumTheme";
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Home}/>
-        </Switch>
-      </Router>
-    </ThemeProvider>
+    <div>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Home} />
+          </Switch>
+        </Router>
+      </ThemeProvider>
+    </div>
   );
 }
 
