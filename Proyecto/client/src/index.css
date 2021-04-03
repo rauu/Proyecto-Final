@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap');
+
+
+/*GLOBAL VARIABLE*/
+:root{
+     --normal-button-color: #FFCEC2;
+     --normal-background-color: #FFEFEB;
+     --white-color: #F5F5F5;
+     --secondary-color: #333232;
+     --primary-color: #FF4810;
+     --navLink-fontSize: 25px;
+}
+
+
+body{
+     background-color: var(--normal-background-color);
+}
