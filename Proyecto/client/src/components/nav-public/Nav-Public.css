@@ -32,6 +32,11 @@
 
 }
 
+a{
+     text-decoration: none !important;
+
+}
+
 
 .background:hover, .background:hover a{
      background-color: var(--normal-button-color);

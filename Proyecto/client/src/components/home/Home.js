@@ -312,7 +312,7 @@ const Home = () => {
         <br />
         <br />
       </div>
-      <hr/>
+      <hr />
       <div className="fifth-compo">
         <br />
         <br />
@@ -324,27 +324,30 @@ const Home = () => {
         <br />
         <Fade bottom>
           <Grid container spacing={2} className="grid-center">
+            
             <Grid item xs={12} sm={12} md={6} lg={6}>
               <div className="grid-compo">
-                <Grid container spacing={2} className="grid-center">
-                  <Grid item xs>
+                <Grid container spacing={0} className="grid-center">
+                  <Grid item xs={12} sm={12} md={6} lg={6}>
                     <div className="comment-inline">
                       <img
                         src={Person1}
                         alt={Person1}
                         className="comment-image"
                       />
-                      <div className="comment-text">
-                        <Typography variant="body1" className="comment-text">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Cras commodo ornare eros sed semper. Aliquam at
-                          tortor laoreet, laoreet lorem id, vehicula leo.
-                        </Typography>
-                        <br />
-                        <Typography variant="body1">
-                          Lorem ipsum - Lorem
-                        </Typography>
-                      </div>
+                    </div>
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={6} lg={6}>
+                    <div className="comment-text">
+                      <Typography variant="body1" className="comment-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Cras commodo ornare eros sed semper. Aliquam at tortor
+                        laoreet, laoreet lorem id, vehicula leo.
+                      </Typography>
+                      <br />
+                      <Typography variant="body1">
+                        Lorem ipsum - Lorem
+                      </Typography>
                     </div>
                   </Grid>
                 </Grid>
@@ -352,25 +355,27 @@ const Home = () => {
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
               <div className="grid-compo">
-                <Grid container spacing={2} className="grid-center">
-                  <Grid item xs>
+                <Grid container spacing={0} className="grid-center">
+                  <Grid item xs={12} sm={12} md={6} lg={6}>
                     <div className="comment-inline">
                       <img
                         src={Person2}
                         alt={Person2}
                         className="comment-image"
                       />
-                      <div className="comment-text">
-                        <Typography variant="body1" className="comment-text">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Cras commodo ornare eros sed semper. Aliquam at
-                          tortor laoreet, laoreet lorem id, vehicula leo.
-                        </Typography>
-                        <br />
-                        <Typography variant="body1">
-                          Lorem ipsum - Lorem
-                        </Typography>
-                      </div>
+                    </div>
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={6} lg={6}>
+                    <div className="comment-text">
+                      <Typography variant="body1" className="comment-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Cras commodo ornare eros sed semper. Aliquam at tortor
+                        laoreet, laoreet lorem id, vehicula leo.
+                      </Typography>
+                      <br />
+                      <Typography variant="body1">
+                        Lorem ipsum - Lorem
+                      </Typography>
                     </div>
                   </Grid>
                 </Grid>
@@ -378,9 +383,9 @@ const Home = () => {
             </Grid>
           </Grid>
         </Fade>
-        <br/>
-        <br/>
-        <br/>
+        <br />
+        <br />
+        <br />
       </div>
       <Footer></Footer>
     </div>

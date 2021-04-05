@@ -15,22 +15,38 @@ const Footer = () => {
       <br />
       <br />
       <Grid container spacing={2} className="grid-center">
-        <Grid item xs={12} sm={12} md={6} lg={6} className="left-footer">
-          <Link href="#" className="" color="primary">
+        <Grid item xs={12} sm={12} md={4} lg={4} className="left-footer">
+          <Link href="#" className="white">
             Contact Us
           </Link>
           <br />
           <br />
-          <Link href="#" className="" color="primary">
+          <Link href="#" className="white">
             Work with us
           </Link>
         </Grid>
-        <Grid item xs={12} sm={12} md={6} lg={6}>
-          <img src={logo} alt={logo} className="logo" />
+        <Grid item xs={12} sm={12} md={4} lg={4}>
+          <img src={logo} alt={logo} className="logo-footer" />
+        </Grid>
+        <Grid item xs={12} sm={12} md={4} lg={4}>
+          <div className="inline">
+            <Link href="#" className="white inline-icons">
+            <InstagramIcon style={{ fontSize: 70 }}></InstagramIcon>
+            </Link>
+            <Link href="#" className="white inline-icons">
+            <FacebookIcon style={{ fontSize: 70 }}></FacebookIcon>
+            </Link>
+            <Link href="#" className="white inline-icons">
+            <TwitterIcon style={{ fontSize: 70 }}></TwitterIcon>
+            </Link>
+            <Link href="#" className="white inline-icons">
+            <WhatsAppIcon style={{ fontSize: 70 }}></WhatsAppIcon>
+            </Link>
+          </div>
         </Grid>
       </Grid>
       <br />
-      <Typography variant="body2" color="primary">
+      <Typography variant="body2" className="white">
         Copyright 2021 Made By Raunak Binyani
       </Typography>
       <br />

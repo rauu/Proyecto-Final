@@ -3,10 +3,21 @@
      text-align: center;
 }
 
-.logo{
+.logo-footer{
      height: 100px;
 }
 
-.left-footer{
+.white{
+     color: var(--normal-background-color) !important;
+}
 
+.inline-icons
+{
+     padding: 10px;
+}
+
+@media (max-width: 500px) {
+     .logo-footer{
+          height: 50px;
+     }
 }

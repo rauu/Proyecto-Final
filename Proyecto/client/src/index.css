@@ -28,12 +28,12 @@ html{
      width: 10px;
 }
 
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track:vertical{
      background-color: var(--white-color);
      border-radius: 30px;
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb:vertical{
      background-color: var(--primary-color);
      border-radius: 30px;
 }

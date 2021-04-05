@@ -2,11 +2,12 @@ import "./Nav-Public.css";
 import logo from "../../assets/logo.png";
 import "./Nav-Public.css";
 import { Typography, Link, Button } from "@material-ui/core";
-import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
+import LinkA from "react-router-dom/Link";
+import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
 
 const Nav = () => {
   return (
-    <Typography component={'div'}>
+    <Typography component={"div"}>
       <nav className="navbar navbar-expand-md nav">
         <div className="d-flex flex-grow-1">
           <a className="navbar-brand" href="#">
@@ -38,9 +39,11 @@ const Nav = () => {
               </Link>
             </li>
             <li className="nav-item px-3  background">
-              <Link href="#" className="nav-link links link_color" color="secondary">
-                Sign Up
-              </Link>
+              <LinkA to="/register">
+                <Link className="nav-link links link_color" color="secondary">
+                  Sign Up
+                </Link>
+              </LinkA>
             </li>
             <li className="nav-item px-3">
               <Link href="#" className="nav-link links" color="secondary">
