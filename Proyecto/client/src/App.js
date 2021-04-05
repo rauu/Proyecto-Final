@@ -11,11 +11,13 @@ function App() {
   return (
     <div>
       <ThemeProvider theme={theme}>
+      <Typography component={'div'}>
         <Router>
           <Switch>
             <Route exact path="/" component={Home} />
           </Switch>
         </Router>
+        </Typography>
       </ThemeProvider>
     </div>
   );

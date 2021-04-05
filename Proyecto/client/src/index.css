@@ -15,3 +15,25 @@
 body{
      background-color: var(--normal-background-color);
 }
+
+html{
+     scroll-behavior: smooth;
+     max-width: 100%;
+     overflow-x: hidden;
+}
+
+
+/*Scrollbar*/
+::-webkit-scrollbar{
+     width: 10px;
+}
+
+::-webkit-scrollbar-track{
+     background-color: var(--white-color);
+     border-radius: 30px;
+}
+
+::-webkit-scrollbar-thumb{
+     background-color: var(--primary-color);
+     border-radius: 30px;
+}
