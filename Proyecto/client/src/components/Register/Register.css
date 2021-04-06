@@ -3,3 +3,14 @@
      background-color: var(--primary-color);
      
 }
+
+.registerForm{
+     text-align: center !important;
+     align-items: center !important;
+     justify-content: center !important;
+     width:50%;
+}
+
+.register{
+     text-align: center;
+}
