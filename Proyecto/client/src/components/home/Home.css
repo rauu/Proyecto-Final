@@ -36,7 +36,6 @@
 }
 
 .comment-inline {
-
      text-align: center;
 }
 
@@ -63,8 +62,10 @@ hr {
           height: 150px;
           text-align: center;
      }
-
-     .image-fitness{
+     .image-fitness {
           height: 100px;
+     }
+     .second-compo, .forth-compo, .fifth-compo {
+          padding: 0;
      }
 }

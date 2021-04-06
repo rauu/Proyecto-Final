@@ -1,7 +1,7 @@
 import "./Nav-Public.css";
 import logo from "../../assets/logo.png";
 import "./Nav-Public.css";
-import { Typography, Link, Button } from "@material-ui/core";
+import { Typography, Link, Button, AppBar } from "@material-ui/core";
 import LinkA from "react-router-dom/Link";
 import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
 

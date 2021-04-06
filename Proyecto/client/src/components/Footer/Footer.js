@@ -49,7 +49,6 @@ const Footer = () => {
       <Typography variant="body2" className="white">
         Copyright 2021 Made By Raunak Binyani
       </Typography>
-      <br />
     </div>
   );
 };
