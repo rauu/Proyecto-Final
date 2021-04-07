@@ -1,16 +1,30 @@
-.register-first{
+.register-first {
      text-align: center;
      background-color: var(--primary-color);
-     
 }
 
-.registerForm{
+.registerForm {
      text-align: center !important;
-     align-items: center !important;
-     justify-content: center !important;
-     width:50%;
+     width: 50%;
 }
 
-.register{
+.button {
+     font-size: 25px !important;
+     border-radius: 30px !important;
+}
+
+.register {
      text-align: center;
 }
+
+button:focus{
+     outline: none;
+}
+
+
+@media (max-width: 700px) {
+     .registerForm {
+          width: 90%;
+     }
+}
+

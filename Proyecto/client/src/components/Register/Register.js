@@ -1,11 +1,33 @@
+import React from "react";
+
 import "./Register.css";
 import logo from "../../assets/logo.png";
-import { Typography, Link, Button, Grid, TextField } from "@material-ui/core";
-import DatePicker from "@material-ui/lab/DatePicker";
+import {
+  Typography,
+  Link,
+  Button,
+  Grid,
+  TextField,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  OutlinedInput,
+} from "@material-ui/core";
+
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 import LinkA from "react-router-dom/Link";
 
 const Register = () => {
+  const [gender, setGender] = React.useState("");
+
+  const handleChange = (event) => {
+    setGender(event.target.value);
+  };
+
   return (
     <div className="register">
       <Typography component={"div"}>
@@ -42,7 +64,13 @@ const Register = () => {
         <br />
         <br />
         <form action="POST" autoComplete="off">
-          <Grid container spacing={5} className="grid-center">
+          <Grid
+            container
+            spacing={5}
+            className="grid-center"
+            alignItems="center"
+            justify="center"
+          >
             <Grid item xs={12} sm={12} md={6} lg={6}>
               <TextField
                 name="firstName"
@@ -84,17 +112,59 @@ const Register = () => {
                 label="Email"
               />
             </Grid>
+            <Grid item xs={12} sm={12} md={6} lg={6}>
+              <TextField
+                id="date"
+                label="Birthday"
+                type="date"
+                required
+                fullWidth
+                variant="outlined"
+                defaultValue=""
+                InputLabelProps={{ shrink: true }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={12} md={6} lg={6}>
+              <FormControl variant="outlined" fullWidth required>
+                <InputLabel id="gender">Gender</InputLabel>
+                <Select
+                  labelId="gender"
+                  id="gender"
+                  value={gender}
+                  onChange={handleChange}
+                  label="Gender"
+                >
+                  <MenuItem value={"men"}>Men</MenuItem>
+                  <MenuItem value={"women"}>Women</MenuItem>
+                  <MenuItem value={"other"}>Other</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
             <Grid item xs={12} sm={12} md={12} lg={12}>
-{/*               <DatePicker
-                label="Basic example"
-                value={value}
-                onChange={(newValue) => {
-                  setValue(newValue);
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              /> */}
+              <TextField
+                id="password"
+                label="Password"
+                type="password"
+                variant="outlined"
+                fullWidth
+                required
+              />
+            </Grid>
+            <Grid item xs={12} sm={12} md={12} lg={12}>
+              <TextField
+                id="confirm-password"
+                label="Confirm Password"
+                type="password"
+                variant="outlined"
+                fullWidth
+                required
+              />
             </Grid>
           </Grid>
+          <br/>
+          <Button variant="contained" color="primary" className="button">
+            Register
+          </Button>
         </form>
       </div>
     </div>
