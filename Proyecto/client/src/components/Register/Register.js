@@ -1,5 +1,7 @@
 import React from "react";
 
+import Footer from "../Footer/Footer";
+
 import "./Register.css";
 import logo from "../../assets/logo.png";
 import {
@@ -148,7 +150,7 @@ const Register = () => {
                 <Select
                   labelId="gender"
                   id="gender"
-                  value={gender}
+                  value={values.gender}
                   onChange={handleChange("gender")}
                   label="Gender"
                 >
@@ -189,8 +191,12 @@ const Register = () => {
           >
             Register
           </Button>
+          <br/>
+          <br/>
+          <br/>
         </form>
       </div>
+      <Footer></Footer>
     </div>
   );
 };
