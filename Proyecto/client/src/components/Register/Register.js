@@ -16,6 +16,7 @@ import {
   InputAdornment,
   OutlinedInput,
 } from "@material-ui/core";
+import { DatePicker, KeyboardDatePicker } from "@material-ui/pickers";
 
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 
@@ -23,9 +24,19 @@ import LinkA from "react-router-dom/Link";
 
 const Register = () => {
   const [gender, setGender] = React.useState("");
+  const [values, setValues] = React.useState({
+    name: "",
+    surname: "",
+    username: "",
+    email: "",
+    dob: "",
+    gender: "",
+    password: "",
+  });
 
-  const handleChange = (event) => {
-    setGender(event.target.value);
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+    console.log(values);
   };
 
   return (
@@ -33,9 +44,11 @@ const Register = () => {
       <Typography component={"div"}>
         <nav className="navbar navbar-expand nav">
           <div className="d-flex flex-grow-1">
-            <a className="navbar-brand" href="#">
-              <img src={logo} alt="logo" className="logo" />
-            </a>
+            <LinkA to="/">
+              <a className="navbar-brand" href="#">
+                <img src={logo} alt="logo" className="logo" />
+              </a>
+            </LinkA>
           </div>
           <div className="collapse navbar-collapse flex-grow-1 text-right">
             <ul className="navbar-nav ml-auto flex-nowrap ">
@@ -80,6 +93,7 @@ const Register = () => {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                onChange={handleChange("name")}
               />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -90,6 +104,7 @@ const Register = () => {
                 fullWidth
                 id="lastName"
                 label="Last Name"
+                onChange={handleChange("surname")}
               />
             </Grid>
             <Grid item xs={12} sm={12} md={12} lg={12}>
@@ -100,6 +115,7 @@ const Register = () => {
                 fullWidth
                 id="username"
                 label="UserName"
+                onChange={handleChange("username")}
               />
             </Grid>
             <Grid item xs={12} sm={12} md={12} lg={12}>
@@ -110,18 +126,20 @@ const Register = () => {
                 fullWidth
                 id="email"
                 label="Email"
+                onChange={handleChange("email")}
               />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
               <TextField
                 id="date"
-                label="Birthday"
+                label="Date of Birth"
                 type="date"
                 required
                 fullWidth
                 variant="outlined"
                 defaultValue=""
                 InputLabelProps={{ shrink: true }}
+                onChange={handleChange("dob")}
               />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -131,7 +149,7 @@ const Register = () => {
                   labelId="gender"
                   id="gender"
                   value={gender}
-                  onChange={handleChange}
+                  onChange={handleChange("gender")}
                   label="Gender"
                 >
                   <MenuItem value={"men"}>Men</MenuItem>
@@ -148,6 +166,7 @@ const Register = () => {
                 variant="outlined"
                 fullWidth
                 required
+                onChange={handleChange("password")}
               />
             </Grid>
             <Grid item xs={12} sm={12} md={12} lg={12}>
@@ -161,8 +180,13 @@ const Register = () => {
               />
             </Grid>
           </Grid>
-          <br/>
-          <Button variant="contained" color="primary" className="button">
+          <br />
+          <Button
+            variant="contained"
+            color="primary"
+            className="button"
+            type="button"
+          >
             Register
           </Button>
         </form>
