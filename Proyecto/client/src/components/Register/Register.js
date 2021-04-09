@@ -35,10 +35,31 @@ const Register = () => {
     gender: "",
     password: "",
   });
+  const [valuesError, setValuesError] = React.useState({
+    name: false,
+    surname: false,
+    username: "false",
+    email: false,
+    dob: false,
+    gender: false,
+    password: false,
+  });
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
     console.log(values);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log("true");
+    if (values.name == "") {
+      setValuesError({
+        name: true,
+      });
+      console.log("true");
+    }
   };
 
   return (
@@ -78,7 +99,7 @@ const Register = () => {
         <br />
         <br />
         <br />
-        <form action="POST" autoComplete="off">
+        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
           <Grid
             container
             spacing={5}
@@ -96,6 +117,7 @@ const Register = () => {
                 label="First Name"
                 autoFocus
                 onChange={handleChange("name")}
+                error={valuesError.name}
               />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -187,13 +209,13 @@ const Register = () => {
             variant="contained"
             color="primary"
             className="button"
-            type="button"
+            type="submit"
           >
             Register
           </Button>
-          <br/>
-          <br/>
-          <br/>
+          <br />
+          <br />
+          <br />
         </form>
       </div>
       <Footer></Footer>
