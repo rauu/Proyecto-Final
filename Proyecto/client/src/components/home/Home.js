@@ -324,7 +324,7 @@ const Home = () => {
         <br />
         <Fade bottom>
           <Grid container spacing={2} className="grid-center">
-            
+
             <Grid item xs={12} sm={12} md={6} lg={6}>
               <div className="grid-compo">
                 <Grid container spacing={0} className="grid-center">

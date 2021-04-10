@@ -46,7 +46,7 @@ const Footer = () => {
         </Grid>
       </Grid>
       <br />
-      <Typography variant="body2" className="white">
+      <Typography variant="body2" className="white copyright">
         Copyright 2021 Made By Raunak Binyani
       </Typography>
     </div>

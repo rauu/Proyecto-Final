@@ -39,10 +39,8 @@ const Nav = () => {
               </Link>
             </li>
             <li className="nav-item px-3  background">
-              <LinkA to="/register">
-                <Link className="nav-link links link_color" color="secondary">
+              <LinkA to="/register" className="nav-link links link_color" color="secondary">
                   Sign Up
-                </Link>
               </LinkA>
             </li>
             <li className="nav-item px-3">

@@ -1,23 +1,28 @@
-.footer{
+.footer {
      background-color: var(--secondary-color);
      text-align: center;
 }
 
-.logo-footer{
+.logo-footer {
      height: 100px;
 }
 
-.white{
+.white {
      color: var(--normal-background-color) !important;
 }
 
-.inline-icons
-{
+.inline-icons {
      padding: 10px;
 }
 
+@media (max-width: 700px) {
+     .copyright {
+          font-size: 14px !important;
+     }
+}
+
 @media (max-width: 500px) {
-     .logo-footer{
+     .logo-footer {
           height: 50px;
      }
 }

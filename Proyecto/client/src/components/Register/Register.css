@@ -6,6 +6,7 @@
 .registerForm {
      text-align: center !important;
      width: 50%;
+     margin: auto;
 }
 
 .button {
