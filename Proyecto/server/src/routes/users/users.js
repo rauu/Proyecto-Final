@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../../config/db_connection");
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 
 //insert movie
 
@@ -11,20 +14,26 @@ router.post("/storeuser", (req, res) => {
   const email = req.body.email;
   const dob = req.body.dob;
   const gender = req.body.gender;
-  const password = req.body.password;
-  console.log(req.body)
+  const password =  bcrypt.hashSync(req.body.password, saltRounds);
+  console.log(req.body);
 
-  const sqlInsert = "INSERT INTO users (name, surname, username, email, date_birth, sex, password) VALUES (?,?,?,?,?,?,?);";
+  const sqlInsert =
+    "INSERT INTO users (name, surname, username, email, date_birth, sex, password) VALUES (?,?,?,?,?,?,?);";
 
-  db.query(sqlInsert, [name, lastname, username, email, dob, gender, password], (err, result) =>{
-    res.send(result);
-    if(err){
-      console.log(err);
-    }else{
-      console.log("inserted user")
+  db.query(
+    sqlInsert,
+    [name, lastname, username, email, dob, gender, password],
+    (err, result) => {
+      //res.send(result);
+      if (err) {
+        console.log(err.errno);
+        res.send(false)
+      } else {
+        console.log("inserted user");
+        res.send(true)
+      }
     }
-  })
-
+  );
 });
 
 module.exports = router;

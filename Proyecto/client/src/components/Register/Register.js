@@ -16,7 +16,10 @@ import {
   InputLabel,
   FormControl,
   FormHelperText,
+  Snackbar,
 } from "@material-ui/core";
+
+import MuiAlert from "@material-ui/lab/Alert";
 
 import LinkA from "react-router-dom/Link";
 import {
@@ -29,6 +32,10 @@ import {
   passwordMatchValidation,
 } from "../../utils/validation";
 import { registerUser } from "../../service/User";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const Register = () => {
   const [values, setValues] = React.useState({
@@ -99,7 +106,7 @@ const Register = () => {
 
   function createUser() {
     console.log("USER");
-    console.log(values);
+    //console.log(values);
     registerUser(
       values.name,
       values.surname,
@@ -109,9 +116,24 @@ const Register = () => {
       values.gender,
       values.password
     ).then((res) => {
-      console.log("user registerd\n" + res);
+      console.log(res);
+      if (res.data) {
+        console.log(res.data);
+        setCreateUserSnackSuccess(true);
+      } else if (!res.data) {
+        console.log(res.data);
+        setCreateUserSnackError(true);
+      }
     });
   }
+  const [createUserSnackSuccess, setCreateUserSnackSuccess] = React.useState(
+    false
+  );
+  const [createUserSnackError, setCreateUserSnackError] = React.useState(false);
+  const handleClose = () => {
+    setCreateUserSnackSuccess(false);
+    setCreateUserSnackError(false);
+  };
 
   function validationFunciton() {
     //name
@@ -329,6 +351,8 @@ const Register = () => {
       cPassBool
     ) {
       createUser();
+    } else {
+      setCreateUserSnackError(true);
     }
   }
 
@@ -532,7 +556,25 @@ const Register = () => {
           <br />
           <br />
         </form>
-      </div>
+      </div>{" "}
+      <Snackbar
+        open={createUserSnackSuccess}
+        autoHideDuration={3000}
+        onClose={handleClose}
+      >
+        <Alert autoHideDuration={3000} onClose={handleClose} severity="success">
+          User registered successfully
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={createUserSnackError}
+        autoHideDuration={3000}
+        onClose={handleClose}
+      >
+        <Alert autoHideDuration={3000} onClose={handleClose} severity="error">
+          User registration failed
+        </Alert>
+      </Snackbar>
       <Footer></Footer>
     </div>
   );

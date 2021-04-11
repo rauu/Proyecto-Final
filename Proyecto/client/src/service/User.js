@@ -18,10 +18,8 @@ export const registerUser = (
       gender: gender,
       password: password
     })
-    .then((response) => {
-      console.log(name);
+    .then((request, response) => {
+      console.log(request);
+      return request;
     })
-    .catch((error) => {
-      console.log(error);
-    });
 };
