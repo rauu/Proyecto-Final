@@ -5,14 +5,15 @@ import { Typography, Link, Button, AppBar } from "@material-ui/core";
 import LinkA from "react-router-dom/Link";
 import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
 
+
 const Nav = () => {
   return (
     <Typography component={"div"}>
       <nav className="navbar navbar-expand-md nav">
         <div className="d-flex flex-grow-1">
-          <a className="navbar-brand" href="#">
+          <LinkA className="navbar-brand" to="/">
             <img src={logo} alt="logo" className="logo" />
-          </a>
+          </LinkA>
           <div className="w-100 text-right">
             <Button
               className="navbar-toggler"

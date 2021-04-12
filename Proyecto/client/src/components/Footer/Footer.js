@@ -3,6 +3,7 @@ import "./Footer.css";
 import logo from "../../assets/logo.png";
 
 import { Typography, Grid, Link } from "@material-ui/core";
+import LinkA from "react-router-dom/Link";
 
 import InstagramIcon from "@material-ui/icons/Instagram";
 import FacebookIcon from "@material-ui/icons/Facebook";
@@ -21,9 +22,9 @@ const Footer = () => {
           </Link>
           <br />
           <br />
-          <Link href="#" className="white">
+          <LinkA to="/workwithus"className="white">
             Work with us
-          </Link>
+          </LinkA>
         </Grid>
         <Grid item xs={12} sm={12} md={4} lg={4}>
           <img src={logo} alt={logo} className="logo-footer" />

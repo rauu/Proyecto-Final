@@ -7,6 +7,7 @@ import Home from "./components/home/Home";
 
 import theme from "./CoustumTheme";
 import Register from './components/Register/Register';
+import WorkWithUS from './components/work-with-us/WorkWithUs';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
           </Switch>
           <Switch>
             <Route exact path="/register" component={Register} />
+          </Switch>
+          <Switch>
+            <Route exact path="/workwithus" component={WorkWithUS} />
           </Switch>
         </Router>
         </Typography>
