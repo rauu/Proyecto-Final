@@ -1,10 +1,10 @@
 export function lettersValidation(name) {
-  const lettersValid = /^[a-zA-Z]+$/;
+  const lettersValid = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
   return lettersValid.test(String(name));
 }
 
 export function usernameValidation(username) {
-  const usernameValid = /^[a-z0-9_-]{3,15}$/;
+  const usernameValid = /^[a-z0-9_-]{1,15}$/;
   return usernameValid.test(username);
 }
 
