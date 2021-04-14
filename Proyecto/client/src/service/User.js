@@ -9,7 +9,7 @@ export const registerUser = (
   gender,
   password
 ) => {
-  return axios.post("http://localhost:3001/users/storeuser", {
+  return axios.post("http://localhost:3001/users/", {
       name: name,
       lastname: lastname,
       username: username,

@@ -12,7 +12,7 @@ require("./src/routes")(app);
 app.listen(PORT, () => {
   console.log(`Running on port ${PORT}`);
 });
-
+/* 
 const nodemailer = require("nodemailer");
 const gmailConnection = require("./src/config/gmail_connection");
 
@@ -47,3 +47,4 @@ transporter.sendMail(mailOptions, function (error, info) {
     console.log("Email sent: " + info.response);
   }
 });
+ */
