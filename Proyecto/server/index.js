@@ -13,14 +13,15 @@ app.listen(PORT, () => {
   console.log(`Running on port ${PORT}`);
 });
 
-/* var nodemailer = require("nodemailer");
+const nodemailer = require("nodemailer");
+const gmailConnection = require("./src/config/gmail_connection");
 
 var transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   auth: {
-    user: "raunakbinyani@gmail.com",
-    pass: "Raunak_12",
+    user: gmailConnection.email,
+    pass: gmailConnection.password,
   },
 });
 
@@ -31,12 +32,12 @@ var mailOptions = {
   text: "That was easy!",
   attachments: [
     {
-       //path: pdf,
-     // filename: 'text1.pdf',
+      //path: pdf,
+      // filename: 'text1.pdf',
       //content: 'aGVsbG8gd29ybGQh',
       //encoding: 'base64'
     },
-  ], 
+  ],
 };
 
 transporter.sendMail(mailOptions, function (error, info) {
@@ -46,4 +47,3 @@ transporter.sendMail(mailOptions, function (error, info) {
     console.log("Email sent: " + info.response);
   }
 });
- */
