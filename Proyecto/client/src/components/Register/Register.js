@@ -1,6 +1,6 @@
 import React from "react";
 
-import Footer from "../Footer/Footer";
+import { Fade } from "react-reveal";
 
 import "./Register.css";
 import logo from "../../assets/logo.png";
@@ -368,195 +368,201 @@ const Register = () => {
           <div className="collapse navbar-collapse flex-grow-1 text-right">
             <ul className="navbar-nav ml-auto flex-nowrap ">
               <li className="nav-item px-3">
-                <Link href="#" className="nav-link links" color="secondary">
+                <LinkA to="/login" className="nav-link links" color="secondary">
                   Sign In
-                </Link>
+                </LinkA>
               </li>
             </ul>
           </div>
         </nav>
       </Typography>
       <div className="register-first">
-        <br />
-        <Typography variant="h2" className="white">
-          YOUR CHANGE BEGINS HERE
-        </Typography>
-        <Typography variant="h5" className="white">
-          Body, Mind and Nutrition
-        </Typography>
-        <br />
+        <Fade right>
+          <br />
+          <Typography variant="h2" className="white">
+            YOUR CHANGE BEGINS HERE
+          </Typography>
+          <Typography variant="h5" className="white">
+            Body, Mind and Nutrition
+          </Typography>
+          <br />
+        </Fade>
       </div>
-      <div className="registerForm">
-        <br />
-        <br />
-        <br />
-        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-          <Grid
-            container
-            spacing={5}
-            className="grid-center"
-            alignItems="center"
-            justify="center"
-          >
-            <Grid item xs={12} sm={12} md={6} lg={6}>
-              <TextField
-                name="name"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-                onChange={handleChange}
-                error={nameValueError.error}
-                helperText={
-                  nameValueError.error ? nameValueError.errorMessage : ""
-                }
-              />
-            </Grid>
-            <Grid item xs={12} sm={12} md={6} lg={6}>
-              <TextField
-                name="surname"
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                onChange={handleChange}
-                error={surnameValueError.error}
-                helperText={
-                  surnameValueError.error ? surnameValueError.errorMessage : ""
-                }
-              />
-            </Grid>
-            <Grid item xs={12} sm={12} md={12} lg={12}>
-              <TextField
-                name="username"
-                variant="outlined"
-                required
-                fullWidth
-                id="username"
-                label="UserName"
-                onChange={handleChange}
-                error={usernameValueError.error}
-                helperText={
-                  usernameValueError.error
-                    ? usernameValueError.errorMessage
-                    : ""
-                }
-              />
-            </Grid>
-            <Grid item xs={12} sm={12} md={12} lg={12}>
-              <TextField
-                name="email"
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email"
-                onChange={handleChange}
-                error={emailValueError.error}
-                helperText={
-                  emailValueError.error ? emailValueError.errorMessage : ""
-                }
-              />
-            </Grid>
-            <Grid item xs={12} sm={12} md={6} lg={6}>
-              <TextField
-                name="dob"
-                id="date"
-                label="Date of Birth"
-                type="date"
-                required
-                fullWidth
-                variant="outlined"
-                InputLabelProps={{ shrink: true }}
-                onChange={handleChange}
-                error={dobValueError.error}
-                helperText={
-                  dobValueError.error ? dobValueError.errorMessage : ""
-                }
-              />
-            </Grid>
-            <Grid item xs={12} sm={12} md={6} lg={6}>
-              <FormControl variant="outlined" fullWidth required>
-                <InputLabel id="gender">Gender</InputLabel>
-                <Select
-                  name="gender"
-                  labelId="gender"
-                  id="gender"
-                  value={values.gender}
+      <Fade left>
+        <div className="registerForm">
+          <br />
+          <br />
+          <br />
+          <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+            <Grid
+              container
+              spacing={5}
+              className="grid-center"
+              alignItems="center"
+              justify="center"
+            >
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <TextField
+                  name="name"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  autoFocus
                   onChange={handleChange}
-                  label="Gender"
-                  error={genderValueError.error}
-                >
-                  <MenuItem value={"men"}>Men</MenuItem>
-                  <MenuItem value={"women"}>Women</MenuItem>
-                  <MenuItem value={"other"}>Other</MenuItem>
-                </Select>
-                {genderValueError.error && (
-                  <FormHelperText
-                    id="standard-weight-helper-text"
+                  error={nameValueError.error}
+                  helperText={
+                    nameValueError.error ? nameValueError.errorMessage : ""
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <TextField
+                  name="surname"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  onChange={handleChange}
+                  error={surnameValueError.error}
+                  helperText={
+                    surnameValueError.error
+                      ? surnameValueError.errorMessage
+                      : ""
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12}>
+                <TextField
+                  name="username"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="username"
+                  label="UserName"
+                  onChange={handleChange}
+                  error={usernameValueError.error}
+                  helperText={
+                    usernameValueError.error
+                      ? usernameValueError.errorMessage
+                      : ""
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12}>
+                <TextField
+                  name="email"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email"
+                  onChange={handleChange}
+                  error={emailValueError.error}
+                  helperText={
+                    emailValueError.error ? emailValueError.errorMessage : ""
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <TextField
+                  name="dob"
+                  id="date"
+                  label="Date of Birth"
+                  type="date"
+                  required
+                  fullWidth
+                  variant="outlined"
+                  InputLabelProps={{ shrink: true }}
+                  onChange={handleChange}
+                  error={dobValueError.error}
+                  helperText={
+                    dobValueError.error ? dobValueError.errorMessage : ""
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
+                <FormControl variant="outlined" fullWidth required>
+                  <InputLabel id="gender">Gender</InputLabel>
+                  <Select
+                    name="gender"
+                    labelId="gender"
+                    id="gender"
+                    value={values.gender}
+                    onChange={handleChange}
+                    label="Gender"
                     error={genderValueError.error}
                   >
-                    {confirmPasswordValueError.error
-                      ? genderValueError.errorMessage
-                      : ""}
-                  </FormHelperText>
-                )}
-              </FormControl>
+                    <MenuItem value={"men"}>Men</MenuItem>
+                    <MenuItem value={"women"}>Women</MenuItem>
+                    <MenuItem value={"other"}>Other</MenuItem>
+                  </Select>
+                  {genderValueError.error && (
+                    <FormHelperText
+                      id="standard-weight-helper-text"
+                      error={genderValueError.error}
+                    >
+                      {confirmPasswordValueError.error
+                        ? genderValueError.errorMessage
+                        : ""}
+                    </FormHelperText>
+                  )}
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12}>
+                <TextField
+                  name="password"
+                  id="password"
+                  label="Password"
+                  type="password"
+                  variant="outlined"
+                  fullWidth
+                  required
+                  onChange={handleChange}
+                  error={passwordValueError.error}
+                  helperText={
+                    passwordValueError.error
+                      ? passwordValueError.errorMessage
+                      : ""
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12}>
+                <TextField
+                  name="confirmPassword"
+                  id="confirm-password"
+                  label="Confirm Password"
+                  type="password"
+                  variant="outlined"
+                  fullWidth
+                  required
+                  onChange={handleChange}
+                  error={confirmPasswordValueError.error}
+                  helperText={
+                    confirmPasswordValueError.error
+                      ? confirmPasswordValueError.errorMessage
+                      : ""
+                  }
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={12} md={12} lg={12}>
-              <TextField
-                name="password"
-                id="password"
-                label="Password"
-                type="password"
-                variant="outlined"
-                fullWidth
-                required
-                onChange={handleChange}
-                error={passwordValueError.error}
-                helperText={
-                  passwordValueError.error
-                    ? passwordValueError.errorMessage
-                    : ""
-                }
-              />
-            </Grid>
-            <Grid item xs={12} sm={12} md={12} lg={12}>
-              <TextField
-                name="confirmPassword"
-                id="confirm-password"
-                label="Confirm Password"
-                type="password"
-                variant="outlined"
-                fullWidth
-                required
-                onChange={handleChange}
-                error={confirmPasswordValueError.error}
-                helperText={
-                  confirmPasswordValueError.error
-                    ? confirmPasswordValueError.errorMessage
-                    : ""
-                }
-              />
-            </Grid>
-          </Grid>
-          <br />
-          <Button
-            variant="contained"
-            color="primary"
-            className="button"
-            type="submit"
-          >
-            Register
-          </Button>
-          <br />
-          <br />
-          <br />
-        </form>
-      </div>{" "}
+            <br />
+            <Button
+              variant="contained"
+              color="primary"
+              className="button"
+              type="submit"
+            >
+              Register
+            </Button>
+            <br />
+            <br />
+            <br />
+          </form>
+        </div>
+      </Fade>
       <Snackbar
         open={createUserSnackSuccess}
         autoHideDuration={3000}
@@ -575,7 +581,6 @@ const Register = () => {
           User registration failed
         </Alert>
       </Snackbar>
-      <Footer></Footer>
     </div>
   );
 };

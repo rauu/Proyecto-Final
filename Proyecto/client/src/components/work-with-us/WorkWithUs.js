@@ -19,6 +19,7 @@ import {
 } from "@material-ui/core";
 
 import { lettersValidation, emailValidation } from "../../utils/validation";
+import { submitCV } from "../../service/WorkWithUs";
 import MuiAlert from "@material-ui/lab/Alert";
 
 function Alert(props) {
@@ -90,7 +91,7 @@ const WorkWithUS = () => {
       fileReader.onload = function (fileLoadedEvent) {
         file = fileLoadedEvent.target.result;
         // Print data in console
-        console.log(file);
+        console.log(fileToLoad);
         setValues({
           ...values,
           cv: file,
@@ -203,12 +204,26 @@ const WorkWithUS = () => {
     }
 
     if (nameBool && surnameBool && emailBool && cvBool && messageBool) {
-      alert("true");
+      submitYourCV();
     } else {
-     setCreateUserSnackError(true);
-
-
+      setCreateUserSnackError(true);
     }
+  }
+
+  function submitYourCV() {
+    submitCV(
+      values.name,
+      values.surname,
+      values.email,
+      values.message,
+      values.cv
+    ).then((res) => {
+     if (res.data) {
+       setCreateUserSnackSuccess(true);
+     } else if (!res.data) {
+       setCreateUserSnackError(true);
+     }
+   });
   }
 
   return (

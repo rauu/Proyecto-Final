@@ -1,0 +1,12 @@
+.links{
+     color: var(--secondry-color)
+}
+.login-first {
+     text-align: center;
+     background-color: var(--primary-color);
+}
+
+.login-form{
+     width: 40%;
+     margin: auto
+}

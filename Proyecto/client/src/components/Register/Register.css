@@ -18,6 +18,9 @@
      text-align: center;
 }
 
+.secondary{
+     color: var(--secondary-color);
+}
 button:focus{
      outline: none;
 }
