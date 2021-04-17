@@ -5,7 +5,6 @@ import { Typography, Link, Button, AppBar } from "@material-ui/core";
 import LinkA from "react-router-dom/Link";
 import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
 
-
 const Nav = () => {
   return (
     <Typography component={"div"}>
@@ -40,14 +39,22 @@ const Nav = () => {
               </Link>
             </li>
             <li className="nav-item px-3  background">
-              <LinkA to="/register" className="nav-link links link_color" color="secondary">
-                  Sign Up
+              <LinkA
+                to="/register"
+                className="nav-link links link_color"
+                color="secondary"
+              >
+                Sign Up
               </LinkA>
             </li>
             <li className="nav-item px-3">
-              <Link href="#" className="nav-link links" color="secondary">
+              <LinkA
+                to="/login"
+                className="nav-link links"
+                color="secondary"
+              >
                 Sign In
-              </Link>
+              </LinkA>
             </li>
           </ul>
         </div>

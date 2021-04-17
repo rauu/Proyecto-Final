@@ -10,3 +10,17 @@
      width: 40%;
      margin: auto
 }
+.button{
+     border-radius: 10px !important;
+}
+
+.login-form{
+     text-align: center;
+}
+
+@media (max-width: 700px) {
+     .login-form {
+          width: 90%;
+     }
+}
+
