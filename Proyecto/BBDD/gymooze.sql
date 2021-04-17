@@ -2,8 +2,8 @@
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 30, 2021 at 08:27 AM
+-- Host: localhost
+-- Generation Time: Apr 17, 2021 at 12:19 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -122,7 +122,11 @@ INSERT INTO `users` (`id_user`, `username`, `name`, `surname`, `role_user`, `ema
 (1, 'rauu', 'raunak', 'binyani', 'role_admin', 'raunakbinyani.binyani@gmail.com', 'male', 'raunak', NULL, '2000-09-29'),
 (2, 'victor', 'victor', 'escudero', 'role_admin', 'victor@gmail.com', 'male', 'victor', NULL, '1998-12-01'),
 (3, 'lucia', 'lucia', 'mena', 'role_user', 'lucia@gmail.com', 'female', 'victor', NULL, '1993-12-24'),
-(4, 'marcos', 'marcos', 'martin', 'role_user', 'marcos@gmail.com', 'male', 'marcos', NULL, '2000-12-12');
+(4, 'marcos', 'marcos', 'martin', 'role_user', 'marcos@gmail.com', 'male', 'marcos', NULL, '2000-12-12'),
+(8, 'rauuu', 'Raunak', 'Binyani', 'role_user', 'raunakbinyani@gmail.com', 'men', 'raunak_A2', NULL, '1997-06-04'),
+(9, 'victorlopez', 'Victor', 'Escudero', 'role_user', 'victor@guacamole.com', 'men', 'victor_uWu1', NULL, '1998-12-01'),
+(12, 'rauuuu', 'Raunak', 'Binyani', 'role_user', 'rauninyani@gmail.com', 'men', '$2b$10$1j9/F3PRr70YkYs1ltUDue1QHNBFd0juxSll6/BNciixIBLeVc2TW', NULL, '2000-09-29'),
+(13, 'rauuuuuuu', 'Raunak', 'Binyani', 'role_user', 'raunakyani@gmail.com', 'men', '$2b$10$eMVDACaze6T2lksIxAJ6Uu/j4NgbtV9prZarwpRqDdHmxRi/Wz8xW', NULL, '2001-06-22');
 
 -- --------------------------------------------------------
 
@@ -154,6 +158,30 @@ CREATE TABLE `video_comment` (
   `comment` varchar(255) NOT NULL,
   `date_upload` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `work_with_us`
+--
+
+CREATE TABLE `work_with_us` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `surname` varchar(50) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `date_uploaded` date NOT NULL DEFAULT current_timestamp(),
+  `file_location` varchar(200) NOT NULL,
+  `message` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `work_with_us`
+--
+
+INSERT INTO `work_with_us` (`id`, `name`, `surname`, `email`, `date_uploaded`, `file_location`, `message`) VALUES
+(8, 'Raunak', 'Binyani', 'raunakbinyani.binyani@gmail.com', '2021-04-15', 'src/uploads/cv/CV-Raunak_Binyani_1618516592591.pdf', 'qwerty'),
+(9, 'Raunak', 'Binyani', 'raunakbinyani.binyani@gmail.com', '2021-04-15', 'src/uploads/cv/CV-Raunak_Binyani_1618516716389.pdf', '123456');
 
 --
 -- Indexes for dumped tables
@@ -213,6 +241,12 @@ ALTER TABLE `video_comment`
   ADD KEY `FK_COMMENT_V_VIDEO` (`id_video`);
 
 --
+-- Indexes for table `work_with_us`
+--
+ALTER TABLE `work_with_us`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -244,7 +278,7 @@ ALTER TABLE `subscriptions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `videos`
@@ -257,6 +291,12 @@ ALTER TABLE `videos`
 --
 ALTER TABLE `video_comment`
   MODIFY `id_comment` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `work_with_us`
+--
+ALTER TABLE `work_with_us`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
