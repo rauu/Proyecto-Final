@@ -100,8 +100,8 @@ const Login = () => {
             className="button"
             type="submit"
           >
+          †</Button>
             LogIn
-          </Button>
         </form>
       </div>
     </div>
