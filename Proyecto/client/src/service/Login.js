@@ -1,4 +1,5 @@
 import axios from "axios";
+axios.defaults.withCredentials = true;
 
 export const LoginUser = (
   username,
@@ -9,7 +10,12 @@ export const LoginUser = (
       password: password
     })
     .then((request, response) => {
-      console.log(request);
-      return request;
+      if(request.data.user == true){
+        console.log(request.data)
+        sessionStorage.setItem("user", JSON.stringify(request.data))
+        return true;
+      }else if( request.data.user == false){
+        return request.data.user;
+      }
     })
 };

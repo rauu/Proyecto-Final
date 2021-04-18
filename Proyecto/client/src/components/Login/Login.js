@@ -5,7 +5,7 @@ import { Fade } from "react-reveal";
 import "./Login.css";
 import logo from "../../assets/logo.png";
 
-import {LoginUser} from "../../service/Login"
+import { LoginUser } from "../../service/Login";
 
 import {
   Typography,
@@ -49,15 +49,17 @@ const Login = () => {
   }
 
   function validationFunciton() {
-    if(loginInfo.username == "" || loginInfo.password == ""){
+    if (loginInfo.username == "" || loginInfo.password == "") {
       setCreateUserSnackError(true);
-    }else if(loginInfo.username!= "" && loginInfo.password != ""){
-      loginFunction()
+    } else if (loginInfo.username != "" && loginInfo.password != "") {
+      loginFunction();
     }
   }
 
-  function loginFunction(){
-    LoginUser(loginInfo.username, loginInfo.password)
+  function loginFunction() {
+    LoginUser(loginInfo.username, loginInfo.password).then((res) => {
+      console.log(res);
+    });
   }
   return (
     <div className="login">
@@ -164,7 +166,7 @@ const Login = () => {
         onClose={handleClose}
       >
         <Alert autoHideDuration={3000} onClose={handleClose} severity="error">
-         Wrong Credentials
+          Wrong Credentials
         </Alert>
       </Snackbar>
     </div>
