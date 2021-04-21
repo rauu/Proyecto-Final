@@ -4,5 +4,6 @@ const controller = require("../../controllers/usersController")
 
 
 router.post("/", controller.store);
+router.get("/", controller.index);
 
 module.exports = router;

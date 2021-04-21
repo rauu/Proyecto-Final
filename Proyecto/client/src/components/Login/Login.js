@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 import { Fade } from "react-reveal";
 
@@ -20,6 +21,8 @@ import MuiAlert from "@material-ui/lab/Alert";
 import LinkA from "react-router-dom/Link";
 
 const Login = () => {
+  const history = useHistory();
+
   const [loginInfo, setLoginInfo] = React.useState({
     username: "",
     password: "",
@@ -49,9 +52,9 @@ const Login = () => {
   }
 
   function validationFunciton() {
-    if (loginInfo.username == "" || loginInfo.password == "") {
+    if (loginInfo.username === "" || loginInfo.password === "") {
       setCreateUserSnackError(true);
-    } else if (loginInfo.username != "" && loginInfo.password != "") {
+    } else if (loginInfo.username !== "" && loginInfo.password !== "") {
       loginFunction();
     }
   }
@@ -59,6 +62,11 @@ const Login = () => {
   function loginFunction() {
     LoginUser(loginInfo.username, loginInfo.password).then((res) => {
       console.log(res);
+      if(res === true){
+        history.push("/dashboard");
+      } else{
+        setCreateUserSnackError(true);
+      }
     });
   }
   return (

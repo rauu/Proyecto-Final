@@ -9,17 +9,30 @@ export const registerUser = (
   gender,
   password
 ) => {
-  return axios.post("http://localhost:3001/users/", {
+  return axios
+    .post("http://localhost:3001/users/", {
       name: name,
       lastname: lastname,
       username: username,
       email: email,
       dob: dob,
       gender: gender,
-      password: password
+      password: password,
     })
     .then((request, response) => {
       console.log(request);
       return request;
-    })
+    });
+};
+
+export const dataExists = (username, email) => {
+  const params = {
+    username: username,
+    email: email,
+  };
+  const headers = { headers: { "Access-Control-Allow-Origin": "*" } };
+
+  return axios.get("http://localhost:3001/users/", {params}).then((response)=>{
+    console.log(response);
+  });
 };

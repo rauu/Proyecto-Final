@@ -1,6 +1,6 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { ThemeProvider } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 
 import Home from "./components/home/Home";
@@ -8,7 +8,8 @@ import Home from "./components/home/Home";
 import theme from "./CoustumTheme";
 import Register from './components/Register/Register';
 import WorkWithUS from './components/work-with-us/WorkWithUs';
-import Login from './components/Login/Login';
+import Login from './components/login/Login';
+import Dashboard from "./components/dashboard/Dashboard";
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
           </Switch>
           <Switch>
             <Route exact path="/login" component={Login} />
+          </Switch>
+          <Switch>
+            <Route exact path="/dashboard" component={Dashboard} />
           </Switch>
         </Router>
         </Typography>
