@@ -1,22 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-
+import NavPrivate from "../nav-private/Nav-Private";
 
 const Dashboard = () => {
-     const history = useHistory();
+  useEffect(() => {
+    if (sessionStorage.getItem("user") === null) {
+      history.push("/login");
+    } else {
+      setLoggedIn(true);
+    }
+  });
+  const [loggedIn, setLoggedIn] = useState(false);
+  const history = useHistory();
+  const user = JSON.parse(sessionStorage.getItem("user"));
 
-     useEffect(() => {
-         if(sessionStorage.getItem('user') === null){
-          history.push('/login')
-         }
-         console.log(sessionStorage.getItem('user'))
-     })
-     return ( 
-          <div className="dashboard">
-               <h1>DASHBOARD</h1>
-          </div>
-      );
-}
- 
+  return (
+    <div className="dashboard">
+      {loggedIn && (
+        <>
+          <NavPrivate></NavPrivate>
+          <h1> WELCOME AGAIN {user.name}!!!</h1>
+        </>
+      )}
+    </div>
+  );
+};
+
 export default Dashboard;
