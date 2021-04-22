@@ -1,6 +1,6 @@
 import React from "react";
 
-import Footer from "../footer/Footer";
+import Footer from "../Footer/Footer";
 import Nav from "../nav-public/Nav-Public";
 import "./WorkWithUs.css";
 import {

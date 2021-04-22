@@ -61,9 +61,11 @@ const NavPrivate = () => {
     prevOpen.current = open;
   }, [open]);
 
-  const prueba = () =>{
-       console.log("prueeba")
-  }
+  const logOut = () => {
+    console.log("prueeba");
+    sessionStorage.removeItem("user");
+    history.push("/login");
+  };
   return (
     <Typography component={"div"}>
       {loggedIn && (
@@ -125,7 +127,18 @@ const NavPrivate = () => {
                                 <MenuItem onClick={handleClose}>
                                   My account
                                 </MenuItem>
-                                <MenuItem onClick={(event)=>{handleClose(event); prueba()}}>
+                                {userInfo.role_user === "role_admin" && (
+                                  <MenuItem onClick={handleClose}>
+                                    Admin
+                                  </MenuItem>
+                                )}
+
+                                <MenuItem
+                                  onClick={(event) => {
+                                    handleClose(event);
+                                    logOut();
+                                  }}
+                                >
                                   Logout
                                 </MenuItem>
                               </MenuList>

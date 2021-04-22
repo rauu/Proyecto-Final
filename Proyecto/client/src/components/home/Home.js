@@ -16,7 +16,7 @@ import Person2 from "../../assets/person.png";
 import { Typography, Grid } from "@material-ui/core";
 import Slide from "react-reveal/Slide";
 import Fade from "react-reveal/Fade";
-import Footer from "../footer/Footer";
+import Footer from "../Footer/Footer";
 
 import DirectionsRunRoundedIcon from "@material-ui/icons/DirectionsRunRounded";
 import MusicVideoRoundedIcon from "@material-ui/icons/MusicVideoRounded";

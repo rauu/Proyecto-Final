@@ -35,6 +35,7 @@ import {
 import { registerUser, dataExists } from "../../service/User";
 import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
+import { useHistory } from "react-router-dom";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -51,6 +52,7 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
+  const history = useHistory();
 
   React.useEffect(() => {
     console.log(values.username);
@@ -129,6 +131,9 @@ const Register = () => {
       if (res.data) {
         console.log(res.data);
         setCreateUserSnackSuccess(true);
+        setTimeout(() => {
+          history.push("/login");
+        }, 1000);
       } else if (!res.data) {
         console.log(res.data);
         setCreateUserSnackError(true);
@@ -151,7 +156,6 @@ const Register = () => {
     emailExists: false,
     emailTooltip: "Email alredy exists",
   });
-
 
   function validationFunciton() {
     //name

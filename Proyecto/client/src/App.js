@@ -8,7 +8,7 @@ import Home from "./components/home/Home";
 import theme from "./CoustumTheme";
 import Register from './components/Register/Register';
 import WorkWithUS from './components/work-with-us/WorkWithUs';
-import Login from './components/login/Login';
+import Login from './components/Login/Login';
 import Dashboard from "./components/dashboard/Dashboard";
 
 function App() {
