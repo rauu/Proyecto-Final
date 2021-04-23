@@ -31,7 +31,7 @@ function store(req, res) {
   );
 }
 
-function index(req, res) {
+async function index(req, res) {
   let sqlResult = {
     user: true,
     email: true,
@@ -40,10 +40,10 @@ function index(req, res) {
   if (req.query.username !== "") {
     const sqlCheck = "SELECT username FROM users WHERE username = ?";
 
-    db.query(sqlCheck, [req.query.username], (err, result) => {
+     await db.query(sqlCheck, [req.query.username], async (err, result) => {
       //res.send(result);
-      if (result.length > 0) {
-        sqlResult = {
+       if (result.length > 0) {
+         sqlResult = {
           ...sqlResult,
           user: false,
         };

@@ -17,12 +17,12 @@ const Footer = () => {
       <br />
       <Grid container spacing={2} className="grid-center">
         <Grid item xs={12} sm={12} md={4} lg={4} className="left-footer">
-          <Link href="#" className="white">
+          <LinkA to="/contactUs" className="white">
             Contact Us
-          </Link>
+          </LinkA>
           <br />
           <br />
-          <LinkA to="/workwithus"className="white">
+          <LinkA to="/workwithus" className="white">
             Work with us
           </LinkA>
         </Grid>
@@ -32,16 +32,16 @@ const Footer = () => {
         <Grid item xs={12} sm={12} md={4} lg={4}>
           <div className="inline">
             <Link href="#" className="white inline-icons">
-            <InstagramIcon style={{ fontSize: 70 }}></InstagramIcon>
+              <InstagramIcon style={{ fontSize: 70 }}></InstagramIcon>
             </Link>
             <Link href="#" className="white inline-icons">
-            <FacebookIcon style={{ fontSize: 70 }}></FacebookIcon>
+              <FacebookIcon style={{ fontSize: 70 }}></FacebookIcon>
             </Link>
             <Link href="#" className="white inline-icons">
-            <TwitterIcon style={{ fontSize: 70 }}></TwitterIcon>
+              <TwitterIcon style={{ fontSize: 70 }}></TwitterIcon>
             </Link>
             <Link href="#" className="white inline-icons">
-            <WhatsAppIcon style={{ fontSize: 70 }}></WhatsAppIcon>
+              <WhatsAppIcon style={{ fontSize: 70 }}></WhatsAppIcon>
             </Link>
           </div>
         </Grid>
