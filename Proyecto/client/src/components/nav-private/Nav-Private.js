@@ -103,8 +103,8 @@ const NavPrivate = () => {
             className="collapse navbar-collapse flex-grow-1 text-right"
             id="myNavbar7"
           >
-            <ul className="navbar-nav ml-auto flex-nowrap ">
-              <li className="nav-item px-3  background nav-pri-li">
+            <ul className="navbar-nav ml-auto flex-nowrap nav-pri-ul">
+              <li className="nav-item px-3  background ">
                 <div>
                   <div>
                     <LinkA
