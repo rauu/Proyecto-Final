@@ -26,40 +26,64 @@ const NavPrivate = () => {
       history.push("/login");
     } else {
       setLoggedIn(true);
+      console.log("ETNRAS")
     }
     console.log(sessionStorage.getItem("user"));
   });
   const userInfo = JSON.parse(sessionStorage.getItem("user"));
-  const [open, setOpen] = React.useState(false);
+  const [openUser, setOpenUser] = React.useState(false);
+  const [openAdmin, setOpenAdmin] = React.useState(false);
   const anchorRef = React.useRef(null);
 
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+  const handleToggleUser = () => {
+    setOpenUser((prevOpen) => !prevOpen);
+  };
+  const handleToggleAdmin = () => {
+    setOpenAdmin((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event) => {
+  const handleCloseUser = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
 
-    setOpen(false);
+    setOpenUser(false);
   };
 
-  function handleListKeyDown(event) {
+  const handleCloseAdmin = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+    setOpenAdmin(false);
+  };
+
+  function handleListKeyDownUser(event) {
     if (event.key === "Tab") {
       event.preventDefault();
-      setOpen(false);
+      setOpenUser(false);
+    }
+  }
+
+  function handleListKeyDownAdmin(event) {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      setOpenAdmin(false);
     }
   }
   // return focus to the button when we transitioned from !open -> open
-  const prevOpen = React.useRef(open);
+  const prevOpenUser = React.useRef(openUser);
+  const prevOpenAdmin = React.useRef(openAdmin);
   React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
+    if (prevOpenUser.current === true && openUser === false) {
+      anchorRef.current.focus();
+    }
+    if (prevOpenAdmin.current === true && openAdmin === false) {
       anchorRef.current.focus();
     }
 
-    prevOpen.current = open;
-  }, [open]);
+
+    prevOpenAdmin.current = openAdmin;
+  }, [openAdmin]);
 
   const logOut = () => {
     console.log("prueeba");
@@ -80,27 +104,20 @@ const NavPrivate = () => {
             id="myNavbar7"
           >
             <ul className="navbar-nav ml-auto flex-nowrap ">
-              <li className="nav-item px-3  background">
-                {/* <LinkA
-                  to="/dashboard"
-                  className="nav-link links link_color"
-                  color="secondary"
-                >
-                  {userInfo.name + " " + userInfo.surname}
-                </LinkA> */}
+              <li className="nav-item px-3  background nav-pri-li">
                 <div>
                   <div>
                     <LinkA
                       ref={anchorRef}
-                      aria-controls={open ? "menu-list-grow" : undefined}
+                      aria-controls={openUser ? "menu-list-grow" : undefined}
                       aria-haspopup="true"
-                      onClick={handleToggle}
+                      onClick={handleToggleUser}
                       className="link_color"
                     >
-                      {userInfo.name + " " + userInfo.surname}
+                      {userInfo.username}
                     </LinkA>
                     <Popper
-                      open={open}
+                      open={openUser}
                       anchorEl={anchorRef.current}
                       role={undefined}
                       transition
@@ -117,25 +134,25 @@ const NavPrivate = () => {
                           }}
                         >
                           <Paper>
-                            <ClickAwayListener onClickAway={handleClose}>
+                            <ClickAwayListener onClickAway={handleCloseUser}>
                               <MenuList
-                                autoFocusItem={open}
+                                autoFocusItem={openUser}
                                 id="menu-list-grow"
-                                onKeyDown={handleListKeyDown}
+                                onKeyDown={handleListKeyDownUser}
                                 color="primary"
                               >
-                                <MenuItem onClick={handleClose}>
+                                <MenuItem onClick={handleCloseUser}>
                                   My account
                                 </MenuItem>
                                 {userInfo.role_user === "role_admin" && (
-                                  <MenuItem onClick={handleClose}>
+                                  <MenuItem onClick={handleCloseUser}>
                                     Admin
                                   </MenuItem>
                                 )}
 
                                 <MenuItem
                                   onClick={(event) => {
-                                    handleClose(event);
+                                    handleCloseUser(event);
                                     logOut();
                                   }}
                                 >
@@ -150,6 +167,65 @@ const NavPrivate = () => {
                   </div>
                 </div>
               </li>
+
+            {/*
+
+              <li className="nav-item px-3  background nav-pri-li">
+                <div>
+                  <div>
+                    <LinkA
+                      ref={anchorRef}
+                      aria-controls={openAdmin ? "menu-list-grow" : undefined}
+                      aria-haspopup="true"
+                      onClick={handleToggleAdmin}
+                      className="link_color"
+                    >
+                     Admin
+                    </LinkA>
+                    <Popper
+                      open={openAdmin}
+                      anchorEl={anchorRef.current}
+                      role={undefined}
+                      transition
+                      disablePortal
+                    >
+                      {({ TransitionProps, placement }) => (
+                        <Grow
+                          {...TransitionProps}
+                          style={{
+                            transformOrigin:
+                              placement === "bottom"
+                                ? "center top"
+                                : "center bottom",
+                          }}
+                        >
+                          <Paper>
+                            <ClickAwayListener onClickAway={handleCloseAdmin}>
+                              <MenuList
+                                autoFocusItem={openAdmin}
+                                id="menu-list-grow"
+                                onKeyDown={handleListKeyDownAdmin}
+                                color="primary"
+                              >
+                                
+
+                                <MenuItem
+                                  onClick={(event) => {
+                                    handleCloseAdmin(event);
+                                    logOut();
+                                  }}
+                                >
+                                  Logout
+                                </MenuItem>
+                              </MenuList>
+                            </ClickAwayListener>
+                          </Paper>
+                        </Grow>
+                      )}
+                    </Popper>
+                  </div>
+                </div>
+              </li> */}
             </ul>
           </div>
         </nav>

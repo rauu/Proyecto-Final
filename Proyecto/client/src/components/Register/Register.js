@@ -54,10 +54,10 @@ const Register = () => {
   });
   const history = useHistory();
 
-  React.useEffect(() => {
+  /*  React.useEffect(() => {
     console.log(values.username);
     dataExists(values.username, values.email);
-  }, [values.username, values.email]);
+  }, [values.username, values.email]); */
 
   const [nameValueError, setNameValueError] = React.useState({
     error: false,
@@ -378,6 +378,10 @@ const Register = () => {
     }
   }
 
+  const dataCheck = () => {
+    dataExists(values.username, values.email);
+  };
+
   return (
     <div className="register">
       <Typography component={"div"}>
@@ -464,6 +468,7 @@ const Register = () => {
                   fullWidth
                   id="username"
                   label="UserName"
+                  onBlur={dataCheck}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="end">
@@ -490,6 +495,7 @@ const Register = () => {
                   fullWidth
                   id="email"
                   label="Email"
+                  onBlur={dataCheck}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="end">

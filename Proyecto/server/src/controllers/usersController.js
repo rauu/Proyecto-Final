@@ -40,16 +40,17 @@ async function index(req, res) {
   if (req.query.username !== "") {
     const sqlCheck = "SELECT username FROM users WHERE username = ?";
 
-     await db.query(sqlCheck, [req.query.username], async (err, result) => {
+    db.query(sqlCheck, [req.query.username], (err, result) => {
       //res.send(result);
-       if (result.length > 0) {
-         sqlResult = {
+      let ans = result;
+      if (ans.length > 0) {
+        sqlResult = {
           ...sqlResult,
           user: false,
         };
-        console.log("Entra")
-        console.log(sqlResult)
-        //return res.send(sqlResult);
+        console.log("DENTRO");
+        /*         console.log(sqlResult)
+         */ //return res.send(sqlResult);
       } else {
         sqlResult = {
           user: true,
@@ -75,9 +76,9 @@ async function index(req, res) {
       }
     });
   }
-  console.log(sqlResult);
+  await console.log("FUERA");
 
-  res.send(sqlResult);
+  await res.send(sqlResult);
 
   //Email validation
 }

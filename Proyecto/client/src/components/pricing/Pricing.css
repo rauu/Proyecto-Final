@@ -1,0 +1,23 @@
+.pricing-first{
+     text-align: center;
+     background-color: var(--primary-color);
+}
+
+
+.pricing-second{
+     margin: auto;
+     text-align: center;
+}
+
+
+.pricing-info{
+     width:90%;
+     text-align: center;
+     margin: auto;
+}
+
+
+.pricing-card{
+     background-color: var(--primary-color);
+     color: var(--white-color);
+}

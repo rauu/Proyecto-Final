@@ -34,9 +34,13 @@ const Nav = () => {
         >
           <ul className="navbar-nav ml-auto flex-nowrap ">
             <li className="nav-item px-3">
-              <Link href="#" className="nav-link links" color="secondary">
+            <LinkA
+                to="/pricing"
+                className="nav-link links"
+                color="secondary"
+              >
                 Pricing
-              </Link>
+              </LinkA>
             </li>
             <li className="nav-item px-3  background">
               <LinkA
