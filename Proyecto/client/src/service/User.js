@@ -1,4 +1,5 @@
 import axios from "axios";
+const url = "http://192.168.1.48:3001/";
 
 export const registerUser = (
   name,
@@ -10,7 +11,7 @@ export const registerUser = (
   password
 ) => {
   return axios
-    .post("http://localhost:3001/users/", {
+    .post(url + "users/", {
       name: name,
       lastname: lastname,
       username: username,

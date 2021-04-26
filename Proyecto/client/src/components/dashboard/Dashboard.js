@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 
 import NavPrivate from "../nav-private/Nav-Private";
 
+import SideMenu from "../sideMenu/SideMenu"
+
 const Dashboard = () => {
   useEffect(() => {
     if (sessionStorage.getItem("user") === null) {
@@ -20,6 +22,7 @@ const Dashboard = () => {
       {loggedIn && (
         <>
           <NavPrivate></NavPrivate>
+         {/*  <SideMenu></SideMenu> */}
           <h1> WELCOME AGAIN {user.name}!!!</h1>
         </>
       )}

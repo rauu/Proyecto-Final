@@ -1,6 +1,6 @@
 import axios from "axios";
 axios.defaults.withCredentials = true;
-
+const url = "http://192.168.1.48:3001/";
 
 
 
@@ -10,7 +10,7 @@ export const LoginUser = (
   password
 ) => {
 
-  return axios.post("http://localhost:3001/login/", {
+  return axios.post(url+"login/", {
       username: username,
       password: password
     })
