@@ -21,8 +21,8 @@ const Dashboard = () => {
     <div className="dashboard">
       {loggedIn && (
         <>
-          <NavPrivate></NavPrivate>
-         {/*  <SideMenu></SideMenu> */}
+          {/* <NavPrivate></NavPrivate> */}
+          <SideMenu></SideMenu>
           <h1> WELCOME AGAIN {user.name}!!!</h1>
         </>
       )}

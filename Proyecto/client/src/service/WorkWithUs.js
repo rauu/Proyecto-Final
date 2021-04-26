@@ -4,7 +4,7 @@ const headers = {
     "content-type": "multipart/form-data",
   },
 };
-const url = "http://192.168.1.48:3001/";
+const url = "http://localhost:3001/";
 export const submitCV = (name, lastname, email, message, file) => {
   const cv = new FormData();
   cv.append("file", file);
