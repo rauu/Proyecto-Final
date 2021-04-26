@@ -1,8 +1,0 @@
-.MuiListItem-button:hover{
-     background-color: var(--primary-color) !important;
-     color: var(--white-color);
-}
-
-.nav-pri-ul{
-     margin-right: 25px;
-}

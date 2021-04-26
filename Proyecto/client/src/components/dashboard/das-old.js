@@ -19,6 +19,19 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import logo from "../../assets/logo.png";
 import LinkA from "react-router-dom/Link";
+import {
+  Link,
+  Button,
+  MenuItem,
+  Menu,
+  MenuList,
+  Popper,
+  Paper,
+  Grow,
+  ClickAwayListener,
+} from "@material-ui/core";
+
+import "./Dashboard.css";
 
 const drawerWidth = 240;
 
@@ -55,6 +68,65 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SideMenu(props) {
+  const userInfo = JSON.parse(sessionStorage.getItem("user"));
+  const [openUser, setOpenUser] = React.useState(false);
+  const [openAdmin, setOpenAdmin] = React.useState(false);
+  const anchorRef = React.useRef(null);
+
+  const handleToggleUser = () => {
+    setOpenUser((prevOpen) => !prevOpen);
+  };
+  const handleToggleAdmin = () => {
+    setOpenAdmin((prevOpen) => !prevOpen);
+  };
+
+  const handleCloseUser = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
+    setOpenUser(false);
+  };
+
+  const handleCloseAdmin = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+    setOpenAdmin(false);
+  };
+
+  function handleListKeyDownUser(event) {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      setOpenUser(false);
+    }
+  }
+
+  function handleListKeyDownAdmin(event) {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      setOpenAdmin(false);
+    }
+  }
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpenUser = React.useRef(openUser);
+  const prevOpenAdmin = React.useRef(openAdmin);
+  React.useEffect(() => {
+    if (prevOpenUser.current === true && openUser === false) {
+      anchorRef.current.focus();
+    }
+    if (prevOpenAdmin.current === true && openAdmin === false) {
+      anchorRef.current.focus();
+    }
+
+    prevOpenAdmin.current = openAdmin;
+  }, [openAdmin]);
+
+  const logOut = () => {
+    console.log("prueeba");
+    sessionStorage.removeItem("user");
+    history.push("/login");
+  };
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -76,9 +148,9 @@ function SideMenu(props) {
   const user = JSON.parse(sessionStorage.getItem("user"));
 
   const drawer = (
-    <div className="nav-slide">
+    <div className="nav-slide ">
       <LinkA className="navbar-brand" to="/">
-        <img src={logo} alt="logo" className="logo"  />
+        <img src={logo} alt="logo" className="logo" />
       </LinkA>
       <div className={classes.toolbar} />
 
@@ -107,23 +179,81 @@ function SideMenu(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <div className={classes.root}>
+    <div className="{classes.root}  ">
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
+      <AppBar position="fixed" className="{classes.appBar} ">
+        <Toolbar className="nav-top">
           <IconButton
-            color="inherit"
+            color="primary"
             aria-label="open drawer"
             edge="start"
+            size="medium"
             onClick={handleDrawerToggle}
             className={classes.menuButton}
           >
             <MenuIcon />
           </IconButton>
-         
+
+          <div className="nav-right">
+            <div>
+              <LinkA
+                ref={anchorRef}
+                aria-controls={openUser ? "menu-list-grow" : undefined}
+                aria-haspopup="true"
+                onClick={handleToggleUser}
+                className="link_color"
+              >
+                {userInfo.username}
+              </LinkA>
+              <Popper
+                open={openUser}
+                anchorEl={anchorRef.current}
+                role={undefined}
+                transition
+                disablePortal
+              >
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{
+                      transformOrigin:
+                        placement === "bottom" ? "center top" : "center bottom",
+                    }}
+                  >
+                    <Paper>
+                      <ClickAwayListener onClickAway={handleCloseUser}>
+                        <MenuList
+                          autoFocusItem={openUser}
+                          id="menu-list-grow"
+                          onKeyDown={handleListKeyDownUser}
+                          color="primary"
+                        >
+                          <MenuItem onClick={handleCloseUser}>
+                            My account
+                          </MenuItem>
+                          {userInfo.role_user === "role_admin" && (
+                            <MenuItem onClick={handleCloseUser}>Admin</MenuItem>
+                          )}
+
+                          <MenuItem
+                            onClick={(event) => {
+                              handleCloseUser(event);
+                              logOut();
+                            }}
+                          >
+                            Logout
+                          </MenuItem>
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
+            </div>
+          </div>
         </Toolbar>
       </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
+      <nav className="{classes.drawer} nav-top" aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
           <Drawer
