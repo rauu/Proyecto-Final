@@ -25,9 +25,10 @@ function App() {
               <Route exact path="/register" component={Register} />
               <Route exact path="/workwithus" component={WorkWithUS} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/dashboard" component={Dashboard} />
               <Route exact path="/contactUs" component={ContactUs} />
               <Route exact path="/pricing" component={Pricing} />
+              <Route exact path="/dashboard" component={Dashboard} />
+              
               <Route path="/*" component={NotFound} />
             </Switch>
           </Router>

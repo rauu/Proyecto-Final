@@ -1,5 +1,6 @@
-.nav-slide {
+#nav-slide {
      text-align: center;
+     background-color: var(--secondary-color) !important;
 }
 
 .nav-top{
