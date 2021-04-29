@@ -13,11 +13,32 @@ import {
   Paper,
   Grow,
   ClickAwayListener,
+  SwipeableDrawer,
+  List,
+  Divider,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  makeStyles,
 } from "@material-ui/core";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MailIcon from "@material-ui/icons/Mail";
+import clsx from 'clsx';
+
 import LinkA from "react-router-dom/Link";
 import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
 
+const useStyles = makeStyles({
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: "auto",
+  },
+});
+
 const NavPrivate = () => {
+  const classes = useStyles();
   const history = useHistory();
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -26,14 +47,64 @@ const NavPrivate = () => {
       history.push("/login");
     } else {
       setLoggedIn(true);
-      console.log("ETNRAS")
+      console.log("ETNRAS");
     }
     console.log(sessionStorage.getItem("user"));
   });
+
   const userInfo = JSON.parse(sessionStorage.getItem("user"));
   const [openUser, setOpenUser] = React.useState(false);
   const [openAdmin, setOpenAdmin] = React.useState(false);
   const anchorRef = React.useRef(null);
+
+  const [state, setState] = React.useState({
+    left: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor) => (
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === "top" || anchor === "bottom",
+      })}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {["All mail", "Trash", "Spam"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
 
   const handleToggleUser = () => {
     setOpenUser((prevOpen) => !prevOpen);
@@ -80,7 +151,6 @@ const NavPrivate = () => {
     if (prevOpenAdmin.current === true && openAdmin === false) {
       anchorRef.current.focus();
     }
-
 
     prevOpenAdmin.current = openAdmin;
   }, [openAdmin]);
@@ -167,8 +237,27 @@ const NavPrivate = () => {
                   </div>
                 </div>
               </li>
+              <li>
+                <div>
+                  {["left"].map((anchor) => (
+                    <React.Fragment key={anchor}>
+                      <Button onClick={toggleDrawer(anchor, true)}>
+                        {anchor}
+                      </Button>
+                      <SwipeableDrawer
+                        anchor={anchor}
+                        open={state[anchor]}
+                        onClose={toggleDrawer(anchor, false)}
+                        onOpen={toggleDrawer(anchor, true)}
+                      >
+                        {list(anchor)}
+                      </SwipeableDrawer>
+                    </React.Fragment>
+                  ))}
+                </div>
+              </li>
 
-            {/*
+              {/*
 
               <li className="nav-item px-3  background nav-pri-li">
                 <div>
