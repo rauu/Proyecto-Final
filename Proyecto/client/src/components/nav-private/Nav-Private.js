@@ -30,10 +30,13 @@ import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
 
 const useStyles = makeStyles({
   list: {
-    width: 250,
+    width: 300,
   },
   fullList: {
     width: "auto",
+  },
+  paper: {
+
   },
 });
 
@@ -72,35 +75,50 @@ const NavPrivate = () => {
   };
 
   const list = (anchor) => (
-    <div >
-    <div
-      className="{clsx(classes.list, {
+    <div>
+      <div
+        className="{clsx(classes.list, {
         [classes.fullList]: anchor === 'top' || anchor === 'bottom',
       })}"
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        <ListItem button>
-          <LinkA className="navbar-brand" to="/">
-            <img src={logo} alt="logo" className="logo" />
-          </LinkA>
-        </ListItem>
-       <br/>
-       <br/>
-       <br/>
-        <ListItem button className="list">
-          <ListItemIcon></ListItemIcon>
-          <ListItemText>About </ListItemText>
-        </ListItem>
-        <Divider />
-        <ListItem button className="list">
-          <ListItemIcon></ListItemIcon>
-          <ListItemText>About </ListItemText>
-        </ListItem>
-      </List>
-    </div>
+        role="presentation"
+        onClick={toggleDrawer(anchor, false)}
+        onKeyDown={toggleDrawer(anchor, false)}
+      >
+        <List>
+          <ListItem button>
+            <LinkA className="navbar-brand" to="/dashboard">
+              <img src={logo} alt="logo" className="logo" />
+            </LinkA>
+          </ListItem>
+          <br />
+
+          <ListItem button className="list">
+          <LinkA className="navbar-brand dashboard-link" to="/dashboard">
+            <ListItemText>DashBoard</ListItemText>
+            </LinkA>
+          </ListItem>
+          <Divider />
+          <ListItem button className="list">
+            <ListItemText>Your Videos</ListItemText>
+          </ListItem>
+          <Divider />
+          <ListItem button className="list">
+            <ListItemText>Our Trainers</ListItemText>
+          </ListItem>
+          <Divider />
+          <ListItem button className="list">
+            <ListItemText>Notices</ListItemText>
+          </ListItem>
+          <Divider />
+          <ListItem button className="list">
+            <ListItemText>Admin</ListItemText>
+          </ListItem>
+          <Divider />
+          <ListItem button className="list">
+            <ListItemText>Trainer</ListItemText>
+          </ListItem>
+        </List>
+      </div>
     </div>
   );
 
@@ -163,7 +181,7 @@ const NavPrivate = () => {
       {loggedIn && (
         <nav className="navbar navbar-expand nav">
           <div className="d-flex flex-grow-1">
-            <LinkA className="navbar-brand" to="/">
+            <LinkA className="navbar-brand" to="/dashboard">
               <img src={logo} alt="logo" className="logo" />
             </LinkA>
           </div>
@@ -246,7 +264,8 @@ const NavPrivate = () => {
                           className="icon"
                         ></MenuRoundedIcon>
                       </Button>
-                      <SwipeableDrawer 
+                      <SwipeableDrawer
+                        classes={{ paper: classes.paper }}
                         anchor={anchor}
                         open={state[anchor]}
                         onClose={toggleDrawer(anchor, false)}
@@ -258,65 +277,6 @@ const NavPrivate = () => {
                   ))}
                 </div>
               </li>
-
-              {/*
-
-              <li className="nav-item px-3  background nav-pri-li">
-                <div>
-                  <div>
-                    <LinkA
-                      ref={anchorRef}
-                      aria-controls={openAdmin ? "menu-list-grow" : undefined}
-                      aria-haspopup="true"
-                      onClick={handleToggleAdmin}
-                      className="link_color"
-                    >
-                     Admin
-                    </LinkA>
-                    <Popper
-                      open={openAdmin}
-                      anchorEl={anchorRef.current}
-                      role={undefined}
-                      transition
-                      disablePortal
-                    >
-                      {({ TransitionProps, placement }) => (
-                        <Grow
-                          {...TransitionProps}
-                          style={{
-                            transformOrigin:
-                              placement === "bottom"
-                                ? "center top"
-                                : "center bottom",
-                          }}
-                        >
-                          <Paper>
-                            <ClickAwayListener onClickAway={handleCloseAdmin}>
-                              <MenuList
-                                autoFocusItem={openAdmin}
-                                id="menu-list-grow"
-                                onKeyDown={handleListKeyDownAdmin}
-                                color="primary"
-                              >
-                                
-
-                                <MenuItem
-                                  onClick={(event) => {
-                                    handleCloseAdmin(event);
-                                    logOut();
-                                  }}
-                                >
-                                  Logout
-                                </MenuItem>
-                              </MenuList>
-                            </ClickAwayListener>
-                          </Paper>
-                        </Grow>
-                      )}
-                    </Popper>
-                  </div>
-                </div>
-              </li> */}
             </ul>
           </div>
         </nav>

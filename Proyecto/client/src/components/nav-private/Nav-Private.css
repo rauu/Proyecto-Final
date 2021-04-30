@@ -4,9 +4,16 @@
 
 .list:hover{
      background-color: var(--primary-color) !important;
-     color: var(--white-color);
+     color: var(--white-color) !important;
 }
 
-.prueba{
-     background-color: yellow;
+.list:hover .dashboard-link{
+     background-color: var(--primary-color) !important;
+     color: var(--white-color) !important;
+}
+
+
+.dashboard-link{
+     text-decoration: none !important;
+     color: black;
 }
