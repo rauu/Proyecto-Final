@@ -1,0 +1,12 @@
+.background{
+     margin: auto;
+}
+
+.list:hover{
+     background-color: var(--primary-color) !important;
+     color: var(--white-color);
+}
+
+.prueba{
+     background-color: yellow;
+}

@@ -23,7 +23,7 @@ import {
 } from "@material-ui/core";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
-import clsx from 'clsx';
+import clsx from "clsx";
 
 import LinkA from "react-router-dom/Link";
 import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
@@ -47,9 +47,7 @@ const NavPrivate = () => {
       history.push("/login");
     } else {
       setLoggedIn(true);
-      console.log("ETNRAS");
     }
-    console.log(sessionStorage.getItem("user"));
   });
 
   const userInfo = JSON.parse(sessionStorage.getItem("user"));
@@ -74,35 +72,35 @@ const NavPrivate = () => {
   };
 
   const list = (anchor) => (
+    <div >
     <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === "top" || anchor === "bottom",
-      })}
+      className="{clsx(classes.list, {
+        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+      })}"
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem button>
+          <LinkA className="navbar-brand" to="/">
+            <img src={logo} alt="logo" className="logo" />
+          </LinkA>
+        </ListItem>
+       <br/>
+       <br/>
+       <br/>
+        <ListItem button className="list">
+          <ListItemIcon></ListItemIcon>
+          <ListItemText>About </ListItemText>
+        </ListItem>
+        <Divider />
+        <ListItem button className="list">
+          <ListItemIcon></ListItemIcon>
+          <ListItemText>About </ListItemText>
+        </ListItem>
       </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+    </div>
     </div>
   );
 
@@ -242,9 +240,13 @@ const NavPrivate = () => {
                   {["left"].map((anchor) => (
                     <React.Fragment key={anchor}>
                       <Button onClick={toggleDrawer(anchor, true)}>
-                        {anchor}
+                        <MenuRoundedIcon
+                          color="primary"
+                          style={{ fontSize: 40 }}
+                          className="icon"
+                        ></MenuRoundedIcon>
                       </Button>
-                      <SwipeableDrawer
+                      <SwipeableDrawer 
                         anchor={anchor}
                         open={state[anchor]}
                         onClose={toggleDrawer(anchor, false)}
