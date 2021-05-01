@@ -2,8 +2,8 @@
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 17, 2021 at 12:19 PM
+-- Host: 127.0.0.1
+-- Generation Time: May 01, 2021 at 10:43 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -20,6 +20,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `gymooze`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `exercise_room`
+--
+
+CREATE TABLE `exercise_room` (
+  `id_room` int(11) NOT NULL,
+  `room_name` varchar(100) NOT NULL,
+  `background_image` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -119,14 +131,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `username`, `name`, `surname`, `role_user`, `email`, `sex`, `password`, `description`, `date_birth`) VALUES
-(1, 'rauu', 'raunak', 'binyani', 'role_admin', 'raunakbinyani.binyani@gmail.com', 'male', 'raunak', NULL, '2000-09-29'),
-(2, 'victor', 'victor', 'escudero', 'role_admin', 'victor@gmail.com', 'male', 'victor', NULL, '1998-12-01'),
+(1, 'rauu', 'Raunak', 'Binyani', 'role_admin', 'raunakbinyani.binyani@gmail.com', 'male', '$2b$10$eMVDACaze6T2lksIxAJ6Uu/j4NgbtV9prZarwpRqDdHmxRi/Wz8xW', NULL, '2000-09-29'),
+(2, 'victor', 'victor', 'escudero', 'role_trainer', 'victor@gmail.com', 'male', '$2b$10$eMVDACaze6T2lksIxAJ6Uu/j4NgbtV9prZarwpRqDdHmxRi/Wz8xW', NULL, '1998-12-01'),
 (3, 'lucia', 'lucia', 'mena', 'role_user', 'lucia@gmail.com', 'female', 'victor', NULL, '1993-12-24'),
 (4, 'marcos', 'marcos', 'martin', 'role_user', 'marcos@gmail.com', 'male', 'marcos', NULL, '2000-12-12'),
 (8, 'rauuu', 'Raunak', 'Binyani', 'role_user', 'raunakbinyani@gmail.com', 'men', 'raunak_A2', NULL, '1997-06-04'),
-(9, 'victorlopez', 'Victor', 'Escudero', 'role_user', 'victor@guacamole.com', 'men', 'victor_uWu1', NULL, '1998-12-01'),
-(12, 'rauuuu', 'Raunak', 'Binyani', 'role_user', 'rauninyani@gmail.com', 'men', '$2b$10$1j9/F3PRr70YkYs1ltUDue1QHNBFd0juxSll6/BNciixIBLeVc2TW', NULL, '2000-09-29'),
-(13, 'rauuuuuuu', 'Raunak', 'Binyani', 'role_user', 'raunakyani@gmail.com', 'men', '$2b$10$eMVDACaze6T2lksIxAJ6Uu/j4NgbtV9prZarwpRqDdHmxRi/Wz8xW', NULL, '2001-06-22');
+(9, 'victorlopez', 'Victor', 'Escudero', 'role_trainer', 'victor@guacamole.com', 'men', '$2b$10$eMVDACaze6T2lksIxAJ6Uu/j4NgbtV9prZarwpRqDdHmxRi/Wz8xW', NULL, '1998-12-01'),
+(13, 'rauuuuuuu', 'Raunak', 'Binyani', 'role_user', 'raunakyani@gmail.com', 'men', '$2b$10$eMVDACaze6T2lksIxAJ6Uu/j4NgbtV9prZarwpRqDdHmxRi/Wz8xW', NULL, '2001-06-22'),
+(15, 'raunak', 'RAUNAROK', '', 'role_user', 'raunakbni.binyani@gmail.com', 'men', '$2b$10$TFwbn5B9AYkuU5.KGbOFuOyeNrXYvSEt4r3RdPh7.rQdFDYoSPtAO', NULL, '2000-02-09');
 
 -- --------------------------------------------------------
 
@@ -141,6 +153,7 @@ CREATE TABLE `videos` (
   `video_description` text NOT NULL,
   `date_upload` date NOT NULL DEFAULT current_timestamp(),
   `type_video` varchar(255) NOT NULL,
+  `exercise_room` int(11) NOT NULL,
   `video` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -180,12 +193,18 @@ CREATE TABLE `work_with_us` (
 --
 
 INSERT INTO `work_with_us` (`id`, `name`, `surname`, `email`, `date_uploaded`, `file_location`, `message`) VALUES
-(8, 'Raunak', 'Binyani', 'raunakbinyani.binyani@gmail.com', '2021-04-15', 'src/uploads/cv/CV-Raunak_Binyani_1618516592591.pdf', 'qwerty'),
-(9, 'Raunak', 'Binyani', 'raunakbinyani.binyani@gmail.com', '2021-04-15', 'src/uploads/cv/CV-Raunak_Binyani_1618516716389.pdf', '123456');
+(10, 'Raunak', 'Binyani', 'raunakbinyani.binyani@gmail.com', '2021-04-17', 'src/uploads/cv/CV-Raunak_Binyani_1618655489293.pdf', 'Hey mate'),
+(11, 'Raunak', 'Binyani', 'raunakbinyani.binyani@gmail.com', '2021-04-23', 'src/uploads/cv/CV-Raunak_Binyani_1619185033772.pdf', 'qwerqwerqwer');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `exercise_room`
+--
+ALTER TABLE `exercise_room`
+  ADD PRIMARY KEY (`id_room`);
 
 --
 -- Indexes for table `news`
@@ -230,7 +249,8 @@ ALTER TABLE `users`
 --
 ALTER TABLE `videos`
   ADD PRIMARY KEY (`id_video`),
-  ADD KEY `FK_VIDEO_USERS` (`id_user`);
+  ADD KEY `FK_VIDEO_USERS` (`id_user`),
+  ADD KEY `FK_VIDEOS_EXERCISE` (`exercise_room`);
 
 --
 -- Indexes for table `video_comment`
@@ -249,6 +269,12 @@ ALTER TABLE `work_with_us`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `exercise_room`
+--
+ALTER TABLE `exercise_room`
+  MODIFY `id_room` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -278,7 +304,7 @@ ALTER TABLE `subscriptions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `videos`
@@ -296,7 +322,7 @@ ALTER TABLE `video_comment`
 -- AUTO_INCREMENT for table `work_with_us`
 --
 ALTER TABLE `work_with_us`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
@@ -327,6 +353,7 @@ ALTER TABLE `subscriptions`
 -- Constraints for table `videos`
 --
 ALTER TABLE `videos`
+  ADD CONSTRAINT `FK_VIDEOS_EXERCISE` FOREIGN KEY (`exercise_room`) REFERENCES `exercise_room` (`id_room`),
   ADD CONSTRAINT `FK_VIDEO_USERS` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
 
 --
