@@ -16,4 +16,9 @@
 .dashboard-link{
      text-decoration: none !important;
      color: black;
+     width: 100% !important;
+}
+.dashboard-link:hover{
+     background-color: var(--primary-color) !important;
+     color: var(--white-color) !important;
 }

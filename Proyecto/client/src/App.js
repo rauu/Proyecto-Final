@@ -12,6 +12,7 @@ import Login from "./components/login/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import ContactUs from "./components/contactUs/ContactUs";
 import Pricing from "./components/pricing/Pricing";
+import Notices from "./components/notices/Notices";
 import NotFound from "./components/notFound/NotFound";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
               <Route exact path="/contactUs" component={ContactUs} />
               <Route exact path="/pricing" component={Pricing} />
               <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/notices" component={Notices} />
               
               <Route path="/*" component={NotFound} />
             </Switch>

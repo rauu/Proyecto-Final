@@ -20,6 +20,7 @@ import {
   ListItemIcon,
   ListItemText,
   makeStyles,
+  Collapse,
 } from "@material-ui/core";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
@@ -27,7 +28,9 @@ import clsx from "clsx";
 
 import LinkA from "react-router-dom/Link";
 import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
-
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
 const useStyles = makeStyles({
   list: {
     width: 300,
@@ -35,9 +38,7 @@ const useStyles = makeStyles({
   fullList: {
     width: "auto",
   },
-  paper: {
-
-  },
+  paper: {},
 });
 
 const NavPrivate = () => {
@@ -56,6 +57,7 @@ const NavPrivate = () => {
   const userInfo = JSON.parse(sessionStorage.getItem("user"));
   const [openUser, setOpenUser] = React.useState(false);
   const [openAdmin, setOpenAdmin] = React.useState(false);
+  const [openTrainer, setOpenTrainer] = React.useState(false);
   const anchorRef = React.useRef(null);
 
   const [state, setState] = React.useState({
@@ -73,6 +75,12 @@ const NavPrivate = () => {
 
     setState({ ...state, [anchor]: open });
   };
+  const handleAdminClick = () => {
+    setOpenAdmin(!openAdmin);
+  };
+  const handleTrainerClick = () => {
+    setOpenTrainer(!openTrainer);
+  };
 
   const list = (anchor) => (
     <div>
@@ -81,7 +89,6 @@ const NavPrivate = () => {
         [classes.fullList]: anchor === 'top' || anchor === 'bottom',
       })}"
         role="presentation"
-        onClick={toggleDrawer(anchor, false)}
         onKeyDown={toggleDrawer(anchor, false)}
       >
         <List>
@@ -91,12 +98,12 @@ const NavPrivate = () => {
             </LinkA>
           </ListItem>
           <br />
-
-          <ListItem button className="list">
           <LinkA className="navbar-brand dashboard-link" to="/dashboard">
-            <ListItemText>DashBoard</ListItemText>
-            </LinkA>
-          </ListItem>
+            <ListItem button className="list">
+              <ListItemText>DashBoard</ListItemText>
+            </ListItem>
+          </LinkA>
+
           <Divider />
           <ListItem button className="list">
             <ListItemText>Your Videos</ListItemText>
@@ -106,17 +113,46 @@ const NavPrivate = () => {
             <ListItemText>Our Trainers</ListItemText>
           </ListItem>
           <Divider />
-          <ListItem button className="list">
-            <ListItemText>Notices</ListItemText>
-          </ListItem>
+          <LinkA className="navbar-brand dashboard-link" to="/notices">
+            <ListItem button className="list">
+              <ListItemText>Notices</ListItemText>
+            </ListItem>
+          </LinkA>
+
           <Divider />
-          <ListItem button className="list">
-            <ListItemText>Admin</ListItemText>
-          </ListItem>
+          {userInfo.role_user === "role_admin" && (
+            <>
+              <ListItem button className="list" onClick={handleAdminClick}>
+                <ListItemText>Admin</ListItemText>
+                {openAdmin ? <ExpandLess /> : <ExpandMore />}
+              </ListItem>
+              <Collapse in={openAdmin} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  <ListItem button className="dashboard-link">
+                    <ListItemText primary="Starred" />
+                  </ListItem>
+                </List>
+              </Collapse>
+            </>
+          )}
+
           <Divider />
-          <ListItem button className="list">
-            <ListItemText>Trainer</ListItemText>
-          </ListItem>
+          {(userInfo.role_user === "role_trainer" ||
+            userInfo.role_user === "role_admin") && (
+            <>
+              <ListItem button className="list" onClick={handleTrainerClick}>
+                <ListItemText>Trainer</ListItemText>
+                {openTrainer ? <ExpandLess /> : <ExpandMore />}
+              </ListItem>
+              <Collapse in={openTrainer} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  <ListItem button className="dashboard-link">
+                    <ListItemText primary="Starred" />
+                  </ListItem>
+                </List>
+              </Collapse>
+            </>
+          )}
         </List>
       </div>
     </div>
@@ -124,9 +160,6 @@ const NavPrivate = () => {
 
   const handleToggleUser = () => {
     setOpenUser((prevOpen) => !prevOpen);
-  };
-  const handleToggleAdmin = () => {
-    setOpenAdmin((prevOpen) => !prevOpen);
   };
 
   const handleCloseUser = (event) => {
@@ -137,39 +170,12 @@ const NavPrivate = () => {
     setOpenUser(false);
   };
 
-  const handleCloseAdmin = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
-    setOpenAdmin(false);
-  };
-
   function handleListKeyDownUser(event) {
     if (event.key === "Tab") {
       event.preventDefault();
       setOpenUser(false);
     }
   }
-
-  function handleListKeyDownAdmin(event) {
-    if (event.key === "Tab") {
-      event.preventDefault();
-      setOpenAdmin(false);
-    }
-  }
-  // return focus to the button when we transitioned from !open -> open
-  const prevOpenUser = React.useRef(openUser);
-  const prevOpenAdmin = React.useRef(openAdmin);
-  React.useEffect(() => {
-    if (prevOpenUser.current === true && openUser === false) {
-      anchorRef.current.focus();
-    }
-    if (prevOpenAdmin.current === true && openAdmin === false) {
-      anchorRef.current.focus();
-    }
-
-    prevOpenAdmin.current = openAdmin;
-  }, [openAdmin]);
 
   const logOut = () => {
     console.log("prueeba");
@@ -230,11 +236,6 @@ const NavPrivate = () => {
                                 <MenuItem onClick={handleCloseUser}>
                                   My account
                                 </MenuItem>
-                                {userInfo.role_user === "role_admin" && (
-                                  <MenuItem onClick={handleCloseUser}>
-                                    Admin
-                                  </MenuItem>
-                                )}
 
                                 <MenuItem
                                   onClick={(event) => {
