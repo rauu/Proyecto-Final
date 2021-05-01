@@ -1,0 +1,10 @@
+.upload-first {
+     text-align: center;
+     background-color: var(--primary-color);
+}
+
+.upload-form{
+     text-align: center;
+     width: 50%;
+     margin: auto;
+}

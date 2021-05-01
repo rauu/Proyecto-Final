@@ -13,6 +13,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import ContactUs from "./components/contactUs/ContactUs";
 import Pricing from "./components/pricing/Pricing";
 import Notices from "./components/notices/Notices";
+import UploadVideos from "./components/uploadVideos/UploadVideo";
 import NotFound from "./components/notFound/NotFound";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
               <Route exact path="/pricing" component={Pricing} />
               <Route exact path="/dashboard" component={Dashboard} />
               <Route exact path="/notices" component={Notices} />
+              <Route exact path="/uploadVideos" component={UploadVideos} />
               
               <Route path="/*" component={NotFound} />
             </Switch>

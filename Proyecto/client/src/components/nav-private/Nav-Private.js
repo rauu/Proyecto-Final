@@ -27,13 +27,14 @@ import MailIcon from "@material-ui/icons/Mail";
 import clsx from "clsx";
 
 import LinkA from "react-router-dom/Link";
+import NavLink from "react-router-dom/NavLink";
 import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import StarBorderRoundedIcon from "@material-ui/icons/StarBorderRounded";
 const useStyles = makeStyles({
   list: {
-    width: 300,
+    width: 250,
   },
   fullList: {
     width: "auto",
@@ -82,82 +83,6 @@ const NavPrivate = () => {
     setOpenTrainer(!openTrainer);
   };
 
-  const list = (anchor) => (
-    <div>
-      <div
-        className="{clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}"
-        role="presentation"
-        onKeyDown={toggleDrawer(anchor, false)}
-      >
-        <List>
-          <ListItem button>
-            <LinkA className="navbar-brand" to="/dashboard">
-              <img src={logo} alt="logo" className="logo" />
-            </LinkA>
-          </ListItem>
-          <br />
-          <LinkA className="navbar-brand dashboard-link" to="/dashboard">
-            <ListItem button className="list">
-              <ListItemText>DashBoard</ListItemText>
-            </ListItem>
-          </LinkA>
-
-          <Divider />
-          <ListItem button className="list">
-            <ListItemText>Your Videos</ListItemText>
-          </ListItem>
-          <Divider />
-          <ListItem button className="list">
-            <ListItemText>Our Trainers</ListItemText>
-          </ListItem>
-          <Divider />
-          <LinkA className="navbar-brand dashboard-link" to="/notices">
-            <ListItem button className="list">
-              <ListItemText>Notices</ListItemText>
-            </ListItem>
-          </LinkA>
-
-          <Divider />
-          {userInfo.role_user === "role_admin" && (
-            <>
-              <ListItem button className="list" onClick={handleAdminClick}>
-                <ListItemText>Admin</ListItemText>
-                {openAdmin ? <ExpandLess /> : <ExpandMore />}
-              </ListItem>
-              <Collapse in={openAdmin} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  <ListItem button className="dashboard-link">
-                    <ListItemText primary="Starred" />
-                  </ListItem>
-                </List>
-              </Collapse>
-            </>
-          )}
-
-          <Divider />
-          {(userInfo.role_user === "role_trainer" ||
-            userInfo.role_user === "role_admin") && (
-            <>
-              <ListItem button className="list" onClick={handleTrainerClick}>
-                <ListItemText>Trainer</ListItemText>
-                {openTrainer ? <ExpandLess /> : <ExpandMore />}
-              </ListItem>
-              <Collapse in={openTrainer} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  <ListItem button className="dashboard-link">
-                    <ListItemText primary="Starred" />
-                  </ListItem>
-                </List>
-              </Collapse>
-            </>
-          )}
-        </List>
-      </div>
-    </div>
-  );
-
   const handleToggleUser = () => {
     setOpenUser((prevOpen) => !prevOpen);
   };
@@ -187,7 +112,7 @@ const NavPrivate = () => {
       {loggedIn && (
         <nav className="navbar navbar-expand nav">
           <div className="d-flex flex-grow-1">
-            <LinkA className="navbar-brand" to="/dashboard">
+            <LinkA  className="navbar-brand" to="/dashboard">
               <img src={logo} alt="logo" className="logo" />
             </LinkA>
           </div>
@@ -196,7 +121,7 @@ const NavPrivate = () => {
             id="myNavbar7"
           >
             <ul className="navbar-nav ml-auto flex-nowrap nav-pri-ul">
-              <li className="nav-item px-3  background ">
+              <li className="nav-item px-3" id="background">
                 <div>
                   <div>
                     <LinkA
@@ -233,10 +158,15 @@ const NavPrivate = () => {
                                 onKeyDown={handleListKeyDownUser}
                                 color="primary"
                               >
+                                {userInfo.role_user === "role_trainer" && (
+                                  <MenuItem onClick={handleCloseUser}>
+                                    My Profile
+                                  </MenuItem>
+                                )}
+
                                 <MenuItem onClick={handleCloseUser}>
                                   My account
                                 </MenuItem>
-
                                 <MenuItem
                                   onClick={(event) => {
                                     handleCloseUser(event);
@@ -272,7 +202,125 @@ const NavPrivate = () => {
                         onClose={toggleDrawer(anchor, false)}
                         onOpen={toggleDrawer(anchor, true)}
                       >
-                        {list(anchor)}
+                        <div className="">
+                          <div
+                            className={clsx(classes.list, {
+                              [classes.fullList]:
+                                anchor === "top" || anchor === "bottom",
+                            })}
+                            role="presentation"
+                            onKeyDown={toggleDrawer(anchor, false)}
+                          >
+                            <List>
+                              <ListItem button>
+                                <LinkA className="navbar-brand" to="/dashboard">
+                                  <img src={logo} alt="logo" className="logo" />
+                                </LinkA>
+                              </ListItem>
+                              <br />
+                              <NavLink
+                                className="navbar-brand dashboard-link"
+                                to="/dashboard" activeClassName="selected"
+                              >
+                                <ListItem button className="list">
+                                  <ListItemText>DashBoard</ListItemText>
+                                </ListItem>
+                              </NavLink>
+
+                              <Divider />
+                              <ListItem button className="list">
+                                <ListItemText>Your Videos</ListItemText>
+                              </ListItem>
+                              <Divider />
+                              <ListItem button className="list">
+                                <ListItemText>Our Trainers</ListItemText>
+                              </ListItem>
+                              <Divider />
+                              <LinkA
+                                className="navbar-brand dashboard-link"
+                                to="/notices"
+                              >
+                                <ListItem button className="list">
+                                  <ListItemText>Notices</ListItemText>
+                                </ListItem>
+                              </LinkA>
+
+                              <Divider />
+                              {userInfo.role_user === "role_admin" && (
+                                <>
+                                  <ListItem
+                                    button
+                                    className="list"
+                                    onClick={handleAdminClick}
+                                  >
+                                    <ListItemText>Admin</ListItemText>
+                                    {openAdmin ? (
+                                      <ExpandLess />
+                                    ) : (
+                                      <ExpandMore />
+                                    )}
+                                  </ListItem>
+                                  <Collapse
+                                    in={openAdmin}
+                                    timeout="auto"
+                                    unmountOnExit
+                                  >
+                                    <List component="div" disablePadding>
+                                      <ListItem
+                                        button
+                                        className="dashboard-link"
+                                      >
+                                        <ListItemText>
+                                          Cosas de admin
+                                        </ListItemText>
+                                      </ListItem>
+                                    </List>
+                                  </Collapse>
+                                </>
+                              )}
+
+                              <Divider />
+                              {(userInfo.role_user === "role_trainer" ||
+                                userInfo.role_user === "role_admin") && (
+                                <>
+                                  <ListItem
+                                    button
+                                    className="list"
+                                    onClick={handleTrainerClick}
+                                  >
+                                    <ListItemText>Trainer</ListItemText>
+                                    {openTrainer ? (
+                                      <ExpandLess />
+                                    ) : (
+                                      <ExpandMore />
+                                    )}
+                                  </ListItem>
+                                  <Collapse
+                                    in={openTrainer}
+                                    timeout="auto"
+                                    unmountOnExit
+                                  >
+                                    <List component="div" disablePadding>
+                                      <LinkA
+                                        className="navbar-brand dashboard-link"
+                                        to="/uploadvideos"
+                                      >
+                                        <ListItem
+                                          button
+                                          className="dashboard-link"
+                                        >
+                                          <ListItemText>
+                                            Upload Videos
+                                          </ListItemText>
+                                        </ListItem>
+                                      </LinkA>
+                                    </List>
+                                  </Collapse>
+                                </>
+                              )}
+                            </List>
+                          </div>
+                        </div>
                       </SwipeableDrawer>
                     </React.Fragment>
                   ))}
