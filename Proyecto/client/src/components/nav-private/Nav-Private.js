@@ -112,7 +112,7 @@ const NavPrivate = () => {
       {loggedIn && (
         <nav className="navbar navbar-expand nav">
           <div className="d-flex flex-grow-1">
-            <LinkA  className="navbar-brand" to="/dashboard">
+            <LinkA className="navbar-brand" to="/dashboard">
               <img src={logo} alt="logo" className="logo" />
             </LinkA>
           </div>
@@ -220,7 +220,8 @@ const NavPrivate = () => {
                               <br />
                               <NavLink
                                 className="navbar-brand dashboard-link"
-                                to="/dashboard" activeClassName="selected"
+                                to="/dashboard"
+                                activeClassName="selected"
                               >
                                 <ListItem button className="list">
                                   <ListItemText>DashBoard</ListItemText>
@@ -236,14 +237,15 @@ const NavPrivate = () => {
                                 <ListItemText>Our Trainers</ListItemText>
                               </ListItem>
                               <Divider />
-                              <LinkA
+                              <NavLink
                                 className="navbar-brand dashboard-link"
                                 to="/notices"
+                                activeClassName="selected"
                               >
                                 <ListItem button className="list">
                                   <ListItemText>Notices</ListItemText>
                                 </ListItem>
-                              </LinkA>
+                              </NavLink>
 
                               <Divider />
                               {userInfo.role_user === "role_admin" && (
@@ -301,9 +303,10 @@ const NavPrivate = () => {
                                     unmountOnExit
                                   >
                                     <List component="div" disablePadding>
-                                      <LinkA
+                                      <NavLink
                                         className="navbar-brand dashboard-link"
                                         to="/uploadvideos"
+                                        activeClassName="selected"
                                       >
                                         <ListItem
                                           button
@@ -313,7 +316,7 @@ const NavPrivate = () => {
                                             Upload Videos
                                           </ListItemText>
                                         </ListItem>
-                                      </LinkA>
+                                      </NavLink>
                                     </List>
                                   </Collapse>
                                 </>
