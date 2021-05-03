@@ -2,8 +2,8 @@
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 01, 2021 at 10:43 PM
+-- Host: localhost
+-- Generation Time: May 03, 2021 at 08:27 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -30,8 +30,21 @@ SET time_zone = "+00:00";
 CREATE TABLE `exercise_room` (
   `id_room` int(11) NOT NULL,
   `room_name` varchar(100) NOT NULL,
-  `background_image` varchar(200) NOT NULL
+  `background_image` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `exercise_room`
+--
+
+INSERT INTO `exercise_room` (`id_room`, `room_name`, `background_image`) VALUES
+(1, 'WELLNESS', NULL),
+(5, 'SIX-PACK', NULL),
+(6, 'LOSE WEIGHT', NULL),
+(7, 'TONE UP', NULL),
+(8, 'ROUTINE GAP', NULL),
+(9, 'PILATES', NULL),
+(10, 'YOGA', NULL);
 
 -- --------------------------------------------------------
 
@@ -157,6 +170,14 @@ CREATE TABLE `videos` (
   `video` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `videos`
+--
+
+INSERT INTO `videos` (`id_video`, `video_name`, `id_user`, `video_description`, `date_upload`, `type_video`, `exercise_room`, `video`) VALUES
+(3, 'gfhfgdxgh', 2, 'qwerty', '2021-05-03', 'private', 5, 'src/uploads/videos/video-private_1620024929079.mp4'),
+(4, 'video', 2, 'qwertyuiop', '2021-05-03', 'public', 1, 'src/uploads/videos/video-public_1620025004097.mp4');
+
 -- --------------------------------------------------------
 
 --
@@ -204,7 +225,8 @@ INSERT INTO `work_with_us` (`id`, `name`, `surname`, `email`, `date_uploaded`, `
 -- Indexes for table `exercise_room`
 --
 ALTER TABLE `exercise_room`
-  ADD PRIMARY KEY (`id_room`);
+  ADD PRIMARY KEY (`id_room`),
+  ADD UNIQUE KEY `room_name` (`room_name`);
 
 --
 -- Indexes for table `news`
@@ -274,7 +296,7 @@ ALTER TABLE `work_with_us`
 -- AUTO_INCREMENT for table `exercise_room`
 --
 ALTER TABLE `exercise_room`
-  MODIFY `id_room` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_room` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -310,7 +332,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `id_video` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_video` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `video_comment`
