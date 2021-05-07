@@ -78,44 +78,6 @@ function store(req, res) {
         };
     }
   });
-
-  /* const extension = video.split(";")[0].split("/")[1];
-
-  let filename =
-    "src/uploads/videos/" +
-    "video-" +
-    videoType +
-    "_" +
-    Date.now() +
-    "." +
-    extension;
-
-  let video_write = video.split(";base64,").pop();
-
-  fs.writeFile(filename, video_write, { encoding: "base64" }, function (err) {
-    console.log("File created");
-  });
-
-  const sqlInsert =
-    "INSERT INTO videos (video_name, video_description, type_video, exercise_room, video, id_user) VALUES(?,?,?,?,?,?)";
-
-  db.query(sqlInsert, [
-    videoName,
-    videoDescription,
-    videoType,
-    videoRoom,
-    filename,
-    id_user
-  ]),
-    (err, result) => {
-      if (err) {
-        console.log(err);
-        res.send(false);
-      } else {
-        res.send(true);
-        console.log("video success");
-      }
-    }; */
 }
 
 module.exports = {

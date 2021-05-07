@@ -317,6 +317,20 @@ const NavPrivate = () => {
                                           </ListItemText>
                                         </ListItem>
                                       </NavLink>
+                                      <NavLink
+                                        className="navbar-brand dashboard-link"
+                                        to="/uploadNotice"
+                                        activeClassName="selected"
+                                      >
+                                        <ListItem
+                                          button
+                                          className="dashboard-link"
+                                        >
+                                          <ListItemText>
+                                            Upload Notices
+                                          </ListItemText>
+                                        </ListItem>
+                                      </NavLink>
                                     </List>
                                   </Collapse>
                                 </>

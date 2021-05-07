@@ -2,6 +2,7 @@ import "./UploadVideo.css";
 import NavPrivate from "../nav-private/Nav-Private";
 import { Fade } from "react-reveal";
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import { GetExersiceRooms, UploadVideo } from "../../service/UploadVideo";
 import {
@@ -43,11 +44,16 @@ const UploadVideos = () => {
       console.log(res);
     });
   }
+  const history = useHistory();
 
   useEffect(() => {
     console.log(roomsList);
     getRooms();
     console.log("entro");
+    if (JSON.parse(sessionStorage.getItem("user")).role_user === "role_user") {
+      history.push("/dashboard");
+    }
+    console.log(JSON.parse(sessionStorage.getItem("user")));
   }, []);
   const fileBase64 = (event) => {
     console.log("FileName");
@@ -65,7 +71,7 @@ const UploadVideos = () => {
       fileReader.onload = function (fileLoadedEvent) {
         file = fileLoadedEvent.target.result;
         // Print data in console
-        console.log(fileToLoad);
+        console.log(file);
 
         setUploadValue({
           ...uploadValue,
@@ -186,13 +192,13 @@ const UploadVideos = () => {
     ) {
       uploadVideo();
     } else {
-      alert("not uploaded");
+      setCreateUserSnackError(true);
     }
   }
 
   function uploadVideo() {
     let id_user = JSON.parse(sessionStorage.getItem("user")).id_user;
-     UploadVideo(
+    UploadVideo(
       uploadValue.video_name,
       uploadValue.description,
       uploadValue.type_video,
@@ -205,7 +211,7 @@ const UploadVideos = () => {
       } else if (!res.data) {
         setCreateUserSnackError(true);
       }
-    }); 
+    });
   }
   const handleSubmit = (e) => {
     e.preventDefault();

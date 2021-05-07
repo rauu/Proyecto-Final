@@ -5,6 +5,7 @@ function router(app){
      app.use('/login', require('./src/login'))
      app.use('/contactUs', require('./src/contactUs'))
      app.use('/uploadVideo', require('./src/uploadVideos'))
+     app.use('/uploadNews', require('./src/uploadNews'))
  
  }
  
