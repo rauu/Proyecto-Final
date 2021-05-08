@@ -7,7 +7,6 @@ import logo from "../../assets/logo.png";
 
 import {
   Typography,
-  Link,
   Button,
   Grid,
   TextField,
@@ -17,6 +16,8 @@ import {
   FormControl,
   FormHelperText,
   Snackbar,
+  InputAdornment,
+  Tooltip,
 } from "@material-ui/core";
 
 import MuiAlert from "@material-ui/lab/Alert";
@@ -31,7 +32,10 @@ import {
   passwordValidation,
   passwordMatchValidation,
 } from "../../utils/validation";
-import { registerUser } from "../../service/User";
+import { registerUser, dataExists } from "../../service/User";
+import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
+import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
+import { useHistory } from "react-router-dom";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -48,6 +52,13 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
+  const history = useHistory();
+
+  /*  React.useEffect(() => {
+    console.log(values.username);
+    dataExists(values.username, values.email);
+  }, [values.username, values.email]); */
+
   const [nameValueError, setNameValueError] = React.useState({
     error: false,
     errorMessage: "",
@@ -120,6 +131,9 @@ const Register = () => {
       if (res.data) {
         console.log(res.data);
         setCreateUserSnackSuccess(true);
+        setTimeout(() => {
+          history.push("/login");
+        }, 1000);
       } else if (!res.data) {
         console.log(res.data);
         setCreateUserSnackError(true);
@@ -134,6 +148,14 @@ const Register = () => {
     setCreateUserSnackSuccess(false);
     setCreateUserSnackError(false);
   };
+  const [userExists, setUserExists] = React.useState({
+    userExists: false,
+    userTooltip: "User alredy exists",
+  });
+  const [emailExists, setEmailExists] = React.useState({
+    emailExists: false,
+    emailTooltip: "Email alredy exists",
+  });
 
   function validationFunciton() {
     //name
@@ -356,6 +378,10 @@ const Register = () => {
     }
   }
 
+  const dataCheck = () => {
+    dataExists(values.username, values.email);
+  };
+
   return (
     <div className="register">
       <Typography component={"div"}>
@@ -442,6 +468,16 @@ const Register = () => {
                   fullWidth
                   id="username"
                   label="UserName"
+                  onBlur={dataCheck}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="end">
+                        <Tooltip title="User">
+                          <DoneRoundedIcon edge="end"> </DoneRoundedIcon>
+                        </Tooltip>
+                      </InputAdornment>
+                    ),
+                  }}
                   onChange={handleChange}
                   error={usernameValueError.error}
                   helperText={
@@ -459,6 +495,16 @@ const Register = () => {
                   fullWidth
                   id="email"
                   label="Email"
+                  onBlur={dataCheck}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="end">
+                        <Tooltip title="User">
+                          <DoneRoundedIcon edge="end"> </DoneRoundedIcon>
+                        </Tooltip>
+                      </InputAdornment>
+                    ),
+                  }}
                   onChange={handleChange}
                   error={emailValueError.error}
                   helperText={

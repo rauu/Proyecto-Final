@@ -1,21 +1,14 @@
 import React from "react";
 
-import Footer from "../Footer/Footer";
+import Footer from "../footer/Footer";
 import Nav from "../nav-public/Nav-Public";
 import "./WorkWithUs.css";
 import {
   Typography,
-  Link,
   Button,
   Grid,
   TextField,
-  MenuItem,
-  Select,
-  InputLabel,
-  FormControl,
-  FormHelperText,
   Snackbar,
-  Input,
 } from "@material-ui/core";
 
 import { lettersValidation, emailValidation } from "../../utils/validation";
@@ -56,10 +49,10 @@ const WorkWithUS = () => {
     error: false,
     errorMessage: "",
   });
-  const [cvValueError, setCvValueError] = React.useState({
+/*   const [cvValueError, setCvValueError] = React.useState({
     error: false,
     errorMessage: "",
-  });
+  }); */
   const [messageValueError, setMessageValueError] = React.useState({
     error: false,
     errorMessage: "",
@@ -79,12 +72,12 @@ const WorkWithUS = () => {
     console.log("FileName");
     let selectedFile = event.target.files;
     let file = null;
-    let fileName = "";
+    //let fileName = "";
     //Check File is not Empty
     if (selectedFile.length > 0) {
       // Select the very first file from list
       let fileToLoad = selectedFile[0];
-      fileName = fileToLoad.name;
+      //fileName = fileToLoad.name;
       // FileReader function for read the file.
       let fileReader = new FileReader();
       // Onload of file read the file content
@@ -218,12 +211,12 @@ const WorkWithUS = () => {
       values.message,
       values.cv
     ).then((res) => {
-     if (res.data) {
-       setCreateUserSnackSuccess(true);
-     } else if (!res.data) {
-       setCreateUserSnackError(true);
-     }
-   });
+      if (res.data) {
+        setCreateUserSnackSuccess(true);
+      } else if (!res.data) {
+        setCreateUserSnackError(true);
+      }
+    });
   }
 
   return (
@@ -328,7 +321,6 @@ const WorkWithUS = () => {
                   variant="outlined"
                   name="message"
                   multiline
-                  name="message"
                   required
                   rows="5"
                   fullWidth

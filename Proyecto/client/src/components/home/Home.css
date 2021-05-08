@@ -48,6 +48,10 @@ hr {
      border: 1px solid var(--secondary-color);
 }
 
+.cookie-consent{
+     background-color: var(--primary-color) !important;
+}
+
 @media (max-width: 1200px) {
      .imageCarousel {
           height: 100%;

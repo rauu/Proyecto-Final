@@ -1,0 +1,10 @@
+.contact-first{
+     text-align: center;
+     background-color: var(--primary-color);
+}
+
+.contactForm{
+     text-align: center !important;
+     width: 50%;
+     margin: auto;
+}

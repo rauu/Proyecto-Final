@@ -2,54 +2,42 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-app.use(express.json({limit: '50mb'}));
-app.use(express.urlencoded({ extended: true }))
+
+app.use(express.json({ limit: "50000000mb" }));
+app.use(express.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
-app.use(express.json());
+app.use(
+  cors({
+    /* origin: ["http://192.168.1.38:3000"], */
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+/* app.use(cors()); */
+/* // Add headers
+app.use(function (req, res, next) {
 
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  // Pass to next layer of middleware
+  next();
+}); */
 require("./src/routes")(app);
 
 app.listen(PORT, () => {
   console.log(`Running on port ${PORT}`);
 });
-
-
-/* 
-const nodemailer = require("nodemailer");
-const gmailConnection = require("./src/config/gmail_connection");
-
-var transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  auth: {
-    user: gmailConnection.email,
-    pass: gmailConnection.password,
-  },
-});
-
-var mailOptions = {
-  from: "raunakbinyani@gmail.com",
-  to: "raunakbinyani.binyani@gmail.com",
-  subject: "Sending Email using Node.js",
-  text: "That was easy!",
-  attachments: [
-    {
-      //path: pdf,
-      // filename: 'text1.pdf',
-      //content: 'aGVsbG8gd29ybGQh',
-      //encoding: 'base64'
-    },
-  ],
-};
-
-transporter.sendMail(mailOptions, function (error, info) {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log("Email sent: " + info.response);
-  }
-});
- */

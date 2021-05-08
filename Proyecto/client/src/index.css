@@ -1,63 +1,65 @@
 @import url('https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap');
-
-
 /*GLOBAL VARIABLE*/
-:root{
+
+:root {
      --normal-button-color: #FFCEC2;
      --normal-background-color: #FFEFEB;
      --white-color: #F5F5F5;
      --secondary-color: #333232;
      --primary-color: #FF4810;
+     --yellow-color: #E8B321;
      --navLink-fontSize: 25px;
+     --black-color: #140500;
 }
 
-
-body{
+body {
      background-color: var(--normal-background-color);
 }
 
-html{
+html {
      scroll-behavior: smooth;
      max-width: 100%;
      overflow-x: hidden;
 }
 
 
+
 /*Scrollbar*/
-::-webkit-scrollbar{
+
+::-webkit-scrollbar {
      width: 10px;
 }
 
-::-webkit-scrollbar-track:vertical{
+::-webkit-scrollbar-track:vertical {
      background-color: var(--white-color);
      border-radius: 30px;
 }
 
-::-webkit-scrollbar-thumb:vertical{
+::-webkit-scrollbar-thumb:vertical {
      background-color: var(--primary-color);
      border-radius: 30px;
 }
 
 @media (max-width: 700px) {
-     h1{
+     h1 {
           font-size: 3rem !important;
      }
-     h2{
+     h2 {
           font-size: 2.5rem !important;
      }
-     h3{
+     h3 {
           font-size: 2rem !important;
      }
-     h4{
+     h4 {
           font-size: 1.5rem !important;
      }
-     h5{
+     h5 {
           font-size: 1.5rem !important;
      }
-     h6{
+     h6 {
           font-size: 1rem !important;
      }
-     p{
+     p {
           font-size: 20px !important;
      }
 }

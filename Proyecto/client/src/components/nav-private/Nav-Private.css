@@ -1,0 +1,38 @@
+#background{
+     margin: auto;
+     margin-top: 10px;
+     padding: 5px;
+     margin-right: 5px;
+     background-color: var(--primary-color) !important;
+     border-radius: 30px;
+}
+
+.list:hover{
+     background-color: var(--primary-color) !important;
+     color: var(--white-color) !important;
+}
+
+.list:hover .dashboard-link{
+     background-color: var(--primary-color) !important;
+     color: var(--white-color) !important;
+}
+
+
+.dashboard-link{
+     text-decoration: none !important;
+     color: black;
+     width: 100% !important;
+}
+.dashboard-link:hover{
+     background-color: var(--primary-color) !important;
+     color: var(--white-color) !important;
+}
+
+.selected{
+     background-color: var(--primary-color) !important;
+     color: var(--white-color) !important;
+}
+
+.menu-top{
+     z-index: 1;
+}

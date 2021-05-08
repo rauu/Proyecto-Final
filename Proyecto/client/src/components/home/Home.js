@@ -1,5 +1,20 @@
 import Nav from "./../nav-public/Nav-Public";
 import "./Home.css";
+
+import { Typography, Grid } from "@material-ui/core";
+import Slide from "react-reveal/Slide";
+import Fade from "react-reveal/Fade";
+import Footer from "../footer/Footer";
+import MUICookieConsent from "material-ui-cookie-consent";
+
+import DirectionsRunRoundedIcon from "@material-ui/icons/DirectionsRunRounded";
+import MusicVideoRoundedIcon from "@material-ui/icons/MusicVideoRounded";
+import GroupRoundedIcon from "@material-ui/icons/GroupRounded";
+import LocalOfferRoundedIcon from "@material-ui/icons/LocalOfferRounded";
+import ScheduleRoundedIcon from "@material-ui/icons/ScheduleRounded";
+import TimelineRoundedIcon from "@material-ui/icons/TimelineRounded";
+import PauseCircleFilledRoundedIcon from "@material-ui/icons/PauseCircleFilledRounded";
+
 import Carousel3 from "../../assets/Carousel3.png";
 import Carousel2 from "../../assets/Carousel2.png";
 import Carousel1 from "../../assets/Carousel1.png";
@@ -13,22 +28,15 @@ import Fitness6 from "../../assets/fitness-5.png";
 import Person1 from "../../assets/raunak.png";
 import Person2 from "../../assets/person.png";
 
-import { Typography, Grid } from "@material-ui/core";
-import Slide from "react-reveal/Slide";
-import Fade from "react-reveal/Fade";
-import Footer from "../Footer/Footer";
-
-import DirectionsRunRoundedIcon from "@material-ui/icons/DirectionsRunRounded";
-import MusicVideoRoundedIcon from "@material-ui/icons/MusicVideoRounded";
-import GroupRoundedIcon from "@material-ui/icons/GroupRounded";
-import LocalOfferRoundedIcon from "@material-ui/icons/LocalOfferRounded";
-import ScheduleRoundedIcon from "@material-ui/icons/ScheduleRounded";
-import TimelineRoundedIcon from "@material-ui/icons/TimelineRounded";
-import PauseCircleFilledRoundedIcon from "@material-ui/icons/PauseCircleFilledRounded";
-
 const Home = () => {
   return (
     <div className="home">
+      <MUICookieConsent
+        cookieName="mySiteCookieConsent"
+        componentType="Dialog" // default value is Snackbar
+        message="This site uses cookies.... bla bla..."
+        classaName="cookie-consent"
+      />
       <Nav className="nav"></Nav>
       <Slide right>
         <div className="imageCarousel scroll">
@@ -324,7 +332,6 @@ const Home = () => {
         <br />
         <Fade bottom>
           <Grid container spacing={2} className="grid-center">
-
             <Grid item xs={12} sm={12} md={6} lg={6}>
               <div className="grid-compo">
                 <Grid container spacing={0} className="grid-center">
