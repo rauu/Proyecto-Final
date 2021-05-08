@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 03, 2021 at 08:27 PM
+-- Generation Time: May 08, 2021 at 09:37 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -60,6 +60,14 @@ CREATE TABLE `news` (
   `image_uploded` varchar(255) NOT NULL,
   `date_upload` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`id_news`, `id_user`, `content`, `title`, `image_uploded`, `date_upload`) VALUES
+(9, 1, '589e8acc32656a7f3e4eba51f7ee4291bb4dc4b8dae3ce657faf5e72949a786f3d8996c1988a925bd0cf272a14c49885f54cadbc0c77b92adeaeaaa96a2dd066bc4c6fc1f3aad3b6abe7b58de2fc08448ce2bfc4c1adaf8bc2d1c9e51c8cf424a54181aee62d60ecb91e933091e4ac0fe14c86192b5fcf600e010489508111db666e9f64b51e8834e4d544ad38758d2616e7a2676be323e3ed71c3d0b91df0e8bd9b57990913156aa522dde83cd22dc2d4c65cc6314df4dd120d54a3368a0b3692f25e97946237e5d4dc0122dbdd374ce52490fe6d050a4b8318cb54d7d56296792b06806cf652ffa2491e129787bf120fef94a472463c3b74585e6ff619e9edde44e094239908d45222ca45ba', 'qwerty', 'src/uploads/news/headlineImages/image-1620471485902.jpeg', '2021-05-08'),
+(10, 1, '589e8a9a2b76243f20178e', 'fhfj', 'src/uploads/news/headlineImages/image-1620491406827.png', '2021-05-08');
 
 -- --------------------------------------------------------
 
@@ -136,22 +144,25 @@ CREATE TABLE `users` (
   `sex` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `date_birth` date NOT NULL
+  `date_birth` date NOT NULL,
+  `profile_image` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id_user`, `username`, `name`, `surname`, `role_user`, `email`, `sex`, `password`, `description`, `date_birth`) VALUES
-(1, 'rauu', 'Raunak', 'Binyani', 'role_admin', 'raunakbinyani.binyani@gmail.com', 'male', '$2b$10$eMVDACaze6T2lksIxAJ6Uu/j4NgbtV9prZarwpRqDdHmxRi/Wz8xW', NULL, '2000-09-29'),
-(2, 'victor', 'victor', 'escudero', 'role_trainer', 'victor@gmail.com', 'male', '$2b$10$eMVDACaze6T2lksIxAJ6Uu/j4NgbtV9prZarwpRqDdHmxRi/Wz8xW', NULL, '1998-12-01'),
-(3, 'lucia', 'lucia', 'mena', 'role_user', 'lucia@gmail.com', 'female', 'victor', NULL, '1993-12-24'),
-(4, 'marcos', 'marcos', 'martin', 'role_user', 'marcos@gmail.com', 'male', 'marcos', NULL, '2000-12-12'),
-(8, 'rauuu', 'Raunak', 'Binyani', 'role_user', 'raunakbinyani@gmail.com', 'men', 'raunak_A2', NULL, '1997-06-04'),
-(9, 'victorlopez', 'Victor', 'Escudero', 'role_trainer', 'victor@guacamole.com', 'men', '$2b$10$eMVDACaze6T2lksIxAJ6Uu/j4NgbtV9prZarwpRqDdHmxRi/Wz8xW', NULL, '1998-12-01'),
-(13, 'rauuuuuuu', 'Raunak', 'Binyani', 'role_user', 'raunakyani@gmail.com', 'men', '$2b$10$eMVDACaze6T2lksIxAJ6Uu/j4NgbtV9prZarwpRqDdHmxRi/Wz8xW', NULL, '2001-06-22'),
-(15, 'raunak', 'RAUNAROK', '', 'role_user', 'raunakbni.binyani@gmail.com', 'men', '$2b$10$TFwbn5B9AYkuU5.KGbOFuOyeNrXYvSEt4r3RdPh7.rQdFDYoSPtAO', NULL, '2000-02-09');
+INSERT INTO `users` (`id_user`, `username`, `name`, `surname`, `role_user`, `email`, `sex`, `password`, `description`, `date_birth`, `profile_image`) VALUES
+(1, 'rauu', 'Raunak', 'Binyani', 'role_admin', 'rai.binyani@gmail.com', 'male', '$2b$10$eMVDACaze6T2lksIxAJ6Uu/j4NgbtV9prZarwpRqDdHmxRi/Wz8xW', NULL, '2000-09-29', NULL),
+(2, 'victor', 'victor', 'escudero', 'role_trainer', 'victor@gmail.com', 'male', '$2b$10$eMVDACaze6T2lksIxAJ6Uu/j4NgbtV9prZarwpRqDdHmxRi/Wz8xW', NULL, '1998-12-01', NULL),
+(3, 'lucia', 'lucia', 'mena', 'role_user', 'lucia@gmail.com', 'female', '$2b$10$TFwbn5B9AYkuU5.KGbOFuOyeNrXYvSEt4r3RdPh7.rQdFDYoSPtAO', NULL, '1993-12-24', NULL),
+(4, 'marcos', 'marcos', 'martin', 'role_user', 'marcos@gmail.com', 'male', 'marcos', NULL, '2000-12-12', NULL),
+(8, 'rauuu', 'Raunak', 'Binyani', 'role_user', 'raunakbinyani@gmail.com', 'men', 'raunak_A2', NULL, '1997-06-04', NULL),
+(9, 'victorlopez', 'Victor', 'Escudero', 'role_trainer', 'victor@guacamole.com', 'men', '$2b$10$eMVDACaze6T2lksIxAJ6Uu/j4NgbtV9prZarwpRqDdHmxRi/Wz8xW', NULL, '1998-12-01', NULL),
+(13, 'rauuuuuuu', 'Raunak', 'Binyani', 'role_user', 'raunakyani@gmail.com', 'men', '$2b$10$eMVDACaze6T2lksIxAJ6Uu/j4NgbtV9prZarwpRqDdHmxRi/Wz8xW', NULL, '2001-06-22', NULL),
+(15, 'raunak', 'RAUNAROK', '', 'role_user', 'raunakbinyani.binyani@gmail.com', 'men', '$2b$10$9jIGsnnNW/X.keLLTO6JFOXxLrYPBElTUxNs5UYPBZuRLIkXFYvy2', NULL, '2000-02-09', NULL),
+(16, 'victor2', 'victor', 'victor', 'role_user', 'victor2@g.com', 'men', '$2b$10$if3Mx/1ivpQSaMYpTOHGVOAjPsGQCjkMqrJXaI8UqCiK6KTXmusT6', NULL, '1996-02-17', NULL),
+(17, 'password', 'raunak', 'raunak', 'role_user', 'ri@gmail.com', 'men', '$2b$10$kBT8XmvBVb7of9cCWESJRer/yYqdG2dD4X290GsMFuivcYVs1LmuK', NULL, '2000-06-08', NULL);
 
 -- --------------------------------------------------------
 
@@ -176,7 +187,12 @@ CREATE TABLE `videos` (
 
 INSERT INTO `videos` (`id_video`, `video_name`, `id_user`, `video_description`, `date_upload`, `type_video`, `exercise_room`, `video`) VALUES
 (3, 'gfhfgdxgh', 2, 'qwerty', '2021-05-03', 'private', 5, 'src/uploads/videos/video-private_1620024929079.mp4'),
-(4, 'video', 2, 'qwertyuiop', '2021-05-03', 'public', 1, 'src/uploads/videos/video-public_1620025004097.mp4');
+(4, 'video', 2, 'qwertyuiop', '2021-05-03', 'public', 1, 'src/uploads/videos/video-public_1620025004097.mp4'),
+(5, 'rauu', 2, 'erqewrqewrqewr', '2021-05-06', 'private', 1, 'src/uploads/videos/video-private_1620335868130.mp4'),
+(6, 'Video3', 1, 'VIDEO·3', '2021-05-07', 'private', 1, 'src/uploads/videos/video-private_1620402807594.mp4'),
+(7, 'one republic', 2, '232323', '2021-05-07', 'private', 1, 'src/uploads/videos/video-private_1620423236053.mp4'),
+(8, 'rauu', 1, 'afadfads', '2021-05-08', 'public', 5, 'src/uploads/videos/video-public_1620488013537.mp4'),
+(9, 'ra', 1, 'fadsf', '2021-05-08', 'public', 5, 'src/uploads/videos/video-public_1620492357912.mp4');
 
 -- --------------------------------------------------------
 
@@ -215,7 +231,8 @@ CREATE TABLE `work_with_us` (
 
 INSERT INTO `work_with_us` (`id`, `name`, `surname`, `email`, `date_uploaded`, `file_location`, `message`) VALUES
 (10, 'Raunak', 'Binyani', 'raunakbinyani.binyani@gmail.com', '2021-04-17', 'src/uploads/cv/CV-Raunak_Binyani_1618655489293.pdf', 'Hey mate'),
-(11, 'Raunak', 'Binyani', 'raunakbinyani.binyani@gmail.com', '2021-04-23', 'src/uploads/cv/CV-Raunak_Binyani_1619185033772.pdf', 'qwerqwerqwer');
+(11, 'Raunak', 'Binyani', 'raunakbinyani.binyani@gmail.com', '2021-04-23', 'src/uploads/cv/CV-Raunak_Binyani_1619185033772.pdf', 'qwerqwerqwer'),
+(12, 'RAmon', 'fadsfasdf', 'raunakbinyani.binyani@gmail.com', '2021-05-04', 'src/uploads/cv/CV-RAmon_fadsfasdf_1620163694893.pdf', 'qwertyufkdashk fdashfk adsfl');
 
 --
 -- Indexes for dumped tables
@@ -302,7 +319,7 @@ ALTER TABLE `exercise_room`
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id_news` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_news` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `news_comment`
@@ -326,13 +343,13 @@ ALTER TABLE `subscriptions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `id_video` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_video` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `video_comment`
@@ -344,7 +361,7 @@ ALTER TABLE `video_comment`
 -- AUTO_INCREMENT for table `work_with_us`
 --
 ALTER TABLE `work_with_us`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

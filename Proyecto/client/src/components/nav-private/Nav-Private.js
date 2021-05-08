@@ -110,7 +110,7 @@ const NavPrivate = () => {
   return (
     <Typography component={"div"}>
       {loggedIn && (
-        <nav className="navbar navbar-expand nav">
+        <nav className="navbar navbar-expand nav ">
           <div className="d-flex flex-grow-1">
             <LinkA className="navbar-brand" to="/dashboard">
               <img src={logo} alt="logo" className="logo" />
@@ -121,7 +121,7 @@ const NavPrivate = () => {
             id="myNavbar7"
           >
             <ul className="navbar-nav ml-auto flex-nowrap nav-pri-ul">
-              <li className="nav-item px-3" id="background">
+              <li className="nav-item px-3  menu-top" id="background">
                 <div>
                   <div>
                     <LinkA
@@ -150,7 +150,7 @@ const NavPrivate = () => {
                                 : "center bottom",
                           }}
                         >
-                          <Paper>
+                          <Paper >
                             <ClickAwayListener onClickAway={handleCloseUser}>
                               <MenuList
                                 autoFocusItem={openUser}
@@ -158,14 +158,11 @@ const NavPrivate = () => {
                                 onKeyDown={handleListKeyDownUser}
                                 color="primary"
                               >
-                                {userInfo.role_user === "role_trainer" && (
-                                  <MenuItem onClick={handleCloseUser}>
-                                    My Profile
-                                  </MenuItem>
-                                )}
-
                                 <MenuItem onClick={handleCloseUser}>
                                   My account
+                                </MenuItem>
+                                <MenuItem onClick={handleCloseUser}>
+                                 Contact Us
                                 </MenuItem>
                                 <MenuItem
                                   onClick={(event) => {

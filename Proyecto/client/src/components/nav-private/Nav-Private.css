@@ -32,3 +32,7 @@
      background-color: var(--primary-color) !important;
      color: var(--white-color) !important;
 }
+
+.menu-top{
+     z-index: 1;
+}

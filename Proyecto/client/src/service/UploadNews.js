@@ -1,6 +1,7 @@
 import axios from "axios";
+import serverURL from "../utils/serverURL"
+const url = serverURL;
 axios.defaults.withCredentials = true;
-const url = "http://localhost:3001/";
 
 export const UploadNews = (headline, headlineImage, content, userId) => {
   return axios

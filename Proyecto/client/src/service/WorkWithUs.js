@@ -1,10 +1,11 @@
 import axios from "axios";
+import serverURL from "../utils/serverURL"
+const url = serverURL;
 const headers = {
   headers: {
     "content-type": "multipart/form-data",
   },
 };
-const url = "http://localhost:3001/";
 export const submitCV = (name, lastname, email, message, file) => {
   const cv = new FormData();
   cv.append("file", file);

@@ -153,11 +153,25 @@ const Login = () => {
               LogIn
             </Button>
           </form>
+          <br/>
+          <Grid
+              container
+              spacing={5}
+              className="grid-center"
+              alignItems="center"
+              justify="center"
+            >
+              <Grid item xs={12} sm={12} md={12} lg={12}>
+                <LinkA to="/forgotPassword" className="forgotPassowrd">
+                <Typography variant="body1" color="primary">Forgot Password?</Typography>
+                </LinkA>
+                </Grid>
+
+            </Grid>
         </Fade>
       </div>
       <br />
-      <br />
-      <br />
+ 
 
       <Snackbar
         open={createUserSnackSuccess}

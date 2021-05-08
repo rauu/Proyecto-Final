@@ -15,6 +15,7 @@ import Pricing from "./components/pricing/Pricing";
 import Notices from "./components/notices/Notices";
 import UploadVideos from "./components/uploadVideos/UploadVideo";
 import UploadNotices from "./components/uploadNotices/UploadNotice";
+import ForgotPassword from "./components/forgotPassword/ForgotPassword";
 import NotFound from "./components/notFound/NotFound";
 
 function App() {
@@ -34,7 +35,8 @@ function App() {
               <Route exact path="/notices" component={Notices} />
               <Route exact path="/uploadVideos" component={UploadVideos} />
               <Route exact path="/uploadNotice" component={UploadNotices} />
-              
+              <Route exact path="/forgotPassword" component={ForgotPassword} />
+
               <Route path="/*" component={NotFound} />
             </Switch>
           </Router>

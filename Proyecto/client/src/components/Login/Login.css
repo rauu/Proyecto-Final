@@ -18,9 +18,12 @@
      text-align: center;
 }
 
+
 @media (max-width: 700px) {
      .login-form {
           width: 90%;
      }
 }
+
+
 

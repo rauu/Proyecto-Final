@@ -6,6 +6,7 @@ function router(app){
      app.use('/contactUs', require('./src/contactUs'))
      app.use('/uploadVideo', require('./src/uploadVideos'))
      app.use('/uploadNews', require('./src/uploadNews'))
+     app.use('/changePassword', require('./src/forgotPassword'))
  
  }
  

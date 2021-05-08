@@ -1,5 +1,6 @@
 import axios from "axios";
-const url = "http://localhost:3001/";
+import serverURL from "../utils/serverURL"
+const url = serverURL;
 
 export const registerUser = (
   name,
