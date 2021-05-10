@@ -3,6 +3,6 @@ const router = express.Router();
 const controller = require("../../controllers/forgotPasswordController")
 
 
-router.post("/", controller.store);
+router.put("/", controller.update);
 
 module.exports = router;

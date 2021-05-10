@@ -17,6 +17,9 @@
      color: var(--white-color) !important;
 }
 
+.username-list{
+     color: black !important;
+}
 
 .dashboard-link{
      text-decoration: none !important;
@@ -28,7 +31,7 @@
      color: var(--white-color) !important;
 }
 
-.selected{
+.selected .username-list{
      background-color: var(--primary-color) !important;
      color: var(--white-color) !important;
 }

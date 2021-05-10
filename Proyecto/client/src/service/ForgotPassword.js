@@ -6,7 +6,7 @@ export const changePassword = (
   email,
 ) => {
   return axios
-    .post(url + "changePassword/", {
+    .put(url + "changePassword/", {
       email: email,
     })
     .then((request, response) => {

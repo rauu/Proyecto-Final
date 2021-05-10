@@ -5,7 +5,7 @@ const gmailConnection = require("../config/gmail_connection");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-function store(req, res) {
+function update(req, res) {
   const email = req.body.email;
 
   console.log(req.body);
@@ -72,5 +72,5 @@ function store(req, res) {
 }
 
 module.exports = {
-  store: (req, res) => store(req, res),
+  update: (req, res) => update(req, res),
 };

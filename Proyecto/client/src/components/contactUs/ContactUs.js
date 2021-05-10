@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Fade } from "react-reveal";
 
 import "./ContactUs.css";
 import Nav from "../nav-public/Nav-Public";
+import NavPrivate from "../nav-private/Nav-Private";
 import {
   Typography,
   Button,
@@ -16,9 +17,10 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 import LinkA from "react-router-dom/Link";
 import { lettersValidation, emailValidation } from "../../utils/validation";
-import {Contact} from "../../service/ContactUs";
+import { Contact } from "../../service/ContactUs";
 
 const ContactUs = () => {
+
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
@@ -201,10 +203,20 @@ const ContactUs = () => {
       }
     });
   }
+  const [userLoggedIn, setUserLoggedIn] = React.useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("user")) {
+      setUserLoggedIn(true);
+    } else {
+      setUserLoggedIn(false);
+    }
+    console.log(userLoggedIn);
+  }, []);
   return (
     <div className="contactUs">
       <Typography component={"div"}>
-        <Nav className="nav"></Nav>
+        {userLoggedIn ? <NavPrivate></NavPrivate> : <Nav className="nav"></Nav>}
       </Typography>
       <div className="contact-first">
         <Fade right>

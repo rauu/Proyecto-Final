@@ -129,10 +129,10 @@ const ForgotPassword = () => {
         <Fade right>
           <br />
           <Typography variant="h2" className="white">
-            CHANGE YOUR PASSWORD
+            FORGOT YOUR PASSWORD?
           </Typography>
           <Typography variant="h5" className="white">
-            Write your email in the textbox below
+            Write your email in the textbox below and we will send you your new password in your email.
           </Typography>
           <br />
         </Fade>

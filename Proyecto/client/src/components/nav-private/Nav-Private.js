@@ -150,7 +150,7 @@ const NavPrivate = () => {
                                 : "center bottom",
                           }}
                         >
-                          <Paper >
+                          <Paper>
                             <ClickAwayListener onClickAway={handleCloseUser}>
                               <MenuList
                                 autoFocusItem={openUser}
@@ -158,20 +158,41 @@ const NavPrivate = () => {
                                 onKeyDown={handleListKeyDownUser}
                                 color="primary"
                               >
-                                <MenuItem onClick={handleCloseUser}>
-                                  My account
-                                </MenuItem>
-                                <MenuItem onClick={handleCloseUser}>
-                                 Contact Us
-                                </MenuItem>
-                                <MenuItem
-                                  onClick={(event) => {
-                                    handleCloseUser(event);
-                                    logOut();
-                                  }}
+                                <NavLink
+                                  className=""
+                                  to="/settings"
+                                  activeClassName="selected"
                                 >
-                                  Logout
-                                </MenuItem>
+                                  <MenuItem
+                                    button
+                                    className="username-list list"
+                                  >
+                                    Settings
+                                  </MenuItem>
+                                </NavLink>
+
+                                <NavLink
+                                  to="/contactUs"
+                                  activeClassName="selected"
+                                >
+                                  <MenuItem
+                                    button
+                                    className="username-list list"
+                                  >
+                                    ContactUs
+                                  </MenuItem>
+                                </NavLink>
+                                <NavLink to="/login" activeClassName="selected">
+                                  <MenuItem
+                                    onClick={(event) => {
+                                      handleCloseUser(event);
+                                      logOut();
+                                    }}
+                                    className="username-list list"
+                                  >
+                                    Logout
+                                  </MenuItem>
+                                </NavLink>
                               </MenuList>
                             </ClickAwayListener>
                           </Paper>

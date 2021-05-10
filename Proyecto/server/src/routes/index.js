@@ -7,6 +7,7 @@ function router(app){
      app.use('/uploadVideo', require('./src/uploadVideos'))
      app.use('/uploadNews', require('./src/uploadNews'))
      app.use('/changePassword', require('./src/forgotPassword'))
+     app.use('/updateSettings', require('./src/userSettings'))
  
  }
  
