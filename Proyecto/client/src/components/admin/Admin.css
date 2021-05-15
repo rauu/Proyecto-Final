@@ -1,0 +1,31 @@
+span{
+     font-style: 50px !important;
+}
+
+.roomForm, .RoomDelete{
+     width: 50%;
+     margin: auto;
+}
+.searchIcon{
+     width: 30%;
+     margin: auto;
+}
+.listUser{
+     border: 1px solid var(--secondary-color);
+     padding: 10px;
+     box-shadow: 1px 1px 6px var(--secondary-color);
+     margin-bottom: 10px;
+}
+@media (max-width: 960px) {
+     .roomForm, .searchIcon{
+          width: 50%;
+          margin: auto;
+     }
+}
+@media (max-width: 550px) {
+     .roomForm, .searchIcon {
+          width: 100%;
+          margin: auto;
+     }
+}
+

@@ -15,14 +15,33 @@ import {
   FormControl,
   Snackbar,
   FormHelperText,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Slide,
 } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 const UploadVideos = () => {
   const [roomsList, setRoomslist] = useState([]);
+
+  const [alertOpen, setAlertOpen] = React.useState(false);
+
+  const handleAlertOpen = () => {
+    setAlertOpen(true);
+  };
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
   const handleChange = (event) => {
     setUploadValue({ ...uploadValue, [event.target.name]: event.target.value });
@@ -177,7 +196,7 @@ const UploadVideos = () => {
       videoDescriptionBool = true;
     }
     if (uploadValue.video === "") {
-      alert("You have to select the video");
+      setAlertOpen(true);
       videoBool = false;
     } else {
       videoBool = true;
@@ -236,8 +255,7 @@ const UploadVideos = () => {
           <div className="upload-form">
             <Fade left>
               <br />
-              <br />
-              <br />
+
 
               <form
                 noValidate
@@ -414,6 +432,29 @@ const UploadVideos = () => {
           </Alert>
         </Snackbar>
       </Typography>
+      <Dialog
+        open={alertOpen}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleAlertClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">
+          {"Error while uploading video"}
+        </DialogTitle>
+
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            Select your Video to upload.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleAlertClose} color="primary">
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

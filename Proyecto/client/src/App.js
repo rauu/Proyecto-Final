@@ -17,6 +17,7 @@ import UploadVideos from "./components/uploadVideos/UploadVideo";
 import UploadNotices from "./components/uploadNotices/UploadNotice";
 import ForgotPassword from "./components/forgotPassword/ForgotPassword";
 import UserSettings from "./components/userSettings/UserSettings";
+import Admin from "./components/admin/Admin";
 import NotFound from "./components/notFound/NotFound";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
               <Route exact path="/uploadNotice" component={UploadNotices} />
               <Route exact path="/forgotPassword" component={ForgotPassword} />
               <Route exact path="/settings" component={UserSettings} />
+              <Route exact path="/admin" component={Admin} />
 
               <Route path="/*" component={NotFound} />
             </Switch>

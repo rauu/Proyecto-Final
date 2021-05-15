@@ -29,17 +29,19 @@ function store(req, res) {
 
   const extension = headlineImage.split(";")[0].split("/")[1];
 
+  let route = "src/uploads/"
   let filename =
-    "src/uploads/news/headlineImages/" +
+    "news/headlineImages/" +
     "image-" +
     Date.now() +
     "." +
     extension;
+    
 
   let newsImage_write = headlineImage.split(";base64,").pop();
 
   fs.writeFile(
-    filename,
+    route + filename,
     newsImage_write,
     { encoding: "base64" },
     function (err) {

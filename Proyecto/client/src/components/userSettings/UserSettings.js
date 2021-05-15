@@ -452,7 +452,7 @@ const UserSettings = () => {
         </Fade>
       </div>
       <Fade left>
-        <div className="registerForm">
+        <div className="settingsForm-first">
           <br />
           <form noValidate autoComplete="off" onSubmit={updateProfile}>
             <Grid
@@ -610,6 +610,9 @@ const UserSettings = () => {
             </Button>
           </form>
           <br />
+        </div>
+        <hr class="userSettingsHr" />
+        <div className="settingsForm-second">
           <br />
           <form noValidate autoComplete="off" onSubmit={updatePassword}>
             <Grid

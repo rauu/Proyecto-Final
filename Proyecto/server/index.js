@@ -36,6 +36,9 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 }); */
+/* app.get('/video', (req, res) => {
+  res.re('src/uploads/cv/CV-RAmon_fadsfasdf_1620163694893.pdf', { root: __dirname });
+}); */
 require("./src/routes")(app);
 
 app.listen(PORT, () => {

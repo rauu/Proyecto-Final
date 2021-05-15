@@ -286,14 +286,20 @@ const NavPrivate = () => {
                                     unmountOnExit
                                   >
                                     <List component="div" disablePadding>
-                                      <ListItem
-                                        button
-                                        className="dashboard-link"
+                                    <NavLink
+                                        className="navbar-brand dashboard-link"
+                                        to="/admin"
+                                        activeClassName="selected"
                                       >
-                                        <ListItemText>
-                                          Cosas de admin
-                                        </ListItemText>
-                                      </ListItem>
+                                        <ListItem
+                                          button
+                                          className="dashboard-link"
+                                        >
+                                          <ListItemText>
+                                            Admin Management
+                                          </ListItemText>
+                                        </ListItem>
+                                      </NavLink>
                                     </List>
                                   </Collapse>
                                 </>
@@ -308,7 +314,7 @@ const NavPrivate = () => {
                                     className="list"
                                     onClick={handleTrainerClick}
                                   >
-                                    <ListItemText>Trainer</ListItemText>
+                                    <ListItemText>Trainer Options</ListItemText>
                                     {openTrainer ? (
                                       <ExpandLess />
                                     ) : (

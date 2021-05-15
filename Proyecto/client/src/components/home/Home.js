@@ -48,7 +48,7 @@ const Home = () => {
   const [snackPack, setSnackPack] = React.useState([]);
   const [open, setOpen] = React.useState(false);
   const [messageInfo, setMessageInfo] = React.useState(
-    "By using GYMOOZE's services you agree to our Cookies Use. We use Cookies to"
+    "To make GYMOOZE work, we log user data. By using GYMOOZE, you agree to our Privacy Policy, including cookie policy."
   );
 
   React.useEffect(() => {

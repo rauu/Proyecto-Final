@@ -1,0 +1,15 @@
+.settingsForm-first, .settingsForm-second{
+     width: 50%;
+     text-align: center;
+     margin: auto;
+}
+
+@media (max-width: 550px) {
+     .settingsForm-first, .settingsForm-second{ 
+          width: 90%;
+          margin: auto;
+     }
+     hr{
+          width: 90%;
+     }
+}
