@@ -80,10 +80,54 @@ export const DeleteExerciseRoom = async (roomName) => {
   return request;
 };
 
+export const DeleteCV = async (id) => {
+  const params = {
+    id: id,
+  };
+  const request = await axios.delete(url + "admin/deleteCV", { params });
+  console.log(request);
+  return request;
+};
+
 
 export const GetAllUsers = () =>{
   return axios.get(url + "admin/users",{}).then((request, response) =>{
     console.log(request);
     return request;
   });
+}
+
+export const UpdateUserType = (id_user, role_user) =>{
+  return axios.put(url + "admin/updateUserType",{
+    id_user: id_user,
+    role_user: role_user,
+  }).then((request, response) =>{
+    console.log(request)
+    return request;
+  })
+}
+
+export const DeleteUser = (id_user) =>{
+  const params = {
+    id_user: id_user,
+  };
+  return axios.delete(url + "admin/deleteUser",{
+   params
+  }).then((request, response) =>{
+    console.log(request)
+    return request;
+  })
+}
+
+
+export const GetSearchUsers = (username) =>{
+  const params = {
+    username: username,
+  };
+  return axios.get(url + "admin/getsearchuser",{
+   params
+  }).then((request, response) =>{
+    console.log(request)
+    return request;
+  })
 }

@@ -3,7 +3,7 @@ import NavPrivate from "../nav-private/Nav-Private";
 import PropTypes from "prop-types";
 import "./Admin.css";
 import { Fade } from "react-reveal";
-
+import { Link } from "react-router-dom";
 import {
   makeStyles,
   AppBar,
@@ -47,10 +47,16 @@ import {
   DeleteExerciseRoom,
   GetExersiceRooms,
   GetAllUsers,
+  UpdateUserType,
+  DeleteUser,
+  GetSearchUsers,
+  GetPDF,
+  DeleteCV,
 } from "../../service/Admin";
 import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
+import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
 
 import { useHistory } from "react-router-dom";
 
@@ -117,6 +123,7 @@ const Admin = () => {
 
   const [roomsList, setRoomslist] = React.useState([]);
   const [allUsers, setAllUsers] = React.useState([]);
+  const [allPdf, setAllPdf] = React.useState([]);
 
   const handleAlertOpen = () => {
     setAlertOpen(true);
@@ -131,14 +138,20 @@ const Admin = () => {
   const handleDeleteAlertClose = () => {
     setDeleteAlertOpen(false);
   };
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const handleSearchUser = () => {
+  const handleSearchUser = (event) => {
+    setSearchValue({
+      username: event.target.value,
+    });
     console.log(searchValue);
+    GetSearchUsers(event.target.value).then((res) => {
+      setAllUsers(res.data);
+    });
   };
+
   const [userRegisterValue, setUserRegisterValue] = React.useState({
     name: "",
     surname: "",
@@ -150,6 +163,7 @@ const Admin = () => {
     password: "",
     confirmPassword: "",
   });
+
   const [deleteRoomValue, setDeleteRoomValue] = React.useState({
     room: "",
   });
@@ -161,6 +175,11 @@ const Admin = () => {
 
   const [searchValue, setSearchValue] = React.useState({
     userSearch: "",
+  });
+
+  const [updateUsers, setUpdateUsers] = React.useState({
+    role_user: "",
+    username: "",
   });
 
   const [nameValueError, setNameValueError] = React.useState({
@@ -200,13 +219,11 @@ const Admin = () => {
     errorMessage: "",
   });
 
-  const [
-    confirmPasswordValueError,
-    setConfirmPasswordVlueError,
-  ] = React.useState({
-    error: false,
-    errorMessage: "",
-  });
+  const [confirmPasswordValueError, setConfirmPasswordVlueError] =
+    React.useState({
+      error: false,
+      errorMessage: "",
+    });
 
   let nameBool = false;
   let surnameBool = false;
@@ -267,6 +284,45 @@ const Admin = () => {
     deleteRoomValidations();
   };
 
+  const userChange = (id_user, username, id) => {
+    console.log(id_user);
+    console.log(username);
+    let role_user = document
+      .getElementsByName("typeUserModify")
+      [id].getAttribute("value");
+    UpdateUserType(id_user, role_user).then((res) => {
+      if (res.data === true) {
+        setSnackbarUserModified(true);
+      }
+    });
+  };
+  const userDelete = (i) => {
+    console.log(i);
+    let userDelete = window.confirm(
+      "Are you sure you want to delete this user?"
+    );
+    if (userDelete) {
+      DeleteUser(i).then((res) => {
+        console.log(res);
+        setSnackbarUserDeleted(true);
+      });
+    }
+  };
+  const deleteCV = (i) => {
+    console.log(i);
+
+    let cvDelete = window.confirm(
+      "Are you sure that you want to delete this CV?"
+    );
+    if (cvDelete) {
+      DeleteCV(i).then((res) => {
+        console.log(res);
+        //setAllPdf(res.data)
+        setDeletePdfSnackSuccess(true);
+      });
+    }
+  };
+
   function createUser() {
     console.log("USER");
     //console.log(values);
@@ -299,18 +355,18 @@ const Admin = () => {
     emailTooltip: "Email alredy exists",
   });
 
-  const [createUserSnackSuccess, setCreateUserSnackSuccess] = React.useState(
-    false
-  );
+  const [createUserSnackSuccess, setCreateUserSnackSuccess] =
+    React.useState(false);
   const [createUserSnackError, setCreateUserSnackError] = React.useState(false);
-  const [createRoomSnackSuccess, setCreateRoomSnackSuccess] = React.useState(
-    false
-  );
-  const [
-    createDeleteRoomSnackSuccess,
-    setCreateDeleteRoomSnackSuccess,
-  ] = React.useState(false);
+  const [createRoomSnackSuccess, setCreateRoomSnackSuccess] =
+    React.useState(false);
+  const [createDeleteRoomSnackSuccess, setCreateDeleteRoomSnackSuccess] =
+    React.useState(false);
   const [createRoomSnackError, setCreateRoomSnackError] = React.useState(false);
+  const [snackbarUserModified, setSnackbarUserModified] = React.useState(false);
+  const [snackbarUserDeleted, setSnackbarUserDeleted] = React.useState(false);
+  const [deletePdfSnackSuccess, setDeletePdfSnackSuccess] =
+    React.useState(false);
 
   const handleClose = () => {
     setCreateUserSnackSuccess(false);
@@ -318,6 +374,8 @@ const Admin = () => {
     setCreateRoomSnackSuccess(false);
     setCreateRoomSnackError(false);
     setCreateDeleteRoomSnackSuccess(false);
+    setSnackbarUserModified(false);
+    setSnackbarUserDeleted(false);
   };
   function RegisterUserValidation() {
     //name
@@ -658,11 +716,16 @@ const Admin = () => {
     console.log(roomsList);
     getRooms();
   }, [createRoomSnackSuccess, createDeleteRoomSnackSuccess]);
-  
+
   React.useEffect(() => {
     console.log(allUsers);
     getUsers();
-  }, []);
+  }, [snackbarUserDeleted]);
+
+  React.useEffect(() => {
+    console.log(allPdf);
+    GetAllPDF();
+  }, [deletePdfSnackSuccess]);
 
   function getRooms() {
     GetExersiceRooms().then((res) => {
@@ -679,6 +742,19 @@ const Admin = () => {
     });
     console.log(allUsers);
   }
+  function GetAllPDF() {
+    GetPDF().then((res) => {
+      setAllPdf(res.data);
+      console.log(res.data);
+    });
+    console.log(allPdf);
+  }
+
+  /* function SearchUsers() {
+    GetSearchUsers(searchValue.username).then((res) => {
+      console.log(res);
+    });
+  } */
 
   return (
     <>
@@ -946,7 +1022,7 @@ const Admin = () => {
               </div>
             </Fade>
             <Snackbar
-              class="snackbar"
+              className="snackbar"
               open={createUserSnackSuccess}
               autoHideDuration={3000}
               onClose={handleClose}
@@ -960,7 +1036,7 @@ const Admin = () => {
               </Alert>
             </Snackbar>
             <Snackbar
-              class="snackbar"
+              className="snackbar"
               open={createUserSnackError}
               autoHideDuration={3000}
               onClose={handleClose}
@@ -976,73 +1052,125 @@ const Admin = () => {
           </div>
         </TabPanel>
         <TabPanel value={value} index="two">
-          <div className="searchIcon">
-            <TextField
-              name="userSearch"
-              variant="outlined"
-              required
-              fullWidth
-              id="userSearch"
-              label="Search Users"
-              onChange={handleSearchUser}
-            />
-          </div>
-          <br />
-          {allUsers !== undefined && (
-            <>
-              {allUsers.map((val) => {
-                return (
-                  <div className="listUser" key={val.id_user}>
-                    <Grid
-                      container
-                      spacing={5}
-                      className="grid-center"
-                      alignItems="center"
-                      justify="center"
-                    >
-                      <Grid item xs={6} sm={6} md={3} lg={3}>
-                        {val.username}
-                      </Grid>
-                      <Grid item xs={6} sm={6} md={3} lg={3}>
-                        <FormControl variant="outlined" fullWidth required>
-                          <InputLabel id="typeUser">User Type</InputLabel>
-                          <Select
-                            name="typeUser"
-                            labelId="typeUser"
-                            id="typeUser"
-                            value={val.role_user}
-                            onChange={handleChangeUser}
-                            label="User Type"
-                            error={typeUserValueError.error}
-                          >
-                            <MenuItem value={"role_user"}>User</MenuItem>
-                            <MenuItem value={"role_trainer"}>Trainer</MenuItem>
-                            <MenuItem value={"role_admin"}>Admin</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </Grid>
-                      <Grid item xs={6} sm={6} md={3} lg={3}>
-                        <DeleteRoundedIcon
-                          fontSize="large"
-                          color="primary"
-                        ></DeleteRoundedIcon>
-                      </Grid>
-                      <Grid item xs={6} sm={6} md={3} lg={3}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          className="button"
-                          type="submit"
+          <>
+            <div className="searchIcon">
+              <TextField
+                name="userSearch"
+                variant="outlined"
+                fullWidth
+                id="userSearch"
+                label="Search Users"
+                onChange={handleSearchUser}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="end">
+                      <Tooltip title="User">
+                        <SearchRoundedIcon edge="end"> </SearchRoundedIcon>
+                      </Tooltip>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </div>
+            <br />
+            {allUsers !== undefined && (
+              <>
+                {allUsers.map((val) => {
+                  return (
+                    <div className="listUser" key={val.id_user}>
+                      <form noValidate autoComplete="off">
+                        <Grid
+                          container
+                          spacing={5}
+                          className="grid-center"
+                          alignItems="center"
+                          justify="center"
                         >
-                          Save Changes
-                        </Button>
-                      </Grid>
-                    </Grid>
-                  </div>
-                );
-              })}
-            </>
-          )}
+                          <Grid item xs={6} sm={6} md={3} lg={3}>
+                            <Typography variant="body">
+                              {val.username}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={6} sm={6} md={3} lg={3}>
+                            <FormControl variant="outlined" fullWidth required>
+                              <InputLabel id="typeUser">User Type</InputLabel>
+                              <Select
+                                name="typeUserModify"
+                                labelId="typeUserModify"
+                                id="typeUserModify"
+                                className="typeUserModify"
+                                defaultValue={val.role_user}
+                                label="User Type"
+                              >
+                                <MenuItem value={"role_user"}>User</MenuItem>
+                                <MenuItem value={"role_trainer"}>
+                                  Trainer
+                                </MenuItem>
+                                <MenuItem value={"role_admin"}>Admin</MenuItem>
+                              </Select>
+                            </FormControl>
+                          </Grid>
+                          <Grid item xs={6} sm={6} md={3} lg={3}>
+                            <DeleteRoundedIcon
+                              onClick={userDelete.bind(this, val.id_user)}
+                              className="deleteIcon"
+                              fontSize="large"
+                              color="primary"
+                            ></DeleteRoundedIcon>
+                          </Grid>
+                          <Grid item xs={6} sm={6} md={3} lg={3}>
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              className="button"
+                              type="button"
+                              onClick={userChange.bind(
+                                this,
+                                val.id_user,
+                                val.username,
+                                val.id
+                              )}
+                            >
+                              Save Changes
+                            </Button>
+                          </Grid>
+                        </Grid>
+                      </form>
+                    </div>
+                  );
+                })}
+              </>
+            )}
+
+            <Snackbar
+              className="snackbarModified"
+              open={snackbarUserModified}
+              autoHideDuration={3000}
+              onClose={handleClose}
+            >
+              <Alert
+                autoHideDuration={3000}
+                onClose={handleClose}
+                severity="success"
+              >
+                User modified successfully
+              </Alert>
+            </Snackbar>
+            <Snackbar
+              className="snackbarDeleted"
+              open={snackbarUserDeleted}
+              autoHideDuration={3000}
+              onClose={handleClose}
+            >
+              <Alert
+                autoHideDuration={3000}
+                onClose={handleClose}
+                severity="success"
+              >
+                The user has been deleted succesfully
+              </Alert>
+            </Snackbar>
+          </>
         </TabPanel>
         <TabPanel value={value} index="three">
           <div className="addRemoveRoom">
@@ -1118,34 +1246,6 @@ const Admin = () => {
                   </Grid>
                 </Grid>
               </Grid>
-              <Snackbar
-                class="snackbar"
-                open={createRoomSnackSuccess}
-                autoHideDuration={3000}
-                onClose={handleClose}
-              >
-                <Alert
-                  autoHideDuration={3000}
-                  onClose={handleClose}
-                  severity="success"
-                >
-                  Room Created successfully
-                </Alert>
-              </Snackbar>
-              <Snackbar
-                class="snackbar"
-                open={createRoomSnackError}
-                autoHideDuration={3000}
-                onClose={handleClose}
-              >
-                <Alert
-                  autoHideDuration={3000}
-                  onClose={handleClose}
-                  severity="error"
-                >
-                  Room Already exists
-                </Alert>
-              </Snackbar>
               <br />
               <hr />
               <br />
@@ -1206,7 +1306,7 @@ const Admin = () => {
                   </form>
                 </Grid>
                 <Snackbar
-                  class="snackbar"
+                  className="snackbar"
                   open={createDeleteRoomSnackSuccess}
                   autoHideDuration={3000}
                   onClose={handleClose}
@@ -1217,6 +1317,34 @@ const Admin = () => {
                     severity="success"
                   >
                     Room Deleted Succesfully
+                  </Alert>
+                </Snackbar>
+                <Snackbar
+                  className="snackbar"
+                  open={createRoomSnackSuccess}
+                  autoHideDuration={3000}
+                  onClose={handleClose}
+                >
+                  <Alert
+                    autoHideDuration={3000}
+                    onClose={handleClose}
+                    severity="success"
+                  >
+                    Room Created successfully
+                  </Alert>
+                </Snackbar>
+                <Snackbar
+                  className="snackbar"
+                  open={createRoomSnackError}
+                  autoHideDuration={3000}
+                  onClose={handleClose}
+                >
+                  <Alert
+                    autoHideDuration={3000}
+                    onClose={handleClose}
+                    severity="error"
+                  >
+                    Room Already exists
                   </Alert>
                 </Snackbar>
               </Grid>
@@ -1248,11 +1376,73 @@ const Admin = () => {
           </div>
         </TabPanel>
         <TabPanel value={value} index="four">
-          <iframe
-            src="http://192.168.1.38:3001/cv/CV-RAmon_fadsfasdf_1620163694893.pdf"
-            width="600px"
-            height="500px"
-          />
+          <>
+            {allPdf !== undefined && (
+              <>
+                {allPdf.map((val) => {
+                  return (
+                    <div className="listUser" key={val.id}>
+                      <Typography variant="body">
+                        <b>Date Uploaded:</b> {val.date_uploaded}
+                      </Typography>
+                      <br />
+                      <br />
+                      <Typography variant="body">
+                        <b>From:</b> {val.name} {val.surname}
+                      </Typography>
+                      <br />
+                      <br />
+                      <Typography variant="body">
+                        <b>Email:</b> {val.email}{" "}
+                      </Typography>
+                      <br />
+                      <br />
+                      <Typography variant="body">
+                        <b>Message:</b> {val.message}
+                      </Typography>
+                      <br />
+                      <br />
+
+                      <iframe
+                        src={`http://192.168.1.38:3001/${val.file_location}`}
+                        width="100%"
+                        height="600px"
+                        allowfullscreen
+                        sandbox
+                      />
+
+                      <br />
+                      <div className="deleteCV">
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          className="button"
+                          type="button"
+                          onClick={deleteCV.bind(this, val.id)}
+                        >
+                          Delete cv
+                        </Button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </>
+            )}
+          </>
+          <Snackbar
+            className="snackbar"
+            open={deletePdfSnackSuccess}
+            autoHideDuration={3000}
+            onClose={handleClose}
+          >
+            <Alert
+              autoHideDuration={3000}
+              onClose={handleClose}
+              severity="success"
+            >
+              CV Deleted successfully
+            </Alert>
+          </Snackbar>
         </TabPanel>
         <Dialog
           open={alertOpen}

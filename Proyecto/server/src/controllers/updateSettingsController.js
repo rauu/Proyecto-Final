@@ -51,7 +51,7 @@ function updateProfile(req, res) {
               name: result[0].name,
               surname: result[0].surname,
               username: result[0].username,
-              dob: moment(result[0].date_birth).format("YYYY-MM-DD"),
+              date: moment(result[0].date_birth).format("YYYY-MM-DD"),
               userUpdated: true,
             };
             console.log(userData);

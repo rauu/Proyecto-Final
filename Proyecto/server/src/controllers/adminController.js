@@ -5,7 +5,10 @@ const saltRounds = 10;
 const fs = require("fs");
 
 function getPDF(req, res) {
-  const getVideos = "SELECT * FROM work_with_us";
+  let pdfUsers = [];
+
+
+  const getVideos = "SELECT * FROM work_with_us ORDER BY date_uploaded DESC;";
 
   db.query(getVideos, (err, result) => {
     if (err) {
@@ -14,9 +17,26 @@ function getPDF(req, res) {
       res.send(false);
     } else {
       /* res.json(result); */
-      console.log(result[0]);
-      var path = require("path");
-      res.json(result);
+      result.map((value) => {
+        /* userData = {
+          username: value.username,
+          role_user: value.role_user,
+          id_user: value.id_user
+        } */
+        pdfUsers.push({
+          name: value.name,
+          surname: value.surname,
+          email: value.email,
+          date_uploaded: moment(value.date_uploaded).format("DD-MM-YYYY"),
+          message: value.message,
+          file_location: value.file_location,
+          id: value.id,
+        });
+      });
+      console.log(pdfUsers);
+
+      res.send(pdfUsers);
+    
     }
   });
 }
@@ -110,11 +130,11 @@ function deleteRoom(req, res) {
       res.send(true);
     }
   });
-
 }
 
-function users(req, res){
-  let userData = []
+function users(req, res) {
+  let userData = [];
+  let count = 0;
 
   const getUsers = "SELECT * FROM users";
   db.query(getUsers, [], (err, result) => {
@@ -123,8 +143,7 @@ function users(req, res){
       console.log(err);
       res.send(false);
     } else {
-      result.map(value =>{
-        
+      result.map((value) => {
         /* userData = {
           username: value.username,
           role_user: value.role_user,
@@ -133,12 +152,95 @@ function users(req, res){
         userData.push({
           username: value.username,
           role_user: value.role_user,
-          id_user: value.id_user
-        })
-      })
-      console.log(userData)
+          id_user: value.id_user,
+          id: count,
+        });
+        count++;
+      });
+      console.log(userData);
 
       res.send(userData);
+    }
+  });
+}
+
+function updateUserType(req, res) {
+  let role_user = req.body.role_user;
+  let id_user = req.body.id_user;
+  console.log(req.body);
+  const getUsers = "UPDATE users SET role_user = ? WHERE id_user = ?";
+  db.query(getUsers, [role_user, id_user], (err, result) => {
+    //res.send(result);
+    if (err) {
+      console.log(err);
+      res.send(false);
+    } else {
+      res.send(true);
+    }
+  });
+}
+
+function deleteUser(req, res) {
+  let id_user = req.query.id_user;
+  console.log(req.query.id_user);
+  const getUsers = "DELETE FROM users WHERE id_user = ?";
+  db.query(getUsers, [id_user], (err, result) => {
+    //res.send(result);
+    if (err) {
+      console.log(err);
+      res.send(false);
+    } else {
+      res.send(true);
+    }
+  });
+}
+
+function getSearchUser(req, res) {
+  let userData = [];
+  let count = 0;
+
+  let username = req.query.username;
+  console.log(req.query.username);
+  const getUsers = "SELECT * FROM users WHERE username LIKE ?;";
+  db.query(getUsers, [username + "%"], (err, result) => {
+    //res.send(result);
+    if (err) {
+      console.log(err);
+      res.send(false);
+    } else {
+      result.map((value) => {
+        /* userData = {
+          username: value.username,
+          role_user: value.role_user,
+          id_user: value.id_user
+        } */
+        userData.push({
+          username: value.username,
+          role_user: value.role_user,
+          id_user: value.id_user,
+          id: count,
+        });
+        count++;
+      });
+      console.log(userData);
+
+      res.send(userData);
+    }
+  });
+}
+function deleteCV(req, res) {
+
+  let id = req.query.id;
+  console.log(req.query)
+  console.log(req.query.username);
+  const getUsers = "DELETE FROM work_with_us WHERE id = ?;";
+  db.query(getUsers, [id ], (err, result) => {
+    //res.send(result);
+    if (err) {
+      console.log(err);
+      res.send(false);
+    } else {
+      res.send(result)
     }
   });
 }
@@ -149,4 +251,8 @@ module.exports = {
   createRoom: (req, res) => createRoom(req, res),
   deleteRoom: (req, res) => deleteRoom(req, res),
   users: (req, res) => users(req, res),
+  updateUserType: (req, res) => updateUserType(req, res),
+  deleteUser: (req, res) => deleteUser(req, res),
+  getSearchUser: (req, res) => getSearchUser(req, res),
+  deleteCV: (req, res) => deleteCV(req, res),
 };
