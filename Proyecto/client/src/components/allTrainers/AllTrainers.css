@@ -1,0 +1,17 @@
+.profile_image{
+     width: 200px;
+     height: 100%;
+     border-radius: 50%;
+     text-align: center;
+     margin: auto;
+}
+
+.a_link{
+     display: flex;
+     flex-direction: column;
+     text-decoration: none;
+     color: inherit;
+}
+.a_link:hover{
+     color: var(--primary-color)
+}

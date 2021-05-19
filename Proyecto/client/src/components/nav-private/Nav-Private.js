@@ -251,9 +251,15 @@ const NavPrivate = () => {
                                 <ListItemText>Your Videos</ListItemText>
                               </ListItem>
                               <Divider />
-                              <ListItem button className="list">
-                                <ListItemText>Our Trainers</ListItemText>
-                              </ListItem>
+                              <NavLink
+                                className="navbar-brand dashboard-link"
+                                to="/trainers"
+                                activeClassName="selected"
+                              >
+                                <ListItem button className="list">
+                                  <ListItemText>Our Trainers</ListItemText>
+                                </ListItem>
+                              </NavLink>
                               <Divider />
                               <NavLink
                                 className="navbar-brand dashboard-link"

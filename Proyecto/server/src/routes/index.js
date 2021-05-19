@@ -10,6 +10,7 @@ function router(app) {
   app.use("/updateSettings", require("./src/userSettings"));
   app.use("/admin", require("./src/admin"));
   app.use("/dashboard", require("./src/dashboard"));
+  app.use("/allTrainers", require("./src/allTrainers"));
 
   app.use(express.static("src/uploads"));
 }

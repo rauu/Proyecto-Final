@@ -8,9 +8,9 @@ function getPDF(req, res) {
   let pdfUsers = [];
 
 
-  const getVideos = "SELECT * FROM work_with_us ORDER BY date_uploaded DESC;";
+  const gefAllPDF = "SELECT * FROM work_with_us ORDER BY date_uploaded DESC;";
 
-  db.query(getVideos, (err, result) => {
+  db.query(gefAllPDF, (err, result) => {
     if (err) {
       console.log(err);
 
