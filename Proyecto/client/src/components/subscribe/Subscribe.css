@@ -1,0 +1,16 @@
+.subscribe-first {
+     text-align: center;
+     background-color: var(--primary-color);
+}
+
+.subscription-form{
+     width: 50%;
+     margin: auto;
+}
+
+@media (max-width: 700px) {
+     .subscription-form {
+          width: 90%;
+     }
+}
+

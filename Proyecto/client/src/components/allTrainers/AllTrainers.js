@@ -9,7 +9,6 @@ import {
   TextField,
   InputAdornment,
   Tooltip,
-
 } from "@material-ui/core/";
 import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
 import LinkA from "react-router-dom/Link";
@@ -90,7 +89,9 @@ const AllTrainers = () => {
                             alt="profile_image"
                             className="profile_image"
                           />
-                          <Typography variant="body">{val.username}</Typography>
+                          <Typography variant="body">
+                            {val.name} {val.surname}
+                          </Typography>
                         </LinkA>
                       </div>
                     </>

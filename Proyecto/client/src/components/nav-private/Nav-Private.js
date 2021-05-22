@@ -158,6 +158,22 @@ const NavPrivate = () => {
                                 onKeyDown={handleListKeyDownUser}
                                 color="primary"
                               >
+                                {userInfo.role_user === "role_trainer" && (
+                                  <>
+                                    <NavLink
+                                      className=""
+                                      to={`/trainer/${userInfo.username}`}
+                                      activeClassName="selected"
+                                    >
+                                      <MenuItem
+                                        button
+                                        className="username-list list"
+                                      >
+                                        My Profile
+                                      </MenuItem>
+                                    </NavLink>
+                                  </>
+                                )}
                                 <NavLink
                                   className=""
                                   to="/settings"
@@ -292,7 +308,7 @@ const NavPrivate = () => {
                                     unmountOnExit
                                   >
                                     <List component="div" disablePadding>
-                                    <NavLink
+                                      <NavLink
                                         className="navbar-brand dashboard-link"
                                         to="/admin"
                                         activeClassName="selected"

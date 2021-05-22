@@ -8,7 +8,7 @@ import Home from "./components/home/Home";
 import theme from "./CoustumTheme";
 import Register from "./components/Register/Register";
 import WorkWithUS from "./components/work-with-us/WorkWithUs";
-import Login from "./components/login/Login";
+import Login from "./components/Login/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import ContactUs from "./components/contactUs/ContactUs";
 import Pricing from "./components/pricing/Pricing";
@@ -20,6 +20,7 @@ import UserSettings from "./components/userSettings/UserSettings";
 import Admin from "./components/admin/Admin";
 import AllTrainers from "./components/allTrainers/AllTrainers";
 import TrainerProfile from "./components/trainerProfile/TrainerProfile";
+import SubscribeUser from "./components/subscribe/Subscribe";
 import NotFound from "./components/notFound/NotFound";
 
 function App() {
@@ -44,7 +45,9 @@ function App() {
               <Route exact path="/admin" component={Admin} />
               <Route exact path="/trainers" component={AllTrainers} />
               <Route exact path="/trainer/*" component={TrainerProfile} />
+              <Route exact path="/subscribe/*" component={SubscribeUser} />
 
+              <Route path="/error" component={NotFound} />
               <Route path="/*" component={NotFound} />
             </Switch>
           </Router>
