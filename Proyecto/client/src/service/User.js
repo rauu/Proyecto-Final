@@ -27,14 +27,26 @@ export const registerUser = (
     });
 };
 
-export const dataExists = (username, email) => {
+export const getUser = (username) => {
   const params = {
     username: username,
+  };
+  console.log(username);
+  const headers = { headers: { "Access-Control-Allow-Origin": "*" } };
+
+  return axios.get(url + "users/getUser/", {params}).then((response)=>{
+    console.log(response);
+    return response;
+  });
+};
+export const getEmail = ( email) => {
+  const params = {
     email: email,
   };
   const headers = { headers: { "Access-Control-Allow-Origin": "*" } };
 
-  return axios.get("http://localhost:3001/users/", {params}).then((response)=>{
+  return axios.get(url + "users/getEmail/", {params}).then((response)=>{
     console.log(response);
+    return response;
   });
 };

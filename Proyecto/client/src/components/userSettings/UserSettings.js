@@ -509,15 +509,7 @@ const UserSettings = () => {
                   defaultValue={userData.username}
                   id="username"
                   label="UserName"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="end">
-                        <Tooltip title="User">
-                          <DoneRoundedIcon edge="end"> </DoneRoundedIcon>
-                        </Tooltip>
-                      </InputAdornment>
-                    ),
-                  }}
+                  disabled
                   onChange={handleChangeProfile}
                   error={usernameValueError.error}
                   helperText={
@@ -536,15 +528,6 @@ const UserSettings = () => {
                   id="email"
                   label="Email"
                   defaultValue={userData.email}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="end">
-                        <Tooltip title="User">
-                          <DoneRoundedIcon edge="end"> </DoneRoundedIcon>
-                        </Tooltip>
-                      </InputAdornment>
-                    ),
-                  }}
                   onChange={handleChangeProfile}
                   error={emailValueError.error}
                   helperText={

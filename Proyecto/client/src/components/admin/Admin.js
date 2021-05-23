@@ -3,7 +3,6 @@ import NavPrivate from "../nav-private/Nav-Private";
 import PropTypes from "prop-types";
 import "./Admin.css";
 import { Fade } from "react-reveal";
-import { Link } from "react-router-dom";
 import {
   makeStyles,
   AppBar,
@@ -57,8 +56,9 @@ import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
+import {getUser, getEmail } from "../../service/User";
 
-import { useHistory } from "react-router-dom";
+
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -114,9 +114,6 @@ const Admin = () => {
   const classes = useTabStyles();
 
   const [value, setValue] = React.useState("one");
-  const [value2, setValue2] = React.useState("two");
-  const [value3, setValue3] = React.useState("three");
-  const [value4, setValue4] = React.useState("four");
 
   const [alertOpen, setAlertOpen] = React.useState(false);
   const [deleteAlertOpen, setDeleteAlertOpen] = React.useState(false);
@@ -124,6 +121,57 @@ const Admin = () => {
   const [roomsList, setRoomslist] = React.useState([]);
   const [allUsers, setAllUsers] = React.useState([]);
   const [allPdf, setAllPdf] = React.useState([]);
+  const [userExists, setUserExists] = React.useState(false);
+  const [emailExists, setEmailExists] = React.useState(false);
+
+  const userAdornment = userExists
+    ? {
+        endAdornment: (
+          <InputAdornment position="end">
+            <Tooltip title="User Alerady Exits">
+              <CloseRoundedIcon edge="end" color="error">
+                {" "}
+              </CloseRoundedIcon>
+            </Tooltip>
+          </InputAdornment>
+        ),
+      }
+    : {
+        endAdornment: (
+          <InputAdornment position="end">
+            <Tooltip title="User Available">
+              <DoneRoundedIcon edge="end" className="green">
+                {" "}
+              </DoneRoundedIcon>
+            </Tooltip>
+          </InputAdornment>
+        ),
+      };
+
+  const emailAdornment = emailExists
+    ? {
+        endAdornment: (
+          <InputAdornment position="end">
+            <Tooltip title="Email Alerady Exits">
+              <CloseRoundedIcon edge="end" color="error">
+                {" "}
+              </CloseRoundedIcon>
+            </Tooltip>
+          </InputAdornment>
+        ),
+      }
+    : {
+        endAdornment: (
+          <InputAdornment position="end">
+            <Tooltip title="Email Available">
+              <DoneRoundedIcon edge="end" className="green">
+                {" "}
+              </DoneRoundedIcon>
+            </Tooltip>
+          </InputAdornment>
+        ),
+      };
+
 
   const handleAlertOpen = () => {
     setAlertOpen(true);
@@ -346,14 +394,7 @@ const Admin = () => {
       }
     });
   }
-  const [userExists, setUserExists] = React.useState({
-    userExists: false,
-    userTooltip: "User alredy exists",
-  });
-  const [emailExists, setEmailExists] = React.useState({
-    emailExists: false,
-    emailTooltip: "Email alredy exists",
-  });
+
 
   const [createUserSnackSuccess, setCreateUserSnackSuccess] =
     React.useState(false);
@@ -756,6 +797,18 @@ const Admin = () => {
     });
   } */
 
+  const dataCheckEmail = () => {
+    getEmail(userRegisterValue.email).then((res) => {
+      setEmailExists(res.data);
+    });
+  };
+  const dataCheckUser = () => {
+    getUser(userRegisterValue.username).then((res) => {
+      setUserExists(res.data);
+    });
+  };
+
+
   return (
     <>
       <NavPrivate></NavPrivate>
@@ -850,16 +903,8 @@ const Admin = () => {
                         fullWidth
                         id="username"
                         label="UserName"
-                        onBlur={dataCheck}
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="end">
-                              <Tooltip title="User">
-                                <DoneRoundedIcon edge="end"> </DoneRoundedIcon>
-                              </Tooltip>
-                            </InputAdornment>
-                          ),
-                        }}
+                        onBlur={dataCheckUser}
+                        InputProps={userAdornment}
                         onChange={handleChangeUser}
                         error={usernameValueError.error}
                         helperText={
@@ -877,16 +922,9 @@ const Admin = () => {
                         fullWidth
                         id="email"
                         label="Email"
-                        onBlur={dataCheck}
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="end">
-                              <Tooltip title="User">
-                                <DoneRoundedIcon edge="end"> </DoneRoundedIcon>
-                              </Tooltip>
-                            </InputAdornment>
-                          ),
-                        }}
+                        onBlur={dataCheckEmail}
+                        InputProps={emailAdornment}
+
                         onChange={handleChangeUser}
                         error={emailValueError.error}
                         helperText={

@@ -33,3 +33,21 @@ export const updateProfile = (id_user, profileImage, description) => {
       return response;
     });
 };
+
+
+export const userSubscribed = (id_user, trainerName) => {
+  const headers = { headers: { "Access-Control-Allow-Origin": "*" } };
+
+  const params = {
+    id_user: id_user,
+    trainerName: trainerName,
+  };
+  return axios
+    .get(url + "trainer/userSubscribed", {
+      params
+    })
+    .then((response) => {
+      console.log(response);
+      return response;
+    });
+};

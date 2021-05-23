@@ -31,59 +31,36 @@ function store(req, res) {
   );
 }
 
-async function index(req, res) {
-  let sqlResult = {
-    user: true,
-    email: true,
-  };
-  //Username validation
-  if (req.query.username !== "") {
-    const sqlCheck = "SELECT username FROM users WHERE username = ?";
+async function getUser(req, res) {
+  console.log(req.query)
+  const sqlCheck = "SELECT * FROM users WHERE username = ?";
 
-    db.query(sqlCheck, [req.query.username], (err, result) => {
-      //res.send(result);
-      let ans = result;
-      if (ans.length > 0) {
-        sqlResult = {
-          ...sqlResult,
-          user: false,
-        };
-        console.log("DENTRO");
-        /*         console.log(sqlResult)
-         */ //return res.send(sqlResult);
-      } else {
-        sqlResult = {
-          user: true,
-        };
-      }
-    });
-  } else if (req.query.email !== "") {
-    const sqlCheck = "SELECT email FROM users WHERE email = ?";
+  db.query(sqlCheck, [req.query.username], (err, result) => {
+    //res.send(result);
+    if(result.length > 0){
+      res.send(true)
+    }else{
+      res.send(false);
+    }
+  })
+}
 
-    db.query(sqlCheck, [req.query.email], (err, result) => {
-      //res.send(result);
-      if (result.length > 0) {
-        sqlResult = {
-          ...sqlResult,
-          email: false,
-        };
-        //return res.send(sqlResult);
-      } else {
-        sqlResult = {
-          ...sqlResult,
-          email: true,
-        };
-      }
-    });
-  }
-  await console.log("FUERA");
+async function getEmail(req, res) {
+  console.log(req.query)
+  const sqlCheck = "SELECT * FROM users WHERE email = ?";
 
-  await res.send(sqlResult);
-
-  //Email validation
+  db.query(sqlCheck, [req.query.email], (err, result) => {
+    //res.send(result);
+    if(result.length > 0){
+      res.send(true)
+    }else{
+      res.send(false);
+    }
+  })
 }
 
 module.exports = {
   store: (req, res) => store(req, res),
-  index: (req, res) => index(req, res),
+  getUser: (req, res) => getUser(req, res),
+  getEmail: (req, res) => getEmail(req, res),
 };

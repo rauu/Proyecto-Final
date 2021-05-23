@@ -3,7 +3,11 @@ import "./TrainerProfile.css";
 import NavPrivate from "../nav-private/Nav-Private";
 import { FadeR } from "react-reveal";
 import { useLocation, useHistory, Link } from "react-router-dom";
-import { dataExists, updateProfile } from "../../service/TrainerProfile";
+import {
+  dataExists,
+  updateProfile,
+  userSubscribed,
+} from "../../service/TrainerProfile";
 import NotFound from "../notFound/NotFound";
 import {
   makeStyles,
@@ -15,24 +19,14 @@ import {
   Button,
   Grid,
   TextField,
-  MenuItem,
-  Select,
-  InputLabel,
-  FormControl,
   FormHelperText,
-  Snackbar,
-  InputAdornment,
-  Tooltip,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Slide,
   Modal,
   Backdrop,
   Fade,
+  Card,
+  CardContent,
 } from "@material-ui/core/";
+const moment = require("moment-timezone");
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -98,19 +92,23 @@ const TrainerProfile = () => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("one");
   const [value2, setValue2] = React.useState("two");
+  const userInfo = JSON.parse(sessionStorage.getItem("user"));
   const [editProfileimage, setEditProfileimage] = React.useState();
   const [editProfile, setEditProfile] = React.useState({
     newProfileImage: "",
     description: "",
   });
-
+  const [videoInfo, setVideoInfo] = React.useState({});
+  const [privateVideos, setPrivateVideos] = React.useState();
+  const [publicVideos, setPublicVideos] = React.useState();
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const handleChangeInfo = (event) => {
     setEditProfile({ ...editProfile, [event.target.name]: event.target.value });
-    console.log(editProfile);
+    /*     console.log(editProfile);
+     */
   };
 
   const handleOpen = () => {
@@ -123,12 +121,13 @@ const TrainerProfile = () => {
 
   React.useEffect(() => {
     getUser();
+    userSubs();
   }, []);
 
   function getUser() {
     dataExists(pathname).then((res) => {
-      console.log(res);
-      if (res.data.userExists) {
+      /*       console.log(res);
+       */ if (res.data.userExists) {
         setTrainerExists(res.data.userExists);
         setTrainerInfo(res.data);
         setEditProfileimage(
@@ -144,19 +143,32 @@ const TrainerProfile = () => {
     });
   }
 
+  function userSubs() {
+    userSubscribed(userInfo.id_user, pathname).then((res) => {
+      /*       console.log(res);
+       */ setVideoInfo(res.data);
+      setPrivateVideos(res.data.privateVideos);
+      setPublicVideos(res.data.publicVideos);
+      /*       console.log(videoInfo);
+       */
+    });
+  }
+  console.log(videoInfo);
+
   const getAllPrivateVideoTrainer = () => {
-    console.log("videos");
+    /*     console.log("videos");
+     */
   };
 
   const handleSubmitEditProfile = (e) => {
     e.preventDefault();
-    console.log(editProfile);
-    updateProfile(
+    /*     console.log(editProfile);
+     */ updateProfile(
       trainerInfo.id,
       editProfile.newProfileImage,
       editProfile.description
-    ).then((res) =>{
-      if(res.data){
+    ).then((res) => {
+      if (res.data) {
         getUser();
       }
     });
@@ -177,14 +189,14 @@ const TrainerProfile = () => {
         file = fileLoadedEvent.target.result;
         // Print data in console
 
-        console.log("file");
-        setEditProfile({
+        /*         console.log("file");
+         */ setEditProfile({
           ...editProfile,
           newProfileImage: file,
         });
       };
-      console.log(editProfile);
-      // Convert data to base64
+      /*       console.log(editProfile);
+       */ // Convert data to base64
       fileReader.readAsDataURL(fileToLoad);
     }
   };
@@ -218,7 +230,14 @@ const TrainerProfile = () => {
             </Grid>
             <Grid item xs={12} sm={12} md={8} lg={8}>
               <Typography variant="body1" className="profile_description">
-                {trainerInfo.description}
+                {trainerInfo.description == null ||
+                trainerInfo.description === "" ? (
+                  <>
+                    <i>No Description Available</i>{" "}
+                  </>
+                ) : (
+                  <>{trainerInfo.description}</>
+                )}
               </Typography>
             </Grid>
           </Grid>
@@ -293,8 +312,7 @@ const TrainerProfile = () => {
                                 }/${500}`} */
                               />
                               <FormHelperText>
-                                {editProfile.description != null 
-                                ? (
+                                {editProfile.description != null ? (
                                   <>
                                     {`${editProfile.description.length}/${500}`}
                                   </>
@@ -336,17 +354,40 @@ const TrainerProfile = () => {
               </>
             </Grid>
             <Grid item xs={12} sm={12} md={8} lg={8}>
-              <Link to={`/subscribe/${trainerInfo.username}`}>
-              
-              <Button
-                variant="contained"
-                color="primary"
-                className="button"
-                type="button"
-              >
-                Subscribe to {trainerInfo.username}
-              </Button>
-              </Link>
+              {videoInfo.subscribed ? (
+                <>
+                  {" "}
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className="button"
+                    type="button"
+                    disabled
+                  >
+                    Subscribed till {videoInfo.expire_date}
+                  </Button>
+                </>
+              ) : (
+                <>
+                  {" "}
+                  {userInfo.username !== trainerInfo.username ? (
+                    <>
+                      <Link to={`/subscribe/${trainerInfo.username}`}>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          className="button"
+                          type="button"
+                        >
+                          Subscribe to {trainerInfo.username}
+                        </Button>
+                      </Link>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </>
+              )}
             </Grid>
           </Grid>
           <br />
@@ -375,10 +416,162 @@ const TrainerProfile = () => {
               </Tabs>
             </AppBar>
             <TabPanel value={value} index="one">
-              Item One
+              <Grid
+                container
+                spacing={5}
+                className="grid-center"
+                alignItems="center"
+                justify="center"
+              >
+                {publicVideos && (
+                  <>
+                    {publicVideos.map((val) => {
+                      return (
+                        <>
+                          <Grid
+                            item
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            lg={3}
+                            key={val.id_video}
+                          >
+                            <Card>
+                              <CardContent className="video-card">
+                                <video className="video">
+                                  <source
+                                    src={`http://192.168.1.38:3001/${val.video}`}
+                                  />
+                                </video>
+                                <br />
+                                <Typography variant="h5">
+                                  {val.video_name}
+                                </Typography>
+                                <Typography variant="body2">
+                                  {moment(val.date_upload).format("DD.MM.YY")}
+                                </Typography>
+                              </CardContent>
+                            </Card>
+                          </Grid>
+                        </>
+                      );
+                    })}
+                  </>
+                )}
+              </Grid>
             </TabPanel>
             <TabPanel value={value} index="two">
-              Item Two
+              {videoInfo.subscribed ||
+              trainerInfo.username === userInfo.username ? (
+                <>
+                  <Grid
+                    container
+                    spacing={5}
+                    className="grid-center"
+                    alignItems="center"
+                    justify="center"
+                  >
+                    {privateVideos && (
+                      <>
+                        {privateVideos.map((val) => {
+                          return (
+                            <>
+                              <Grid
+                                item
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                lg={3}
+                                key={val.id_video}
+                              >
+                                <Card>
+                                  <CardContent className="video-card">
+                                    <video className="video">
+                                      <source
+                                        src={`http://192.168.1.38:3001/${val.video}`}
+                                      />
+                                    </video>
+                                    <br />
+                                    <Typography variant="h5">
+                                      {val.video_name}
+                                    </Typography>
+                                    <Typography variant="body2">
+                                      {moment(val.date_upload).format(
+                                        "DD.MM.YY"
+                                      )}
+                                    </Typography>
+                                  </CardContent>
+                                </Card>
+                              </Grid>
+                            </>
+                          );
+                        })}
+                      </>
+                    )}
+                  </Grid>
+                </>
+              ) : (
+                <>
+                  <Grid
+                    container
+                    spacing={5}
+                    className="grid-center"
+                    alignItems="center"
+                    justify="center"
+                  >
+                    {privateVideos && (
+                      <>
+                        {privateVideos.map((val) => {
+                          return (
+                            <>
+                              <Grid
+                                item
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                lg={3}
+                                key={val.id_video}
+                              >
+                                <Link to={`/subscribe/${trainerInfo.username}`}>
+                                  <Card>
+                                    <CardContent className="video-card overlayCard">
+                                      <div className="notSubscribed">
+                                        <video className="video notSubscribedVideo">
+                                          <source
+                                            src={`http://192.168.1.38:3001/${val.video}`}
+                                          />
+                                        </video>
+                                        <Typography
+                                          variant="body2"
+                                          className="white"
+                                        >
+                                          Your need to subscribe to{" "}
+                                          {trainerInfo.username} in order to
+                                          watch his videos
+                                        </Typography>
+                                      </div>
+
+                                      <br />
+                                      <Typography variant="h5">
+                                        {val.video_name}
+                                      </Typography>
+                                      <Typography variant="body2">
+                                        {moment(val.date_upload).format(
+                                          "DD.MM.YY"
+                                        )}
+                                      </Typography>
+                                    </CardContent>
+                                  </Card>
+                                </Link>
+                              </Grid>
+                            </>
+                          );
+                        })}
+                      </>
+                    )}
+                  </Grid>
+                </>
+              )}
             </TabPanel>
           </div>
         </>

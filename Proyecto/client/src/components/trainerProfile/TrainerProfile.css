@@ -12,6 +12,13 @@
      text-align: center;
 }
 
+.notSubscribed{
+     background-color: var(--primary-color);
+}
+.notSubscribedVideo{
+    opacity: 0.5;
+}
+
 .newImage {
      cursor: pointer;
 }

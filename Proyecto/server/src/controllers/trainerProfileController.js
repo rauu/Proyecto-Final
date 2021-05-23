@@ -1,5 +1,8 @@
 const db = require("../config/db_connection");
-const moment = require("moment-timezone");
+const Moment = require("moment");
+const MomentRange = require("moment-range");
+
+const moment = MomentRange.extendMoment(Moment);
 const fs = require("fs");
 
 function index(req, res) {
@@ -92,7 +95,81 @@ function update(req, res) {
   }
 }
 
+function userSubscribed(req, res) {
+  console.log(req.query);
+  let id_user = req.query.id_user;
+  let trainerName = req.query.trainerName;
+
+  const getAll = "SELECT * FROM videos WHERE id_user = ?";
+  const getTrainerID = "SELECT * FROM users WHERE username = ?";
+  const getSub =
+    "SELECT * FROM subscriptions WHERE id_user = ? AND id_user_trainer = ?";
+
+  db.query(getTrainerID, [trainerName], (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send(false);
+    } else {
+      let trainerID = result[0].id_user;
+
+      db.query(getAll, [trainerID], (err, resultVideo) => {
+        if (err) {
+          res.send(false);
+          console.log(err);
+        } else {
+          let sub = false;
+          let startDate;
+          let endDate;
+          let range;
+          let PublicVideos = [];
+          let PrivateVideos = [];
+          let InfoSend = {};
+
+          /*           console.log(result);
+           */ db.query(getSub, [id_user, trainerID], (err, result) => {
+            if (err) {
+              console.log(err);
+              res.send(false);
+            } else {
+              /*               console.log(range.contains(moment()));
+               */ if (result.length > 0) {
+                for (value of result) {
+                  startDate = moment(value.start_date).format("YYYY-MM-DD");
+                  endDate = moment(value.expire_date).format("YYYY-MM-DD");
+                  range = moment().range(startDate, endDate);
+                  if (range.contains(moment())) {
+                    sub = true;
+                    break;
+                  }
+                }
+              }
+              for (value of resultVideo) {
+                if (value.type_video == "private") {
+                  PrivateVideos.push(value);
+                } else if (value.type_video == "public") {
+                  PublicVideos.push(value);
+                }
+              }
+
+              InfoSend = {
+                subscribed: sub,
+                expire_date: moment(endDate).format("DD/MM/YYYY"),
+                publicVideos: PublicVideos,
+                privateVideos: PrivateVideos,
+              };
+              res.send(InfoSend);
+              console.log(InfoSend);
+              console.log(sub + "SUB");
+            }
+          });
+        }
+      });
+    }
+  });
+}
+
 module.exports = {
   index: (req, res) => index(req, res),
   update: (req, res) => update(req, res),
+  userSubscribed: (req, res) => userSubscribed(req, res),
 };
