@@ -436,22 +436,26 @@ const TrainerProfile = () => {
                             lg={3}
                             key={val.id_video}
                           >
-                            <Card>
-                              <CardContent className="video-card">
-                                <video className="video">
-                                  <source
-                                    src={`http://192.168.1.38:3001/${val.video}`}
-                                  />
-                                </video>
-                                <br />
-                                <Typography variant="h5">
-                                  {val.video_name}
-                                </Typography>
-                                <Typography variant="body2">
-                                  {moment(val.date_upload).format("DD.MM.YY")}
-                                </Typography>
-                              </CardContent>
-                            </Card>
+                              <Card>
+                                <CardContent className="video-card">
+                                  <video
+                                   /*  onClick={(e) => e.preventDefault()} */
+                                    onContextMenu={(e) => e.preventDefault()}
+                                    className="video controls"
+                                  >
+                                    <source
+                                      src={`http://192.168.1.38:3001/${val.video}`}
+                                    />
+                                  </video>
+                                  <br />
+                                  <Typography variant="h5">
+                                    {val.video_name}
+                                  </Typography>
+                                  <Typography variant="body2">
+                                    {moment(val.date_upload).format("DD.MM.YY")}
+                                  </Typography>
+                                </CardContent>
+                              </Card>
                           </Grid>
                         </>
                       );
@@ -486,7 +490,10 @@ const TrainerProfile = () => {
                               >
                                 <Card>
                                   <CardContent className="video-card">
-                                    <video className="video">
+                                    <video
+                                      onContextMenu={(e) => e.preventDefault()}
+                                      className="video controls"
+                                    >
                                       <source
                                         src={`http://192.168.1.38:3001/${val.video}`}
                                       />
@@ -536,7 +543,12 @@ const TrainerProfile = () => {
                                   <Card>
                                     <CardContent className="video-card overlayCard">
                                       <div className="notSubscribed">
-                                        <video className="video notSubscribedVideo">
+                                        <video
+                                          onContextMenu={(e) =>
+                                            e.preventDefault()
+                                          }
+                                          className="video notSubscribedVideo controls"
+                                        >
                                           <source
                                             src={`http://192.168.1.38:3001/${val.video}`}
                                           />
