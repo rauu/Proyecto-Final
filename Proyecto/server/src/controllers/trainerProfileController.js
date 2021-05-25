@@ -100,7 +100,7 @@ function userSubscribed(req, res) {
   let id_user = req.query.id_user;
   let trainerName = req.query.trainerName;
 
-  const getAll = "SELECT * FROM videos WHERE id_user = ? ORDER BY date_upload DESC ";
+  const getAll = "SELECT * FROM videos WHERE id_user = ? ORDER BY id_video DESC ";
   const getTrainerID = "SELECT * FROM users WHERE username = ?";
   const getSub =
     "SELECT * FROM subscriptions WHERE id_user = ? AND id_user_trainer = ?";

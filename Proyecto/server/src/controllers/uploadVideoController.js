@@ -36,9 +36,9 @@ function store(req, res) {
 
       const extension = video.split(";")[0].split("/")[1];
 
-      let filename = "video-" + videoType + "_" + Date.now() + "." + extension;
+      let filename = "videos/video-" + videoType + "_" + Date.now() + "." + extension;
 
-      let fileRoute = "src/uploads/videos/";
+      let fileRoute = "src/uploads/";
 
       let video_write = video.split(";base64,").pop();
 
