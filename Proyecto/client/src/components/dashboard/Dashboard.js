@@ -3,6 +3,8 @@ import { AllVideos } from "../../service/Dashboard";
 import "./Dashboard.css";
 import NavPrivate from "../nav-private/Nav-Private";
 import { Fade } from "react-reveal";
+import Link from "react-router-dom/Link";
+
 import {
   Typography,
   Backdrop,
@@ -23,7 +25,7 @@ const DashBoard = () => {
   console.log(videos);
 
   React.useEffect(() => {
-    AllVideos(userInfo.username).then((res) => {
+    AllVideos(userInfo.username,userInfo.id_user ).then((res) => {
       setVideos(res.data);
       console.log(videos);
     });
@@ -58,6 +60,7 @@ const DashBoard = () => {
                           lg={3}
                           key={val.id_video}
                         >
+                          <Link to={`/video/${val.id_video}`}>
                           <Card className="card">
                             <CardContent className="video-card">
                               <video
@@ -78,6 +81,7 @@ const DashBoard = () => {
                               </Typography>
                             </CardContent>
                           </Card>
+                          </Link>
                         </Grid>
                       </>
                     );

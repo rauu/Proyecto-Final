@@ -436,10 +436,11 @@ const TrainerProfile = () => {
                             lg={3}
                             key={val.id_video}
                           >
+                            <Link to={`/video/${val.id_video}`}>
                               <Card>
                                 <CardContent className="video-card">
                                   <video
-                                   /*  onClick={(e) => e.preventDefault()} */
+                                    /*  onClick={(e) => e.preventDefault()} */
                                     onContextMenu={(e) => e.preventDefault()}
                                     className="video controls"
                                   >
@@ -456,10 +457,20 @@ const TrainerProfile = () => {
                                   </Typography>
                                 </CardContent>
                               </Card>
+                            </Link>
                           </Grid>
                         </>
                       );
                     })}
+                  </>
+                )}
+                {(publicVideos === undefined || publicVideos.length === 0) && (
+                  <>
+                    <br />
+                    <br />
+                    <Typography variant="body1">
+                      <i>No public videos available</i>
+                    </Typography>
                   </>
                 )}
               </Grid>
@@ -488,27 +499,31 @@ const TrainerProfile = () => {
                                 lg={3}
                                 key={val.id_video}
                               >
-                                <Card>
-                                  <CardContent className="video-card">
-                                    <video
-                                      onContextMenu={(e) => e.preventDefault()}
-                                      className="video controls"
-                                    >
-                                      <source
-                                        src={`http://192.168.1.38:3001/${val.video}`}
-                                      />
-                                    </video>
-                                    <br />
-                                    <Typography variant="h5">
-                                      {val.video_name}
-                                    </Typography>
-                                    <Typography variant="body2">
-                                      {moment(val.date_upload).format(
-                                        "DD.MM.YY"
-                                      )}
-                                    </Typography>
-                                  </CardContent>
-                                </Card>
+                                <Link to={`/video/${val.id_video}`}>
+                                  <Card>
+                                    <CardContent className="video-card">
+                                      <video
+                                        onContextMenu={(e) =>
+                                          e.preventDefault()
+                                        }
+                                        className="video controls"
+                                      >
+                                        <source
+                                          src={`http://192.168.1.38:3001/${val.video}`}
+                                        />
+                                      </video>
+                                      <br />
+                                      <Typography variant="h5">
+                                        {val.video_name}
+                                      </Typography>
+                                      <Typography variant="body2">
+                                        {moment(val.date_upload).format(
+                                          "DD.MM.YY"
+                                        )}
+                                      </Typography>
+                                    </CardContent>
+                                  </Card>
+                                </Link>
                               </Grid>
                             </>
                           );
@@ -579,6 +594,16 @@ const TrainerProfile = () => {
                             </>
                           );
                         })}
+                      </>
+                    )}
+                    {(privateVideos === undefined ||
+                      privateVideos.length === 0) && (
+                      <>
+                        <br />
+                        <br />
+                        <Typography variant="body1">
+                          <i>No public videos available</i>
+                        </Typography>
                       </>
                     )}
                   </Grid>

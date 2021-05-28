@@ -6,6 +6,7 @@ const moment = MomentRange.extendMoment(Moment);
 
 function index(req, res) {
   const username = req.query.username;
+  const idTrainer = req.query.idTrainer;
   let privateVideos = [];
   let publicVideos = [];
   let trainerSubs = [];
@@ -15,8 +16,11 @@ function index(req, res) {
   const getPrivateVideos =
     "SELECT * FROM videos WHERE type_video = 'private' AND id_user= ?";
 
+  const getAllVideos = "SELECT * FROM videos";
+
   const getUserID = "SELECT id_user FROM users WHERE username = ?";
   const getSubsName = "SELECT * FROM subscriptions WHERE id_user = ?";
+
   db.query(getUserID, [username], (err, result) => {
     if (err) {
       console.log(err);
@@ -38,6 +42,9 @@ function index(req, res) {
               trainerSubs.push(val.id_user_trainer);
             }
           }
+
+
+
           db.query(getPublicVideos, [userID], async (err, result) => {
             if (err) {
               console.log(err);
@@ -57,15 +64,43 @@ function index(req, res) {
                     }
                   }
                   if (index == trainerSubs.length - 1) {
-                    await res.send(
+                    /*  console.log(videos);
+                    res.send(
                       videos.sort(
                         (a, b) => (a.id_video < b.id_video && 1) || -1
                       )
-                    );
+                    ); */
+                    db.query(getAllVideos, async (err, result) => {
+                      if (err) {
+                        res.send(false);
+                        console.log(err);
+                      } else {
+                        let allVideos = [];
+                        /*                         console.log(result);
+                         */ for (val of result) {
+                          allVideos.push(val);
+                        }
+                        allVideos.filter((val, i) => {
+                          if (videos[i] != undefined) {
+                            val.id_video != videos[i].id_video;
+                          }
+                        });
+                        console.log(allVideos);
+                        /*                         console.log(allVideos);
+                         */ res.send(videos);
+                      }
+                    });
+                    console.log("get");
                   }
                 });
               }
-              setTimeout(async () => {}, 2000);
+
+              console.log(trainerSubs);
+              if (trainerSubs == "") {
+                res.send(
+                  videos.sort((a, b) => (a.id_video < b.id_video && 1) || -1)
+                );
+              }
 
               /*               await res.send(privateVideos)
                */
@@ -82,6 +117,8 @@ function index(req, res) {
       });
     }
   });
+
+
 }
 
 module.exports = {

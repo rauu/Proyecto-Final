@@ -14,6 +14,7 @@ function router(app) {
   app.use("/trainer", require("./src/trainerProfile"));
   app.use("/plans", require("./src/plans"));
   app.use("/subscribe", require("./src/subscribe"));
+  app.use("/exersiceRooms", require("./src/exerciseRoom"));
 
   app.use(express.static("src/uploads"));
 }

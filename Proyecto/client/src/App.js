@@ -21,6 +21,9 @@ import Admin from "./components/admin/Admin";
 import AllTrainers from "./components/allTrainers/AllTrainers";
 import TrainerProfile from "./components/trainerProfile/TrainerProfile";
 import SubscribeUser from "./components/subscribe/Subscribe";
+import Video from "./components/video/Video";
+import ExerciseRooms from "./components/exersiceRoom/ExerciseRoom";
+import ExerciseRoomVideo from "./components/exerciseRoomVideos/ExersiceRoomVideos";
 import NotFound from "./components/notFound/NotFound";
 
 function App() {
@@ -44,8 +47,11 @@ function App() {
               <Route exact path="/settings" component={UserSettings} />
               <Route exact path="/admin" component={Admin} />
               <Route exact path="/trainers" component={AllTrainers} />
+              <Route exact path="/exerciseRooms" component={ExerciseRooms} />
+              <Route exact path="/exerciseRoom/*" component={ExerciseRoomVideo} />
               <Route exact path="/trainer/*" component={TrainerProfile} />
               <Route exact path="/subscribe/*" component={SubscribeUser} />
+              <Route exact path="/video/*" component={Video} />
 
               <Route path="/error" component={NotFound} />
               <Route path="/*" component={NotFound} />

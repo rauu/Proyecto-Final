@@ -263,9 +263,15 @@ const NavPrivate = () => {
                               </NavLink>
 
                               <Divider />
+                              <NavLink
+                                className="navbar-brand dashboard-link"
+                                to="/exerciseRooms"
+                                activeClassName="selected"
+                              >
                               <ListItem button className="list">
-                                <ListItemText>Your Videos</ListItemText>
+                                <ListItemText>Exercise Rooms</ListItemText>
                               </ListItem>
+                              </NavLink>
                               <Divider />
                               <NavLink
                                 className="navbar-brand dashboard-link"
