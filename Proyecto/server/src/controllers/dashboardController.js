@@ -28,6 +28,7 @@ function index(req, res) {
       res.send(false);
     } else {
       let userID = result[0].id_user;
+      trainerSubs.push(userID);
       db.query(getSubsName, [userID], (err, result) => {
         if (err) {
           console.log(err);
@@ -42,8 +43,6 @@ function index(req, res) {
               trainerSubs.push(val.id_user_trainer);
             }
           }
-
-
 
           db.query(getPublicVideos, [userID], async (err, result) => {
             if (err) {
@@ -117,8 +116,6 @@ function index(req, res) {
       });
     }
   });
-
-
 }
 
 module.exports = {

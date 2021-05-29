@@ -1,7 +1,7 @@
 
 const gmailConnection = ({
   email: "raunakbinyani@gmail.com",
-  password: "",
+  password: "Raunak_12",
 });
 
 module.exports = gmailConnection; 
