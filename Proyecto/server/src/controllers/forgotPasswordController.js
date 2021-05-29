@@ -40,7 +40,7 @@ function update(req, res) {
                 "Greetings " +
                 userName +
                 ",\nWe recived your request to change your current password so, here is your new Password:\n\n" +
-                newPassword+
+                newPassword +
                 "\n\n" +
                 "You can change your password in settings. Don't share it to anyone\nHave a great day.\nGYMOOZE",
             };

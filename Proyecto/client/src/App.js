@@ -13,6 +13,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import ContactUs from "./components/contactUs/ContactUs";
 import Pricing from "./components/pricing/Pricing";
 import Notices from "./components/notices/Notices";
+import Notice from "./components/notice/Notice";
 import UploadVideos from "./components/uploadVideos/UploadVideo";
 import UploadNotices from "./components/uploadNotices/UploadNotice";
 import ForgotPassword from "./components/forgotPassword/ForgotPassword";
@@ -48,10 +49,11 @@ function App() {
               <Route exact path="/admin" component={Admin} />
               <Route exact path="/trainers" component={AllTrainers} />
               <Route exact path="/exerciseRooms" component={ExerciseRooms} />
-              <Route exact path="/exerciseRoom/*" component={ExerciseRoomVideo} />
+              <Route exact path="/exerciseRooms/*" component={ExerciseRoomVideo} />
               <Route exact path="/trainer/*" component={TrainerProfile} />
               <Route exact path="/subscribe/*" component={SubscribeUser} />
               <Route exact path="/video/*" component={Video} />
+              <Route exact path="/notice/*" component={Notice} />
 
               <Route path="/error" component={NotFound} />
               <Route path="/*" component={NotFound} />

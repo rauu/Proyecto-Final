@@ -42,7 +42,7 @@ const ExerciseRooms = () => {
                 return (
                   <>
                     <Grid item xs={12} sm={6} md={4} lg={3} key={val.id_room}>
-                      <Link to={`/exerciseRoom/${val.id_room}`}>
+                      <Link to={`/exerciseRooms/${val.id_room}`}>
                         <Card className="cardImage">
                           <CardContent className="image-card">
                             <img
