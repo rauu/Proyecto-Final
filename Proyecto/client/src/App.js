@@ -25,6 +25,7 @@ import SubscribeUser from "./components/subscribe/Subscribe";
 import Video from "./components/video/Video";
 import ExerciseRooms from "./components/exersiceRoom/ExerciseRoom";
 import ExerciseRoomVideo from "./components/exerciseRoomVideos/ExersiceRoomVideos";
+import SetMetting from "./components/setMeeting/SetMetting";
 import NotFound from "./components/notFound/NotFound";
 
 function App() {
@@ -49,11 +50,12 @@ function App() {
               <Route exact path="/admin" component={Admin} />
               <Route exact path="/trainers" component={AllTrainers} />
               <Route exact path="/exerciseRooms" component={ExerciseRooms} />
+              <Route exact path="/setMetting" component={SetMetting} />
               <Route exact path="/exerciseRooms/*" component={ExerciseRoomVideo} />
               <Route exact path="/trainer/*" component={TrainerProfile} />
               <Route exact path="/subscribe/*" component={SubscribeUser} />
               <Route exact path="/video/*" component={Video} />
-              <Route exact path="/notice/*" component={Notice} />
+              <Route exact path="/notices/*" component={Notice} />
 
               <Route path="/error" component={NotFound} />
               <Route path="/*" component={NotFound} />

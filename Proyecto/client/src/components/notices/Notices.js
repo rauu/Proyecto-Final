@@ -4,7 +4,6 @@ import NavPrivate from "../nav-private/Nav-Private";
 import { Fade } from "react-reveal";
 import Link from "react-router-dom/Link";
 import { AllNotices } from "../../service/Notices";
-import parse from 'html-react-parser';
 import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import NotFound from "../notFound/NotFound";
@@ -104,7 +103,7 @@ const Notices = () => {
                           lg={4}
                           key={val.id_news}
                         >
-                          <Link to={`/notice/${val.id_news}`}>
+                          <Link to={`/notices/${val.id_news}`}>
                             <Card className="card">
                               <CardContent className="video-card">
                                {/*  <video
@@ -127,6 +126,39 @@ const Notices = () => {
                             </Card>
                           </Link>
                         </Grid>
+                        <Grid
+                          item
+                          xs={12}
+                          sm={6}
+                          md={6}
+                          lg={4}
+                          key={val.id_news}
+                        >
+                          <Link to={`/notices/${val.id_news}`}>
+                            <Card className="card">
+                              <CardContent className="video-card">
+                               {/*  <video
+                                  onContextMenu={(e) => e.preventDefault()}
+                                  className="video controls"
+                                >
+                                  <source
+                                    src={`http://192.168.1.38:3001/${val.video}`}
+                                  />
+                                </video> */}
+                                <img src={`http://192.168.1.38:3001/${val.image_uploded}`} alt={val.id_news} className="news-image"/>
+                                <br />
+                                <Typography variant="h5">
+                                  {val.title}
+                                </Typography>
+                                <Typography variant="body2">
+                                  {val.date_upload}
+                                </Typography>
+                              </CardContent>
+                            </Card>
+                          </Link>
+                        </Grid>
+
+
                       </>
                     );
                   })}

@@ -268,9 +268,9 @@ const NavPrivate = () => {
                                 to="/exerciseRooms"
                                 activeClassName="selected"
                               >
-                              <ListItem button className="list">
-                                <ListItemText>Exercise Rooms</ListItemText>
-                              </ListItem>
+                                <ListItem button className="list">
+                                  <ListItemText>Exercise Rooms</ListItemText>
+                                </ListItem>
                               </NavLink>
                               <Divider />
                               <NavLink
@@ -380,6 +380,20 @@ const NavPrivate = () => {
                                         >
                                           <ListItemText>
                                             Upload Notices
+                                          </ListItemText>
+                                        </ListItem>
+                                      </NavLink>
+                                      <NavLink
+                                        className="navbar-brand dashboard-link"
+                                        to="/setMetting"
+                                        activeClassName="selected"
+                                      >
+                                        <ListItem
+                                          button
+                                          className="dashboard-link"
+                                        >
+                                          <ListItemText>
+                                            Set Meeting
                                           </ListItemText>
                                         </ListItem>
                                       </NavLink>
