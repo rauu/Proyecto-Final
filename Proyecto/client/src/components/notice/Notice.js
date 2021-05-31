@@ -165,6 +165,8 @@ const Notice = () => {
                 <Typography variant="body">
                   Uploded on: {moment(notice.date_upload).format("DD.MM.YYYY")}
                 </Typography>
+                <br />
+                <br />
                 <div className="noticeContent">
                   {parse(decrypt(notice.content))}
                 </div>

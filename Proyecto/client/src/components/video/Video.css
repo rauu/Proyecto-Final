@@ -1,0 +1,21 @@
+.showVideo {
+     width: 100% !important;
+     margin: auto;
+     box-shadow: 2px 2px 3px var(--secondary-color);
+     border-radius: 4px;
+}
+
+.videoDescription{
+     text-align: left !important;
+     align-items: left !important;
+}
+
+
+.commentsVideo{
+     box-shadow: 0.5px 1px 5px var(--primary-color) !important;
+
+}
+.singleVideo {
+     width: 80%;
+     margin: auto;
+}

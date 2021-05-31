@@ -34,3 +34,38 @@ export const DeleteNewsComment = (idComment) => {
       return request.data;
     });
 };
+
+
+
+export const VideoComment = (idVideo, idUser, comment) => {
+  return axios
+    .post(url + "comments/videoComment", {
+      idUser: idUser,
+      idVideo: idVideo,
+      comment: comment,
+    })
+    .then((request, response) => {
+      console.log(request);
+      return request.data;
+    });
+};
+
+export const GetVideoComments = (idVideo) => {
+  let params = { idVideo: idVideo };
+  return axios
+    .get(url + "comments/videoComments", { params })
+    .then((request, response) => {
+      console.log(request);
+      return request.data;
+    });
+};
+
+export const DeleteVideoComment = (idComment) => {
+  let params = { idComment: idComment };
+  return axios
+    .delete(url + "comments/deleteVideoComment", { params })
+    .then((request, response) => {
+      console.log(request);
+      return request.data;
+    });
+};
