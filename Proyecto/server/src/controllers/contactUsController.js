@@ -40,6 +40,7 @@ function store(req, res) {
     if (error) {
       console.log(error);
     } else {
+      res.send(true)
       console.log("Email sent: " + info.response);
     }
   });

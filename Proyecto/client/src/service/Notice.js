@@ -9,3 +9,12 @@ export const GetNotice = (idNotice) => {
     return request.data;
   });
 };
+export const DeleteNotice = (id_notice) => {
+  let params = { id_notice: id_notice };
+  return axios
+    .delete(url + "notice/delete", { params })
+    .then((request, response) => {
+      console.log(request);
+      return request.data;
+    });
+};

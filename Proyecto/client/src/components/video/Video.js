@@ -119,11 +119,14 @@ const Video = () => {
         setAllComments(res);
       });
     }); */
-    DeleteVideo(videoID).then((res) => {
-      if (res === true) {
-        history.push("/dashboard");
-      }
-    });
+    if (window.confirm("Do you really want to delete this video?")) {
+      DeleteVideo(videoID).then((res) => {
+        if (res === true) {
+          history.push("/dashboard");
+        }
+      });
+    }
+    
   };
 
   return (

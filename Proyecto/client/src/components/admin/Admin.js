@@ -56,9 +56,7 @@ import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
-import {getUser, getEmail } from "../../service/User";
-
-
+import { getUser, getEmail } from "../../service/User";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -120,7 +118,7 @@ const Admin = () => {
 
   const [roomsList, setRoomslist] = React.useState([]);
   const [allUsers, setAllUsers] = React.useState([]);
-  const [allPdf, setAllPdf] = React.useState([]);
+  const [allPdf, setAllPdf] = React.useState(null);
   const [userExists, setUserExists] = React.useState(false);
   const [emailExists, setEmailExists] = React.useState(false);
 
@@ -171,7 +169,6 @@ const Admin = () => {
           </InputAdornment>
         ),
       };
-
 
   const handleAlertOpen = () => {
     setAlertOpen(true);
@@ -395,7 +392,6 @@ const Admin = () => {
     });
   }
 
-
   const [createUserSnackSuccess, setCreateUserSnackSuccess] =
     React.useState(false);
   const [createUserSnackError, setCreateUserSnackError] = React.useState(false);
@@ -417,6 +413,7 @@ const Admin = () => {
     setCreateDeleteRoomSnackSuccess(false);
     setSnackbarUserModified(false);
     setSnackbarUserDeleted(false);
+    setDeletePdfSnackSuccess(false);
   };
   function RegisterUserValidation() {
     //name
@@ -808,7 +805,6 @@ const Admin = () => {
     });
   };
 
-
   return (
     <>
       <NavPrivate></NavPrivate>
@@ -924,7 +920,6 @@ const Admin = () => {
                         label="Email"
                         onBlur={dataCheckEmail}
                         InputProps={emailAdornment}
-
                         onChange={handleChangeUser}
                         error={emailValueError.error}
                         helperText={
@@ -1415,7 +1410,7 @@ const Admin = () => {
         </TabPanel>
         <TabPanel value={value} index="four">
           <>
-            {allPdf !== undefined && (
+            {allPdf !== null && allPdf !== false && (
               <>
                 {allPdf.map((val) => {
                   return (
@@ -1464,6 +1459,14 @@ const Admin = () => {
                     </div>
                   );
                 })}
+              </>
+            )}
+
+            {allPdf === false && (
+              <>
+                <Typography variant="body1">
+                  <i>Currently there are no CV uploaded</i>
+                </Typography>
               </>
             )}
           </>

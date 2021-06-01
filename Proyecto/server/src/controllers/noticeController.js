@@ -31,6 +31,23 @@ function index(req, res) {
   });
 }
 
+function deleteNotice(req, res) {
+  console.log(req.query);
+  let idNotice = req.query.id_notice;
+
+  const deleteSQL = "DELETE  FROM news WHERE id_news = ?;";
+
+  db.query(deleteSQL, [idNotice], (err, result) => {
+    if (err) {
+      res.send(false);
+      console.log(err);
+    } else {
+      res.send(true);
+    }
+  });
+}
+
 module.exports = {
   index: (req, res) => index(req, res),
+  deleteNotice: (req, res) => deleteNotice(req, res),
 };

@@ -24,7 +24,7 @@ import {
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 
 import parse from "html-react-parser";
-import { GetNotice } from "../../service/Notice";
+import { GetNotice, DeleteNotice } from "../../service/Notice";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {
   GetNewsComments,
@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Notice = () => {
+  const history = useHistory();
   const classes = useStyles();
   const location = useLocation();
   const pathname = location.pathname.substr(
@@ -106,6 +107,16 @@ const Notice = () => {
       setCommentError({
         error: false,
         errorMessage: "",
+      });
+    }
+  };
+  const noticeDelete = (id_news) => {
+    console.log(id_news);
+    if (window.confirm("Do you really want to delete this video?")) {
+      DeleteNotice(id_news).then((res) => {
+        if (res === true) {
+          history.push("/notices");
+        }
       });
     }
   };
@@ -170,6 +181,20 @@ const Notice = () => {
                 <div className="noticeContent">
                   {parse(decrypt(notice.content))}
                 </div>
+                {(userInfo.role_user === "role_admin" ||
+                  notice.id_user === userInfo.id_user) && (
+                  <>
+                   <Button
+                        variant="contained"
+                        color="primary"
+                        component="span"
+                        type="button"
+                        onClick={noticeDelete.bind(this, notice.id_news)}
+                      >
+                        Delete Notice
+                      </Button>
+                  </>
+                )}
               </div>
             </Grid>
             <br />

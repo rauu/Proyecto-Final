@@ -7,7 +7,6 @@ const fs = require("fs");
 function getPDF(req, res) {
   let pdfUsers = [];
 
-
   const gefAllPDF = "SELECT * FROM work_with_us ORDER BY date_uploaded DESC;";
 
   db.query(gefAllPDF, (err, result) => {
@@ -17,26 +16,28 @@ function getPDF(req, res) {
       res.send(false);
     } else {
       /* res.json(result); */
-      result.map((value) => {
-        /* userData = {
+      if (result.length > 0) {
+        result.map((value) => {
+          /* userData = {
           username: value.username,
           role_user: value.role_user,
           id_user: value.id_user
         } */
-        pdfUsers.push({
-          name: value.name,
-          surname: value.surname,
-          email: value.email,
-          date_uploaded: moment(value.date_uploaded).format("DD-MM-YYYY"),
-          message: value.message,
-          file_location: value.file_location,
-          id: value.id,
+          pdfUsers.push({
+            name: value.name,
+            surname: value.surname,
+            email: value.email,
+            date_uploaded: moment(value.date_uploaded).format("DD-MM-YYYY"),
+            message: value.message,
+            file_location: value.file_location,
+            id: value.id,
+          });
         });
-      });
+        res.send(pdfUsers);
+      } else {
+        res.send(false);
+      }
       console.log(pdfUsers);
-
-      res.send(pdfUsers);
-    
     }
   });
 }
@@ -229,18 +230,17 @@ function getSearchUser(req, res) {
   });
 }
 function deleteCV(req, res) {
-
   let id = req.query.id;
-  console.log(req.query)
+  console.log(req.query);
   console.log(req.query.username);
   const getUsers = "DELETE FROM work_with_us WHERE id = ?;";
-  db.query(getUsers, [id ], (err, result) => {
+  db.query(getUsers, [id], (err, result) => {
     //res.send(result);
     if (err) {
       console.log(err);
       res.send(false);
     } else {
-      res.send(result)
+      res.send(result);
     }
   });
 }

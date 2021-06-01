@@ -87,7 +87,7 @@ const Pricing = () => {
                               </Typography>
                               <br />
                               <Typography variant="h3">
-                                {val.price}€/mes
+                                {(Number(val.price)/Number(val.months)).toFixed(2)}€/mes
                               </Typography>
                               <Typography variant="body2">
                                 (IVA INCLUDED)

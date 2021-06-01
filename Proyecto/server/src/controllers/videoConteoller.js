@@ -25,27 +25,34 @@ function index(req, res) {
               res.send(false);
               console.log(err);
             } else {
-                 let count = 0;
+              let count = 0;
               for (let [index, val] of result.entries()) {
                 let range = moment().range(
                   moment(val.start_date).format("YYYY-MM-DD"),
                   moment(val.expire_date).format("YYYY-MM-DD")
                 );
-                if (
-                  range.contains(moment()) &&
-                  trainerID == val.id_user_trainer
-                ) {
-                     count++;
+                if (range.contains(moment()) && trainerID == val.id_user_trainer) {
+                     console.log( val.id_user_trainer)
+                  count++;
                   res.send(resultVideo[0]);
                   break;
-                } else if(index === result.length){
-                     console.log("w")
-                     res.send(false)
+                } else if (index === result.length) {
+                  console.log(val.id_user_trainer);
+                  console.log(trainerID);
+                  res.send(false);
                 }
               }
-              if(count === 0){
-               console.log("w")
-               res.send(false)
+              if (count === 0) {
+                console.log(resultVideo[0]);
+                console.log(userId);
+                if (resultVideo[0].id_user == userId) {
+                  res.send(resultVideo[0]);
+                }else{
+                    console.log("w");
+
+                    res.send(false);
+
+                }
               }
             }
           });
@@ -69,7 +76,7 @@ function videoDelete(req, res) {
       res.send(false);
       console.log(err);
     } else {
-      res.send(true)
+      res.send(true);
     }
   });
 }
