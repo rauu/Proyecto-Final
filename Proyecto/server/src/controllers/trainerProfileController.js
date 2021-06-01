@@ -10,7 +10,7 @@ function index(req, res) {
   let username = req.query.username;
 
   const getTrainer =
-    "SELECT * FROM users WHERE username = ? AND role_user = 'role_trainer'";
+    "SELECT * FROM users WHERE username = ? AND role_user = 'role_trainer' OR role_user = 'role_admin'";
 
   db.query(getTrainer, [username], (err, result) => {
     if (err) {
@@ -100,7 +100,8 @@ function userSubscribed(req, res) {
   let id_user = req.query.id_user;
   let trainerName = req.query.trainerName;
 
-  const getAll = "SELECT * FROM videos WHERE id_user = ? ORDER BY id_video DESC ";
+  const getAll =
+    "SELECT * FROM videos WHERE id_user = ? ORDER BY id_video DESC ";
   const getTrainerID = "SELECT * FROM users WHERE username = ?";
   const getSub =
     "SELECT * FROM subscriptions WHERE id_user = ? AND id_user_trainer = ?";

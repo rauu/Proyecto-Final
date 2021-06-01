@@ -6,7 +6,7 @@ function index(req, res) {
      let trainers = [];
    
    
-     const getTrainers = "SELECT * FROM users WHERE role_user = 'role_trainer';";
+     const getTrainers = "SELECT * FROM users WHERE role_user = 'role_trainer' OR role_user = 'role_admin';";
    
      db.query(getTrainers, (err, result) => {
        if (err) {

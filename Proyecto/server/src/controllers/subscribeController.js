@@ -17,10 +17,9 @@ function getPlans(req, res) {
 
 function userExists(req, res) {
   let username = req.query.username;
-  console.log(username);
 
   const getTrainer =
-    "SELECT * FROM users WHERE username = ? AND role_user = 'role_trainer'";
+    "SELECT * FROM users WHERE username = ? AND role_user = 'role_trainer' OR role_user = 'role_admin'";
 
   db.query(getTrainer, [username], (err, result) => {
     if (err) {
