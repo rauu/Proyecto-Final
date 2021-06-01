@@ -63,7 +63,6 @@ const Video = () => {
 
   useEffect(() => {
     GetVideo(pathname, userInfo.id_user).then((res) => {
-      console.log(res);
       setVideo(res);
     });
     GetVideoComments(pathname).then((res) => {
@@ -73,7 +72,6 @@ const Video = () => {
 
   const handleChangeComment = (event) => {
     setComment({ ...comment, [event.target.name]: event.target.value });
-    console.log(comment);
 
     if (commentError.error) {
       setCommentError({
@@ -83,7 +81,6 @@ const Video = () => {
     }
   };
   const handleSubmitComment = () => {
-    console.log("entra");
     if (comment.comments === "") {
       setCommentError({
         error: true,
@@ -91,7 +88,6 @@ const Video = () => {
       });
     } else {
       VideoComment(pathname, userInfo.id_user, comment.comments).then((res) => {
-        console.log(res);
         GetVideoComments(pathname).then((res) => {
           setAllComments(res);
         });
@@ -103,16 +99,13 @@ const Video = () => {
     }
   };
   const commentDelete = (commentID) => {
-    console.log(commentID);
     DeleteVideoComment(commentID).then((res) => {
-      console.log(res);
       GetVideoComments(pathname).then((res) => {
         setAllComments(res);
       });
     });
   };
   const videoDelete = (videoID) => {
-    console.log(videoID);
     /* DeleteVideoComment(commentID).then((res) => {
       console.log(res);
       GetVideoComments(pathname).then((res) => {
@@ -126,7 +119,6 @@ const Video = () => {
         }
       });
     }
-    
   };
 
   return (

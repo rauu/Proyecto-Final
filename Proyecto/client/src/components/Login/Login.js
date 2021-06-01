@@ -30,7 +30,6 @@ const Login = () => {
 
   const handleChange = (event) => {
     setLoginInfo({ ...loginInfo, [event.target.name]: event.target.value });
-    console.log(loginInfo);
   };
 
   const handleSubmit = (e) => {
@@ -61,7 +60,6 @@ const Login = () => {
 
   function loginFunction() {
     LoginUser(loginInfo.username, loginInfo.password).then((res) => {
-      console.log(res);
       if(res === true){
         history.push("/dashboard");
       } else{

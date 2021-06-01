@@ -7,21 +7,16 @@ const headers = {
   },
 };
 
-export const postMetting = (
-    userID, message, subject
-   ) => {
-     const headers = { headers: { "Access-Control-Allow-Origin": "*" } };
-   
-     return axios
-       .post(url + "setMetting/", {
-         userID: userID,
-         message: message,
-         subject: subject,
-         
-       })
-       .then((response) => {
-         console.log(response);
-         return response;
-       });
-   };
-   
+export const postMetting = (userID, message, subject) => {
+  const headers = { headers: { "Access-Control-Allow-Origin": "*" } };
+
+  return axios
+    .post(url + "setMetting/", {
+      userID: userID,
+      message: message,
+      subject: subject,
+    })
+    .then((response) => {
+      return response;
+    });
+};

@@ -64,7 +64,6 @@ const ContactUs = () => {
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
-    console.log(values);
   };
 
   const handleSubmit = (e) => {
@@ -79,7 +78,6 @@ const ContactUs = () => {
   let messageBool = false;
 
   function validationForm() {
-    console.log("validation");
 
     if (values.name === "") {
       setNameValueError({
@@ -196,7 +194,6 @@ const ContactUs = () => {
       values.number
     ).then((res) => {
       if (res.data) {
-        console.log(res.data);
         setCreateUserSnackSuccess(true);
       } else if (!res.data) {
         setCreateUserSnackError(true);
@@ -211,7 +208,6 @@ const ContactUs = () => {
     } else {
       setUserLoggedIn(false);
     }
-    console.log(userLoggedIn);
   }, []);
   return (
     <div className="contactUs">

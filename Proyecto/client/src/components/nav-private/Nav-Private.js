@@ -103,7 +103,6 @@ const NavPrivate = () => {
   }
 
   const logOut = () => {
-    console.log("prueeba");
     sessionStorage.removeItem("user");
     history.push("/login");
   };

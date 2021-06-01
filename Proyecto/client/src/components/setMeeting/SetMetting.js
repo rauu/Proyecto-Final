@@ -51,13 +51,11 @@ const SetMetting = () => {
 
   const handleChange = (event) => {
     setMetting({ ...meeting, [event.target.name]: event.target.value });
-    console.log(meeting);
   };
 
   let subjectBool = false;
   let messageBool = false;
   function validationForm() {
-    console.log("validation");
 
     if (meeting.message === "") {
       setMessageValueError({
@@ -102,7 +100,6 @@ const SetMetting = () => {
     postMetting(userInfo.id_user, meeting.message, meeting.subject).then(
       (res) => {
         if (res.data) {
-          console.log(res.data);
           setCreateUserSnackSuccess(true);
         } else if (!res.data) {
           setCreateUserSnackError(true);

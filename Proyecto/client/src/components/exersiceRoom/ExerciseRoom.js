@@ -20,7 +20,6 @@ const ExerciseRooms = () => {
       setAllRooms(res.data);
     });
   }, []);
-  console.log(allRooms);
   return (
     <>
       <NavPrivate></NavPrivate>

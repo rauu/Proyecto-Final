@@ -20,22 +20,19 @@ const AllTrainers = () => {
   });
 
   React.useEffect(() => {
-    console.log(trainerList);
     ourTrainers();
   }, []);
 
   function ourTrainers() {
     GetTrainers().then((res) => {
       setTrainerList(res.data);
-      console.log(trainerList);
-      console.log(res.data);
+
     });
   }
   const handleSearchUser = (event) => {
     setSearchValue({
       username: event.target.value,
     });
-    console.log(searchValue);
     GetSearchUsers(event.target.value).then((res) => {
       setTrainerList(res.data);
     });

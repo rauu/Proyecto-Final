@@ -68,27 +68,23 @@ const SubscribeUser = () => {
       ...subscriptionInfo,
       [event.target.name]: event.target.value,
     });
-    console.log(subscriptionInfo);
   };
 
   function getUser() {}
   React.useEffect(() => {
     dataExists(pathname).then((res) => {
-      console.log(res);
       if (!res.data) {
         history.push("/error");
       }
     });
     GetPlans().then((res) => {
       setPlans(res.data);
-      console.log(plans);
     });
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setAlertOpen(true);
-    console.log(subscriptionInfo);
     SubscribeUserService(
       subscriptionInfo.usename,
       subscriptionInfo.trainerUsername,
@@ -97,11 +93,9 @@ const SubscribeUser = () => {
       subscriptionInfo.typeSubscription,
       subscriptionInfo.expiryDate
     ).then((res) => {
-      console.log(res);
     });
   };
 
-  console.log(plans);
   return (
     <>
       <NavPrivate></NavPrivate>

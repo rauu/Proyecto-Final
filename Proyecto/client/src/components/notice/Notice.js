@@ -80,7 +80,6 @@ const Notice = () => {
   }, []);
 
   const handleSubmitComment = () => {
-    console.log("entra");
     if (comment.comments === "") {
       setCommentError({
         error: true,
@@ -88,7 +87,6 @@ const Notice = () => {
       });
     } else {
       NewsComment(pathname, userInfo.id_user, comment.comments).then((res) => {
-        console.log(res);
         GetNewsComments(pathname).then((res) => {
           setAllComments(res);
         });
@@ -101,7 +99,6 @@ const Notice = () => {
   };
   const handleChangeComment = (event) => {
     setComment({ ...comment, [event.target.name]: event.target.value });
-    console.log(comment);
 
     if (commentError.error) {
       setCommentError({
@@ -111,7 +108,6 @@ const Notice = () => {
     }
   };
   const noticeDelete = (id_news) => {
-    console.log(id_news);
     if (window.confirm("Do you really want to delete this video?")) {
       DeleteNotice(id_news).then((res) => {
         if (res === true) {
@@ -122,9 +118,7 @@ const Notice = () => {
   };
 
   const commentDelete = (commentID) => {
-    console.log(commentID);
     DeleteNewsComment(commentID).then((res) => {
-      console.log(res);
       GetNewsComments(pathname).then((res) => {
         setAllComments(res);
       });

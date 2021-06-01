@@ -1,5 +1,5 @@
 import axios from "axios";
-import serverURL from "../utils/serverURL"
+import serverURL from "../utils/serverURL";
 const url = serverURL;
 const headers = {
   headers: {
@@ -9,7 +9,6 @@ const headers = {
 export const submitCV = (name, lastname, email, message, file) => {
   const cv = new FormData();
   cv.append("file", file);
-  console.log(cv);
   return axios
     .post(url + "workwithus/", {
       name: name,
@@ -19,7 +18,6 @@ export const submitCV = (name, lastname, email, message, file) => {
       file: file,
     })
     .then((request, response) => {
-      console.log(file);
       return request;
     });
 };

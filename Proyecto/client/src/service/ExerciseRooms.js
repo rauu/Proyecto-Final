@@ -4,7 +4,6 @@ const url = serverURL;
 
 export const AllRooms = () => {
   return axios.get(url + "exerciseRooms/").then((request, response) => {
-    console.log(request);
     return request;
   });
 };

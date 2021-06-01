@@ -34,7 +34,6 @@ export const updateProfile = (id_user, profileImage, description) => {
     });
 };
 
-
 export const userSubscribed = (id_user, trainerName) => {
   const headers = { headers: { "Access-Control-Allow-Origin": "*" } };
 
@@ -44,10 +43,9 @@ export const userSubscribed = (id_user, trainerName) => {
   };
   return axios
     .get(url + "trainer/userSubscribed", {
-      params
+      params,
     })
     .then((response) => {
-      console.log(response);
       return response;
     });
 };

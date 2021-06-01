@@ -50,7 +50,6 @@ export const dataExists = (username) => {
   return axios
     .get(url + "subscribe/trainerExists", { params })
     .then((response) => {
-      console.log(response);
       return response;
     });
 };

@@ -11,7 +11,6 @@ export const AllPlans = () => {
   const headers = { headers: { "Access-Control-Allow-Origin": "*" } };
 
   return axios.get(url + "plans/").then((response) => {
-    console.log(response);
     return response.data;
   });
 };

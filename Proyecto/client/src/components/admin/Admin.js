@@ -191,7 +191,6 @@ const Admin = () => {
     setSearchValue({
       username: event.target.value,
     });
-    console.log(searchValue);
     GetSearchUsers(event.target.value).then((res) => {
       setAllUsers(res.data);
     });
@@ -287,7 +286,6 @@ const Admin = () => {
       ...userRegisterValue,
       [event.target.name]: event.target.value,
     });
-    console.log(userRegisterValue);
   };
   const handleChangeRoom = (event) => {
     if (event.target.name === "room_name") {
@@ -302,7 +300,6 @@ const Admin = () => {
       });
     }
 
-    console.log(addExerciseRoom);
   };
 
   const handleChangeDeleteRoom = (event) => {
@@ -310,28 +307,23 @@ const Admin = () => {
       ...deleteRoomValue,
       [event.target.name]: event.target.value,
     });
-    console.log(deleteRoomValue);
   };
 
   const handleSubmitUser = (e) => {
     e.preventDefault();
-    console.log(userRegisterValue);
     RegisterUserValidation();
   };
   const handleSubmitRoom = (e) => {
     e.preventDefault();
-    console.log(addExerciseRoom);
     CreateRoomValidation();
   };
   const handleSubmitDeleteRoom = (e) => {
     e.preventDefault();
-    console.log(deleteRoomValue);
     deleteRoomValidations();
   };
 
   const userChange = (id_user, username, id) => {
-    console.log(id_user);
-    console.log(username);
+
     let role_user = document
       .getElementsByName("typeUserModify")
       [id].getAttribute("value");
@@ -342,26 +334,22 @@ const Admin = () => {
     });
   };
   const userDelete = (i) => {
-    console.log(i);
     let userDelete = window.confirm(
       "Are you sure you want to delete this user?"
     );
     if (userDelete) {
       DeleteUser(i).then((res) => {
-        console.log(res);
         setSnackbarUserDeleted(true);
       });
     }
   };
   const deleteCV = (i) => {
-    console.log(i);
 
     let cvDelete = window.confirm(
       "Are you sure that you want to delete this CV?"
     );
     if (cvDelete) {
       DeleteCV(i).then((res) => {
-        console.log(res);
         //setAllPdf(res.data)
         setDeletePdfSnackSuccess(true);
       });
@@ -369,7 +357,6 @@ const Admin = () => {
   };
 
   function createUser() {
-    console.log("USER");
     //console.log(values);
     registerUser(
       userRegisterValue.name,
@@ -381,12 +368,9 @@ const Admin = () => {
       userRegisterValue.password,
       userRegisterValue.typeUser
     ).then((res) => {
-      console.log(res);
       if (res.data) {
-        console.log(res.data);
         setCreateUserSnackSuccess(true);
       } else if (!res.data) {
-        console.log(res.data);
         setCreateUserSnackError(true);
       }
     });
@@ -699,7 +683,6 @@ const Admin = () => {
     DeleteExerciseRoom(deleteRoomValue.room).then((res) => {
       if (res.data === true) {
         setCreateDeleteRoomSnackSuccess(true);
-        console.log("DELETE");
       }
     });
   }
@@ -708,7 +691,6 @@ const Admin = () => {
       addExerciseRoom.room_name,
       addExerciseRoom.profile_image
     ).then((res) => {
-      console.log(res);
       if (res.data === "Room already exists") {
         setCreateRoomSnackError(true);
       } else if (res.data === true) {
@@ -736,13 +718,11 @@ const Admin = () => {
       fileReader.onload = function (fileLoadedEvent) {
         file = fileLoadedEvent.target.result;
         // Print data in console
-        console.log("file");
 
         setAddExerciseRoom({
           ...addExerciseRoom,
           profile_image: file,
         });
-        console.log(addExerciseRoom);
       };
 
       // Convert data to base64
@@ -751,41 +731,33 @@ const Admin = () => {
   };
 
   React.useEffect(() => {
-    console.log(roomsList);
     getRooms();
   }, [createRoomSnackSuccess, createDeleteRoomSnackSuccess]);
 
   React.useEffect(() => {
-    console.log(allUsers);
     getUsers();
   }, [snackbarUserDeleted]);
 
   React.useEffect(() => {
-    console.log(allPdf);
     GetAllPDF();
   }, [deletePdfSnackSuccess]);
 
   function getRooms() {
     GetExersiceRooms().then((res) => {
       setRoomslist(res);
-      console.log(roomsList);
-      console.log(res);
+
     });
   }
 
   function getUsers() {
     GetAllUsers().then((res) => {
       setAllUsers(res.data);
-      console.log(allUsers);
     });
-    console.log(allUsers);
   }
   function GetAllPDF() {
     GetPDF().then((res) => {
       setAllPdf(res.data);
-      console.log(res.data);
     });
-    console.log(allPdf);
   }
 
   /* function SearchUsers() {

@@ -10,7 +10,6 @@ export const NewsComment = (idNotice, idUser, comment) => {
       comment: comment,
     })
     .then((request, response) => {
-      console.log(request);
       return request.data;
     });
 };
@@ -20,7 +19,6 @@ export const GetNewsComments = (idNotice) => {
   return axios
     .get(url + "comments/newsComments", { params })
     .then((request, response) => {
-      console.log(request);
       return request.data;
     });
 };
@@ -30,12 +28,9 @@ export const DeleteNewsComment = (idComment) => {
   return axios
     .delete(url + "comments/deleteNewsComment", { params })
     .then((request, response) => {
-      console.log(request);
       return request.data;
     });
 };
-
-
 
 export const VideoComment = (idVideo, idUser, comment) => {
   return axios
@@ -45,7 +40,6 @@ export const VideoComment = (idVideo, idUser, comment) => {
       comment: comment,
     })
     .then((request, response) => {
-      console.log(request);
       return request.data;
     });
 };
@@ -55,7 +49,6 @@ export const GetVideoComments = (idVideo) => {
   return axios
     .get(url + "comments/videoComments", { params })
     .then((request, response) => {
-      console.log(request);
       return request.data;
     });
 };
@@ -65,7 +58,6 @@ export const DeleteVideoComment = (idComment) => {
   return axios
     .delete(url + "comments/deleteVideoComment", { params })
     .then((request, response) => {
-      console.log(request);
       return request.data;
     });
 };

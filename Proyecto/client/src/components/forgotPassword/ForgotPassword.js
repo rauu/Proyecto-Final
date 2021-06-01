@@ -38,12 +38,10 @@ const ForgotPassword = () => {
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
-    console.log(values);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
     validationFunciton();
   };
 

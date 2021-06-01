@@ -45,19 +45,15 @@ const UploadNotices = () => {
 
   const handleAlertOpen = () => {
     setAlertOpen(true);
-    
   };
   const handleAlertClose = () => {
     setAlertOpen(false);
     setApenContent(false);
   };
   useEffect(() => {
-    console.log("entro");
     if (JSON.parse(sessionStorage.getItem("user")).role_user === "role_user") {
       history.push("/dashboard");
     }
-    console.log(JSON.parse(sessionStorage.getItem("user")));
-    console.log(createSnackSuccess);
   }, []);
 
   /* useEffect(() => {
@@ -87,12 +83,10 @@ const UploadNotices = () => {
       ...uploadValue,
       content: draftToHtml(convertToRaw(editorState.getCurrentContent())),
     });
-    console.log(uploadValue);
   };
 
   const handleChange = (event) => {
     setUploadValue({ ...uploadValue, [event.target.name]: event.target.value });
-    console.log(uploadValue);
   };
 
   const { editorState } = state;
@@ -120,7 +114,6 @@ const UploadNotices = () => {
       fileReader.onload = function (fileLoadedEvent) {
         file = fileLoadedEvent.target.result;
         // Print data in console
-        console.log("file");
 
         setUploadValue({
           ...uploadValue,
@@ -142,7 +135,6 @@ const UploadNotices = () => {
   let newsContentBool = false;
 
   function validation() {
-    console.log(uploadValue);
     if (uploadValue.headline === "") {
       setNoticeHeadlineError({
         error: true,
@@ -159,13 +151,13 @@ const UploadNotices = () => {
     }
 
     if (uploadValue.headlineImage === "") {
-      setAlertOpen(true)
+      setAlertOpen(true);
       newsHeadlineImageBool = false;
     } else {
       newsHeadlineImageBool = true;
     }
     if (uploadValue.content === "") {
-      setApenContent(true)
+      setApenContent(true);
       newsContentBool = false;
     } else {
       newsContentBool = true;
@@ -234,11 +226,11 @@ const UploadNotices = () => {
                   onChange={handleChange}
                   autoFocus
                   error={noticeHeadlineError.error}
-                      helperText={
-                        noticeHeadlineError.error
-                          ? noticeHeadlineError.errorMessage
-                          : ""
-                      }
+                  helperText={
+                    noticeHeadlineError.error
+                      ? noticeHeadlineError.errorMessage
+                      : ""
+                  }
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={12} lg={12}>
@@ -304,52 +296,52 @@ const UploadNotices = () => {
         </Alert>
       </Snackbar>
       <Dialog
-          open={alertOpen}
-          TransitionComponent={Transition}
-          keepMounted
-          onClose={handleAlertClose}
-          aria-labelledby="alert-dialog-slide-title"
-          aria-describedby="alert-dialog-slide-description"
-        >
-          <DialogTitle id="alert-dialog-slide-title">
-            {"Error while uploading news"}
-          </DialogTitle>
+        open={alertOpen}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleAlertClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">
+          {"Error while uploading news"}
+        </DialogTitle>
 
-          <DialogContent>
-            <DialogContentText id="alert-dialog-slide-description">
-              Select headline Image
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleAlertClose} color="primary">
-              Agree
-            </Button>
-          </DialogActions>
-        </Dialog>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            Select headline Image
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleAlertClose} color="primary">
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       <Dialog
-          open={alertOpenContent}
-          TransitionComponent={Transition}
-          keepMounted
-          onClose={handleAlertClose}
-          aria-labelledby="alert-dialog-slide-title"
-          aria-describedby="alert-dialog-slide-description"
-        >
-          <DialogTitle id="alert-dialog-slide-title">
-            {"Error while uploading news"}
-          </DialogTitle>
+        open={alertOpenContent}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleAlertClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">
+          {"Error while uploading news"}
+        </DialogTitle>
 
-          <DialogContent>
-            <DialogContentText id="alert-dialog-slide-description">
-              You have to write a content.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleAlertClose} color="primary">
-              Agree
-            </Button>
-          </DialogActions>
-        </Dialog>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            You have to write a content.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleAlertClose} color="primary">
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

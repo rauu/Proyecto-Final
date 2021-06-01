@@ -39,14 +39,10 @@ const ExerciseRoomVideo = () => {
   useEffect(() => {
     AllVideos(userInfo.username, pathname).then((res) => {
       setVideos(res.data);
-      console.log(videos);
     });
-    console.log(pathname);
     roomName(pathname).then((res) => {
-      setRoom(res.data);
     });
   }, []);
-  console.log(videos);
 
   return (
     <>

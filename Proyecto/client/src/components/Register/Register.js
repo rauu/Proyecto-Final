@@ -104,17 +104,14 @@ const Register = () => {
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
-    console.log(values);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
     validationFunciton();
   };
 
   function createUser() {
-    console.log("USER");
     //console.log(values);
     registerUser(
       values.name,
@@ -125,15 +122,12 @@ const Register = () => {
       values.gender,
       values.password
     ).then((res) => {
-      console.log(res);
       if (res.data) {
-        console.log(res.data);
         setCreateUserSnackSuccess(true);
         setTimeout(() => {
           history.push("/login");
         }, 1000);
       } else if (!res.data) {
-        console.log(res.data);
         setCreateUserSnackError(true);
       }
     });

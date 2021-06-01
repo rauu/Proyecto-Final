@@ -30,7 +30,6 @@ export const registerUser = (
       typeUser: typeUser,
     })
     .then((request, response) => {
-      console.log(request);
       return request;
     });
 };
@@ -44,9 +43,7 @@ export const dataExists = (username, email) => {
 
   return axios
     .get("http://localhost:3001/users/", { params })
-    .then((response) => {
-      console.log(response);
-    });
+    .then((response) => {});
 };
 
 export const GetExersiceRooms = () => {
@@ -66,7 +63,6 @@ export const CreateExerciseRoom = (roomName, backgroundImage) => {
       backgroundImage: backgroundImage,
     })
     .then((request, response) => {
-      console.log(request);
       return request;
     });
 };
@@ -76,7 +72,6 @@ export const DeleteExerciseRoom = async (roomName) => {
     roomName: roomName,
   };
   const request = await axios.delete(url + "admin/deleteRoom", { params });
-  console.log(request);
   return request;
 };
 
@@ -85,49 +80,48 @@ export const DeleteCV = async (id) => {
     id: id,
   };
   const request = await axios.delete(url + "admin/deleteCV", { params });
-  console.log(request);
   return request;
 };
 
-
-export const GetAllUsers = () =>{
-  return axios.get(url + "admin/users",{}).then((request, response) =>{
-    console.log(request);
+export const GetAllUsers = () => {
+  return axios.get(url + "admin/users", {}).then((request, response) => {
     return request;
   });
-}
+};
 
-export const UpdateUserType = (id_user, role_user) =>{
-  return axios.put(url + "admin/updateUserType",{
-    id_user: id_user,
-    role_user: role_user,
-  }).then((request, response) =>{
-    console.log(request)
-    return request;
-  })
-}
+export const UpdateUserType = (id_user, role_user) => {
+  return axios
+    .put(url + "admin/updateUserType", {
+      id_user: id_user,
+      role_user: role_user,
+    })
+    .then((request, response) => {
+      return request;
+    });
+};
 
-export const DeleteUser = (id_user) =>{
+export const DeleteUser = (id_user) => {
   const params = {
     id_user: id_user,
   };
-  return axios.delete(url + "admin/deleteUser",{
-   params
-  }).then((request, response) =>{
-    console.log(request)
-    return request;
-  })
-}
+  return axios
+    .delete(url + "admin/deleteUser", {
+      params,
+    })
+    .then((request, response) => {
+      return request;
+    });
+};
 
-
-export const GetSearchUsers = (username) =>{
+export const GetSearchUsers = (username) => {
   const params = {
     username: username,
   };
-  return axios.get(url + "admin/getsearchuser",{
-   params
-  }).then((request, response) =>{
-    console.log(request)
-    return request;
-  })
-}
+  return axios
+    .get(url + "admin/getsearchuser", {
+      params,
+    })
+    .then((request, response) => {
+      return request;
+    });
+};

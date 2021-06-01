@@ -55,7 +55,6 @@ const UserSettings = () => {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
   if (sessionStorage.getItem("user") === null) {
-    console.log("ASDF");
     history.push("/login");
     window.location.reload();
   }
@@ -106,13 +105,11 @@ const UserSettings = () => {
     error: false,
     errorMessage: "",
   });
-  const [
-    confirmPasswordValueError,
-    setConfirmPasswordVlueError,
-  ] = React.useState({
-    error: false,
-    errorMessage: "",
-  });
+  const [confirmPasswordValueError, setConfirmPasswordVlueError] =
+    React.useState({
+      error: false,
+      errorMessage: "",
+    });
 
   let nameBool = false;
   let surnameBool = false;
@@ -128,29 +125,24 @@ const UserSettings = () => {
       ...profileValue,
       [event.target.name]: event.target.value,
     });
-    console.log(profileValue);
   };
   const handleChangePassword = (event) => {
     setPasswordValue({
       ...passwordValue,
       [event.target.name]: event.target.value,
     });
-    console.log(passwordValue);
   };
 
   const updateProfile = (e) => {
     e.preventDefault();
-    console.log(profileValue);
     validationProfileFunciton();
   };
   const updatePassword = (e) => {
     e.preventDefault();
-    console.log(passwordValue);
     validationPasswordFunciton();
   };
 
   function updateProfileService() {
-    console.log("USER");
     //console.log(values);
     userUpdateProfile(
       profileValue.name,
@@ -161,24 +153,18 @@ const UserSettings = () => {
       profileValue.gender,
       userData.id_user
     ).then((res) => {
-      console.log(res);
       if (res.data) {
-        console.log(res.data);
         setUpdateProfileSnack(true);
       } else if (!res.data) {
-        console.log(res.data);
         setCreateUserSnackError(true);
       }
     });
   }
   function updatePasswordService() {
     userUpdatePassword(passwordValue.password, userData.id_user).then((res) => {
-      console.log(res);
       if (res.data) {
-        console.log(res.data);
         setUpdatePasswordSnack(true);
       } else if (!res.data) {
-        console.log(res.data);
         setCreateUserSnackError(true);
       }
     });

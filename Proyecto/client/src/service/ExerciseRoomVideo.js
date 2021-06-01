@@ -7,7 +7,6 @@ export const AllVideos = (username, idRoom) => {
   return axios
     .get(url + "exerciseRoomVideo/", { params })
     .then((request, response) => {
-      console.log(request);
       return request;
     });
 };
@@ -16,7 +15,6 @@ export const roomName = (idRoom) => {
   return axios
     .get(url + "exerciseRoomVideo/roomName", { params })
     .then((request, response) => {
-      console.log(request);
       return request;
     });
 };

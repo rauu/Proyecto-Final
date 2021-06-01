@@ -8,7 +8,6 @@ const headers = {
 };
 export const GetTrainers = () => {
   return axios.get(url + "allTrainers/", {}).then((request, response) => {
-    console.log(request);
     return request;
   });
 };
@@ -22,7 +21,6 @@ export const GetSearchUsers = (username) => {
       params,
     })
     .then((request, response) => {
-      console.log(request);
       return request;
     });
 };

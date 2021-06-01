@@ -45,11 +45,9 @@ const UploadVideos = () => {
 
   const handleChange = (event) => {
     setUploadValue({ ...uploadValue, [event.target.name]: event.target.value });
-    console.log(uploadValue);
   };
-  const [createUserSnackSuccess, setCreateUserSnackSuccess] = React.useState(
-    false
-  );
+  const [createUserSnackSuccess, setCreateUserSnackSuccess] =
+    React.useState(false);
   const [createUserSnackError, setCreateUserSnackError] = React.useState(false);
   const handleClose = () => {
     setCreateUserSnackSuccess(false);
@@ -60,22 +58,17 @@ const UploadVideos = () => {
     GetExersiceRooms().then((res) => {
       setRoomslist(res);
       //console.log(roomsList)
-      console.log(res);
     });
   }
   const history = useHistory();
 
   useEffect(() => {
-    console.log(roomsList);
     getRooms();
-    console.log("entro");
     if (JSON.parse(sessionStorage.getItem("user")).role_user === "role_user") {
       history.push("/dashboard");
     }
-    console.log(JSON.parse(sessionStorage.getItem("user")));
   }, []);
   const fileBase64 = (event) => {
-    console.log("FileName");
     let selectedFile = event.target.files;
     let file = null;
     //let fileName = "";
@@ -90,7 +83,6 @@ const UploadVideos = () => {
       fileReader.onload = function (fileLoadedEvent) {
         file = fileLoadedEvent.target.result;
         // Print data in console
-        console.log(file);
 
         setUploadValue({
           ...uploadValue,
@@ -135,8 +127,6 @@ const UploadVideos = () => {
   let videoBool = false;
 
   function uploadVideoValitation() {
-    console.log("validation");
-
     if (uploadValue.video_name === "") {
       setVideoNameError({
         error: true,
@@ -255,7 +245,6 @@ const UploadVideos = () => {
           <div className="upload-form">
             <Fade left>
               <br />
-
 
               <form
                 noValidate

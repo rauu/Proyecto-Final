@@ -22,12 +22,10 @@ const DashBoard = () => {
     AllVideos();
   } */
 
-  console.log(videos);
 
   React.useEffect(() => {
     AllVideos(userInfo.username,userInfo.id_user ).then((res) => {
       setVideos(res.data);
-      console.log(videos);
     });
   }, []);
   return (

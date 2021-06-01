@@ -32,7 +32,6 @@ const Pricing = () => {
       setPlans(res);
     });
   }
-  console.log(plans);
   return (
     <div className="pricing">
       <Typography component={"div"}>
