@@ -32,7 +32,7 @@ import {
   passwordValidation,
   passwordMatchValidation,
 } from "../../utils/validation";
-import { registerUser, dataExists } from "../../service/User";
+import { registerUser, getUser, getEmail } from "../../service/User";
 import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 import { useHistory } from "react-router-dom";
@@ -87,13 +87,11 @@ const Register = () => {
     error: false,
     errorMessage: "",
   });
-  const [
-    confirmPasswordValueError,
-    setConfirmPasswordVlueError,
-  ] = React.useState({
-    error: false,
-    errorMessage: "",
-  });
+  const [confirmPasswordValueError, setConfirmPasswordVlueError] =
+    React.useState({
+      error: false,
+      errorMessage: "",
+    });
 
   let nameBool = false;
   let surnameBool = false;
@@ -106,17 +104,14 @@ const Register = () => {
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
-    console.log(values);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
     validationFunciton();
   };
 
   function createUser() {
-    console.log("USER");
     //console.log(values);
     registerUser(
       values.name,
@@ -127,35 +122,73 @@ const Register = () => {
       values.gender,
       values.password
     ).then((res) => {
-      console.log(res);
       if (res.data) {
-        console.log(res.data);
         setCreateUserSnackSuccess(true);
         setTimeout(() => {
           history.push("/login");
         }, 1000);
       } else if (!res.data) {
-        console.log(res.data);
         setCreateUserSnackError(true);
       }
     });
   }
-  const [createUserSnackSuccess, setCreateUserSnackSuccess] = React.useState(
-    false
-  );
+  const [createUserSnackSuccess, setCreateUserSnackSuccess] =
+    React.useState(false);
   const [createUserSnackError, setCreateUserSnackError] = React.useState(false);
   const handleClose = () => {
     setCreateUserSnackSuccess(false);
     setCreateUserSnackError(false);
   };
-  const [userExists, setUserExists] = React.useState({
-    userExists: false,
-    userTooltip: "User alredy exists",
-  });
-  const [emailExists, setEmailExists] = React.useState({
-    emailExists: false,
-    emailTooltip: "Email alredy exists",
-  });
+  const [userExists, setUserExists] = React.useState(false);
+  const [emailExists, setEmailExists] = React.useState(false);
+
+  const userAdornment = userExists
+    ? {
+        endAdornment: (
+          <InputAdornment position="end">
+            <Tooltip title="User Alerady Exits">
+              <CloseRoundedIcon edge="end" color="error">
+                {" "}
+              </CloseRoundedIcon>
+            </Tooltip>
+          </InputAdornment>
+        ),
+      }
+    : {
+        endAdornment: (
+          <InputAdornment position="end">
+            <Tooltip title="User Available">
+              <DoneRoundedIcon edge="end" className="green">
+                {" "}
+              </DoneRoundedIcon>
+            </Tooltip>
+          </InputAdornment>
+        ),
+      };
+
+  const emailAdornment = emailExists
+    ? {
+        endAdornment: (
+          <InputAdornment position="end">
+            <Tooltip title="Email Alerady Exits">
+              <CloseRoundedIcon edge="end" color="error">
+                {" "}
+              </CloseRoundedIcon>
+            </Tooltip>
+          </InputAdornment>
+        ),
+      }
+    : {
+        endAdornment: (
+          <InputAdornment position="end">
+            <Tooltip title="Email Available">
+              <DoneRoundedIcon edge="end" className="green">
+                {" "}
+              </DoneRoundedIcon>
+            </Tooltip>
+          </InputAdornment>
+        ),
+      };
 
   function validationFunciton() {
     //name
@@ -378,8 +411,15 @@ const Register = () => {
     }
   }
 
-  const dataCheck = () => {
-    dataExists(values.username, values.email);
+  const dataCheckEmail = () => {
+    getEmail(values.email).then((res) => {
+      setEmailExists(res.data);
+    });
+  };
+  const dataCheckUser = () => {
+    getUser(values.username).then((res) => {
+      setUserExists(res.data);
+    });
   };
 
   return (
@@ -468,16 +508,8 @@ const Register = () => {
                   fullWidth
                   id="username"
                   label="UserName"
-                  onBlur={dataCheck}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="end">
-                        <Tooltip title="User">
-                          <DoneRoundedIcon edge="end"> </DoneRoundedIcon>
-                        </Tooltip>
-                      </InputAdornment>
-                    ),
-                  }}
+                  onBlur={dataCheckUser}
+                  InputProps={userAdornment}
                   onChange={handleChange}
                   error={usernameValueError.error}
                   helperText={
@@ -495,16 +527,8 @@ const Register = () => {
                   fullWidth
                   id="email"
                   label="Email"
-                  onBlur={dataCheck}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="end">
-                        <Tooltip title="User">
-                          <DoneRoundedIcon edge="end"> </DoneRoundedIcon>
-                        </Tooltip>
-                      </InputAdornment>
-                    ),
-                  }}
+                  onBlur={dataCheckEmail}
+                  InputProps={emailAdornment}
                   onChange={handleChange}
                   error={emailValueError.error}
                   helperText={

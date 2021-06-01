@@ -103,7 +103,6 @@ const NavPrivate = () => {
   }
 
   const logOut = () => {
-    console.log("prueeba");
     sessionStorage.removeItem("user");
     history.push("/login");
   };
@@ -150,7 +149,7 @@ const NavPrivate = () => {
                                 : "center bottom",
                           }}
                         >
-                          <Paper >
+                          <Paper>
                             <ClickAwayListener onClickAway={handleCloseUser}>
                               <MenuList
                                 autoFocusItem={openUser}
@@ -158,20 +157,57 @@ const NavPrivate = () => {
                                 onKeyDown={handleListKeyDownUser}
                                 color="primary"
                               >
-                                <MenuItem onClick={handleCloseUser}>
-                                  My account
-                                </MenuItem>
-                                <MenuItem onClick={handleCloseUser}>
-                                 Contact Us
-                                </MenuItem>
-                                <MenuItem
-                                  onClick={(event) => {
-                                    handleCloseUser(event);
-                                    logOut();
-                                  }}
+                                {userInfo.role_user === "role_trainer" && (
+                                  <>
+                                    <NavLink
+                                      className=""
+                                      to={`/trainer/${userInfo.username}`}
+                                      activeClassName="selected"
+                                    >
+                                      <MenuItem
+                                        button
+                                        className="username-list list"
+                                      >
+                                        My Profile
+                                      </MenuItem>
+                                    </NavLink>
+                                  </>
+                                )}
+                                <NavLink
+                                  className=""
+                                  to="/settings"
+                                  activeClassName="selected"
                                 >
-                                  Logout
-                                </MenuItem>
+                                  <MenuItem
+                                    button
+                                    className="username-list list"
+                                  >
+                                    Settings
+                                  </MenuItem>
+                                </NavLink>
+
+                                <NavLink
+                                  to="/contactUs"
+                                  activeClassName="selected"
+                                >
+                                  <MenuItem
+                                    button
+                                    className="username-list list"
+                                  >
+                                    ContactUs
+                                  </MenuItem>
+                                </NavLink>
+                                <NavLink to="/login" activeClassName="selected">
+                                  <MenuItem
+                                    onClick={(event) => {
+                                      handleCloseUser(event);
+                                      logOut();
+                                    }}
+                                    className="username-list list"
+                                  >
+                                    Logout
+                                  </MenuItem>
+                                </NavLink>
                               </MenuList>
                             </ClickAwayListener>
                           </Paper>
@@ -226,13 +262,25 @@ const NavPrivate = () => {
                               </NavLink>
 
                               <Divider />
-                              <ListItem button className="list">
-                                <ListItemText>Your Videos</ListItemText>
-                              </ListItem>
+                              <NavLink
+                                className="navbar-brand dashboard-link"
+                                to="/exerciseRooms"
+                                activeClassName="selected"
+                              >
+                                <ListItem button className="list">
+                                  <ListItemText>Exercise Rooms</ListItemText>
+                                </ListItem>
+                              </NavLink>
                               <Divider />
-                              <ListItem button className="list">
-                                <ListItemText>Our Trainers</ListItemText>
-                              </ListItem>
+                              <NavLink
+                                className="navbar-brand dashboard-link"
+                                to="/trainers"
+                                activeClassName="selected"
+                              >
+                                <ListItem button className="list">
+                                  <ListItemText>Our Trainers</ListItemText>
+                                </ListItem>
+                              </NavLink>
                               <Divider />
                               <NavLink
                                 className="navbar-brand dashboard-link"
@@ -265,14 +313,20 @@ const NavPrivate = () => {
                                     unmountOnExit
                                   >
                                     <List component="div" disablePadding>
-                                      <ListItem
-                                        button
-                                        className="dashboard-link"
+                                      <NavLink
+                                        className="navbar-brand dashboard-link"
+                                        to="/admin"
+                                        activeClassName="selected"
                                       >
-                                        <ListItemText>
-                                          Cosas de admin
-                                        </ListItemText>
-                                      </ListItem>
+                                        <ListItem
+                                          button
+                                          className="dashboard-link"
+                                        >
+                                          <ListItemText>
+                                            Admin Management
+                                          </ListItemText>
+                                        </ListItem>
+                                      </NavLink>
                                     </List>
                                   </Collapse>
                                 </>
@@ -287,7 +341,7 @@ const NavPrivate = () => {
                                     className="list"
                                     onClick={handleTrainerClick}
                                   >
-                                    <ListItemText>Trainer</ListItemText>
+                                    <ListItemText>Trainer Options</ListItemText>
                                     {openTrainer ? (
                                       <ExpandLess />
                                     ) : (
@@ -325,6 +379,20 @@ const NavPrivate = () => {
                                         >
                                           <ListItemText>
                                             Upload Notices
+                                          </ListItemText>
+                                        </ListItem>
+                                      </NavLink>
+                                      <NavLink
+                                        className="navbar-brand dashboard-link"
+                                        to="/setMetting"
+                                        activeClassName="selected"
+                                      >
+                                        <ListItem
+                                          button
+                                          className="dashboard-link"
+                                        >
+                                          <ListItemText>
+                                            Set Meeting
                                           </ListItemText>
                                         </ListItem>
                                       </NavLink>

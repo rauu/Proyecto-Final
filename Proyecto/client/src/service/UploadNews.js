@@ -1,5 +1,5 @@
 import axios from "axios";
-import serverURL from "../utils/serverURL"
+import serverURL from "../utils/serverURL";
 const url = serverURL;
 axios.defaults.withCredentials = true;
 
@@ -12,7 +12,6 @@ export const UploadNews = (headline, headlineImage, content, userId) => {
       userId: userId,
     })
     .then((request, response) => {
-      console.log(request);
       return request;
       //sessionStorage.setItem("user", JSON.stringify(request.data))
       //history.push('/dashboard')

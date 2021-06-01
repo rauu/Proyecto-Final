@@ -9,6 +9,12 @@ import {
   Grid,
   TextField,
   Snackbar,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Slide,
 } from "@material-ui/core";
 
 import { lettersValidation, emailValidation } from "../../utils/validation";
@@ -18,15 +24,25 @@ import MuiAlert from "@material-ui/lab/Alert";
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const WorkWithUS = () => {
-  const [createUserSnackSuccess, setCreateUserSnackSuccess] = React.useState(
-    false
-  );
+  const [createUserSnackSuccess, setCreateUserSnackSuccess] =
+    React.useState(false);
   const [createUserSnackError, setCreateUserSnackError] = React.useState(false);
   const handleClose = () => {
     setCreateUserSnackSuccess(false);
     setCreateUserSnackError(false);
+  };
+  const [alertOpen, setAlertOpen] = React.useState(false);
+
+  const handleAlertOpen = () => {
+    setAlertOpen(true);
+  };
+  const handleAlertClose = () => {
+    setAlertOpen(false);
   };
 
   const [values, setValues] = React.useState({
@@ -49,7 +65,7 @@ const WorkWithUS = () => {
     error: false,
     errorMessage: "",
   });
-/*   const [cvValueError, setCvValueError] = React.useState({
+  /*   const [cvValueError, setCvValueError] = React.useState({
     error: false,
     errorMessage: "",
   }); */
@@ -60,7 +76,6 @@ const WorkWithUS = () => {
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
-    console.log(values);
   };
 
   const handleSubmit = (e) => {
@@ -69,7 +84,6 @@ const WorkWithUS = () => {
   };
 
   const fileBase64 = (event) => {
-    console.log("FileName");
     let selectedFile = event.target.files;
     let file = null;
     //let fileName = "";
@@ -84,7 +98,6 @@ const WorkWithUS = () => {
       fileReader.onload = function (fileLoadedEvent) {
         file = fileLoadedEvent.target.result;
         // Print data in console
-        console.log(fileToLoad);
         setValues({
           ...values,
           cv: file,
@@ -93,8 +106,6 @@ const WorkWithUS = () => {
       // Convert data to base64
       fileReader.readAsDataURL(fileToLoad);
     }
-
-    console.log(selectedFile);
   };
 
   let nameBool = false;
@@ -104,8 +115,6 @@ const WorkWithUS = () => {
   let messageBool = false;
 
   function validationForm() {
-    console.log("validation");
-
     if (values.name === "") {
       setNameValueError({
         error: true,
@@ -190,7 +199,7 @@ const WorkWithUS = () => {
     }
 
     if (values.cv === "") {
-      alert("You haven't uploaded your CV");
+      setAlertOpen(true);
       cvBool = false;
     } else {
       cvBool = true;
@@ -373,6 +382,29 @@ const WorkWithUS = () => {
         </Snackbar>
         <Footer></Footer>
       </Typography>
+      <Dialog
+        open={alertOpen}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleAlertClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">
+          {"Error while submitting CV"}
+        </DialogTitle>
+
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            Select your CV.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleAlertClose} color="primary">
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

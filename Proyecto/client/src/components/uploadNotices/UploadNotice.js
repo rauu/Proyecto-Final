@@ -13,6 +13,12 @@ import {
   Grid,
   TextField,
   Snackbar,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Slide,
 } from "@material-ui/core";
 import { Fade } from "react-reveal";
 import { useHistory } from "react-router-dom";
@@ -23,6 +29,9 @@ import { UploadNews } from "../../service/UploadNews";
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const UploadNotices = () => {
   const history = useHistory();
@@ -31,13 +40,20 @@ const UploadNotices = () => {
     headlineImage: "",
     content: "",
   });
+  const [alertOpen, setAlertOpen] = React.useState(false);
+  const [alertOpenContent, setApenContent] = React.useState(false);
+
+  const handleAlertOpen = () => {
+    setAlertOpen(true);
+  };
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+    setApenContent(false);
+  };
   useEffect(() => {
-    console.log("entro");
     if (JSON.parse(sessionStorage.getItem("user")).role_user === "role_user") {
       history.push("/dashboard");
     }
-    console.log(JSON.parse(sessionStorage.getItem("user")));
-    console.log(createSnackSuccess);
   }, []);
 
   /* useEffect(() => {
@@ -67,12 +83,10 @@ const UploadNotices = () => {
       ...uploadValue,
       content: draftToHtml(convertToRaw(editorState.getCurrentContent())),
     });
-    console.log(uploadValue);
   };
 
   const handleChange = (event) => {
     setUploadValue({ ...uploadValue, [event.target.name]: event.target.value });
-    console.log(uploadValue);
   };
 
   const { editorState } = state;
@@ -100,7 +114,6 @@ const UploadNotices = () => {
       fileReader.onload = function (fileLoadedEvent) {
         file = fileLoadedEvent.target.result;
         // Print data in console
-        console.log("file");
 
         setUploadValue({
           ...uploadValue,
@@ -122,36 +135,35 @@ const UploadNotices = () => {
   let newsContentBool = false;
 
   function validation() {
-    console.log(uploadValue);
     if (uploadValue.headline === "") {
       setNoticeHeadlineError({
         error: true,
-        errorMessage: "Invalid video name",
+        errorMessage: "Headline can't be empty",
       });
       newsHeadlineBool = false;
     } else {
       setNoticeHeadlineError({
         ...noticeHeadlineError,
         error: false,
-        errorMessage: "Headline can't be empty",
+        errorMessage: "",
       });
       newsHeadlineBool = true;
     }
 
     if (uploadValue.headlineImage === "") {
-      alert("Select the Headline Image");
+      setAlertOpen(true);
       newsHeadlineImageBool = false;
     } else {
       newsHeadlineImageBool = true;
     }
     if (uploadValue.content === "") {
-      alert("You have to write a content");
+      setApenContent(true);
       newsContentBool = false;
     } else {
       newsContentBool = true;
     }
 
-    if (newsContentBool && newsContentBool && newsHeadlineImageBool) {
+    if (newsHeadlineBool && newsContentBool && newsHeadlineImageBool) {
       createNews();
     } else {
       setSnackError(true);
@@ -187,8 +199,6 @@ const UploadNotices = () => {
         </Fade>
       </div>
       <br />
-      <br />
-      <br />
 
       <div className="upload-form">
         <Fade left>
@@ -215,6 +225,12 @@ const UploadNotices = () => {
                   label="News HeadLine"
                   onChange={handleChange}
                   autoFocus
+                  error={noticeHeadlineError.error}
+                  helperText={
+                    noticeHeadlineError.error
+                      ? noticeHeadlineError.errorMessage
+                      : ""
+                  }
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={12} lg={12}>
@@ -279,6 +295,53 @@ const UploadNotices = () => {
           There was an unexpected error
         </Alert>
       </Snackbar>
+      <Dialog
+        open={alertOpen}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleAlertClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">
+          {"Error while uploading news"}
+        </DialogTitle>
+
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            Select headline Image
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleAlertClose} color="primary">
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={alertOpenContent}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleAlertClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">
+          {"Error while uploading news"}
+        </DialogTitle>
+
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            You have to write a content.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleAlertClose} color="primary">
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

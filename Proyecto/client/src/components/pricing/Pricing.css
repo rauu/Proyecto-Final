@@ -1,23 +1,30 @@
-.pricing-first{
+.pricing-first {
      text-align: center;
      background-color: var(--primary-color);
 }
 
-
-.pricing-second{
+.pricing-second {
      margin: auto;
      text-align: center;
 }
 
-
-.pricing-info{
-     width:90%;
+.pricing-info {
+     width: 90%;
      text-align: center;
      margin: auto;
 }
 
-
-.pricing-card{
+.pricing-card {
      background-color: var(--primary-color);
      color: var(--white-color);
+}
+
+.divLoader {
+     position: relative;
+}
+
+#ball {
+     position: absolute;
+     left: 50%;
+     transform: translateX(-50%);
 }

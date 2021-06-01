@@ -1,0 +1,10 @@
+.imageCard{
+     width:100%;
+
+}
+
+.cardImage:hover{
+     box-shadow: 2px 2px 10px var(--primary-color);
+     cursor: pointer;
+
+}

@@ -1,3 +1,4 @@
+const moment = require('moment-timezone');
 const db = require("../config/db_connection");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
@@ -29,8 +30,9 @@ function store(req, res) {
             name: result[0].name,
             surname: result[0].surname,
             username: result[0].username,
+            dob: moment(result[0].date_birth).format("YYYY-MM-DD"),
           };
-/*           req.session.user = result;
+          /*           req.session.user = result;
           console.log(req.session.user); */
           res.send(userLogin);
         } else {

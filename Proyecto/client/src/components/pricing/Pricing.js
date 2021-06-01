@@ -1,4 +1,6 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { Fade } from "react-reveal";
 
@@ -6,8 +8,30 @@ import "./Pricing.css";
 import Nav from "../nav-public/Nav-Public";
 import Footer from "../footer/Footer";
 import { Typography, Grid, Card, CardContent } from "@material-ui/core";
+import { AllPlans } from "../../service/Plans";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    "& > * + *": {
+      marginLeft: theme.spacing(2),
+    },
+  },
+}));
 
 const Pricing = () => {
+  const classes = useStyles();
+
+  const [plans, setPlans] = React.useState(null);
+
+  React.useEffect(() => {
+    getPlans();
+  }, []);
+  function getPlans() {
+    AllPlans().then((res) => {
+      setPlans(res);
+    });
+  }
   return (
     <div className="pricing">
       <Typography component={"div"}>
@@ -42,48 +66,51 @@ const Pricing = () => {
               alignItems="center"
               justify="center"
             >
-              <Grid item xs={12} sm={6} md={4} lg={4}>
-                <Card>
-                  <CardContent className="pricing-card">
-                    <Typography variant="body1">
-                      1 month/subscription
-                    </Typography>
-                    <br />
-                    <Typography variant="h3">14.99€/mes</Typography>
-                    <Typography variant="body2">(IVA INCLUDED)</Typography>
-                    <br/>
-                    <Typography variant="body1">Unlimited Clases</Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={4}>
-                <Card>
-                  <CardContent className="pricing-card">
-                    <Typography variant="body1">
-                      3 month/subscription
-                    </Typography>
-                    <br />
-                    <Typography variant="h3">13.50€/mes</Typography>
-                    <Typography variant="body2">(IVA INCLUDED)</Typography>
-                    <br/>
-                    <Typography variant="body1">Unlimited Clases</Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={12} sm={12} md={4} lg={4}>
-                <Card>
-                  <CardContent className="pricing-card">
-                    <Typography variant="body1">
-                      6 month/subscription
-                    </Typography>
-                    <br />
-                    <Typography variant="h3">12.75€/mes</Typography>
-                    <Typography variant="body2">(IVA INCLUDED)</Typography>
-                    <br/>
-                    <Typography variant="body1">Unlimited Clases</Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
+              {plans != null ? (
+                <>
+                  {plans.map((val) => {
+                    return (
+                      <>
+                        <Grid
+                          item
+                          xs={12}
+                          sm={6}
+                          md={4}
+                          lg={4}
+                          key={val.id_plan}
+                        >
+                          <Card>
+                            <CardContent className="pricing-card">
+                              <Typography variant="body1">
+                                {val.name}
+                              </Typography>
+                              <br />
+                              <Typography variant="h3">
+                                {(Number(val.price)/Number(val.months)).toFixed(2)}€/mes
+                              </Typography>
+                              <Typography variant="body2">
+                                (IVA INCLUDED)
+                              </Typography>
+                              <br />
+                              <Typography variant="body1">
+                                Unlimited Clases
+                              </Typography>
+                            </CardContent>
+                          </Card>
+                        </Grid>
+                      </>
+                    );
+                  })}
+                </>
+              ) : (
+                <>
+                  <div className="divLoader">
+                    <div className={classes.root} id="ball">
+                      <CircularProgress />
+                    </div>
+                  </div>{" "}
+                </>
+              )}
             </Grid>
           </div>
         </div>

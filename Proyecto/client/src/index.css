@@ -7,9 +7,7 @@
      --white-color: #F5F5F5;
      --secondary-color: #333232;
      --primary-color: #FF4810;
-     --yellow-color: #E8B321;
      --navLink-fontSize: 25px;
-     --black-color: #140500;
 }
 
 body {
@@ -21,8 +19,6 @@ html {
      max-width: 100%;
      overflow-x: hidden;
 }
-
-
 
 /*Scrollbar*/
 

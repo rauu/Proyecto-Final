@@ -1,5 +1,5 @@
 import axios from "axios";
-import serverURL from "../utils/serverURL"
+import serverURL from "../utils/serverURL";
 const url = serverURL;
 axios.defaults.withCredentials = true;
 
@@ -30,7 +30,6 @@ export const UploadVideo = (
       id_user: id_user,
     })
     .then((request, response) => {
-      console.log(request);
       return request;
       //sessionStorage.setItem("user", JSON.stringify(request.data))
       //history.push('/dashboard')

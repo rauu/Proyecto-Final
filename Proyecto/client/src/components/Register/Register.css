@@ -25,6 +25,10 @@ button:focus{
      outline: none;
 }
 
+.green{
+     color: green
+}
+
 
 @media (max-width: 700px) {
      .registerForm {

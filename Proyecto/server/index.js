@@ -10,8 +10,8 @@ const PORT = process.env.PORT || 3001;
 
 app.use(
   cors({
-    /* origin: ["http://192.168.1.38:3000"], */
-    origin: ["http://localhost:3000"],
+    origin: ["http://192.168.1.38:3000", "http://localhost:3000"],
+    /* origin: ["http://localhost:3000"], */
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -35,6 +35,9 @@ app.use(function (req, res, next) {
 
   // Pass to next layer of middleware
   next();
+}); */
+/* app.get('/video', (req, res) => {
+  res.re('src/uploads/cv/CV-RAmon_fadsfasdf_1620163694893.pdf', { root: __dirname });
 }); */
 require("./src/routes")(app);
 

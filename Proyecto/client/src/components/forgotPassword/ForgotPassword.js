@@ -38,12 +38,10 @@ const ForgotPassword = () => {
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
-    console.log(values);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
     validationFunciton();
   };
 
@@ -129,10 +127,10 @@ const ForgotPassword = () => {
         <Fade right>
           <br />
           <Typography variant="h2" className="white">
-            CHANGE YOUR PASSWORD
+            FORGOT YOUR PASSWORD?
           </Typography>
           <Typography variant="h5" className="white">
-            Write your email in the textbox below
+            Write your email in the textbox below and we will send you your new password in your email.
           </Typography>
           <br />
         </Fade>

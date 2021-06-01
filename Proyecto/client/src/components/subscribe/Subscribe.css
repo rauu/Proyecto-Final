@@ -1,0 +1,29 @@
+.subscribe-first {
+     text-align: center;
+     background-color: var(--primary-color);
+}
+
+
+.subscription-form {
+     width: 50%;
+     margin: auto;
+}
+
+/* Chrome, Safari, Edge, Opera */
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+     -webkit-appearance: none;
+     margin: 0;
+}
+
+/* Firefox */
+
+input[type=number] {
+     -moz-appearance: textfield;
+}
+
+@media (max-width: 700px) {
+     .subscription-form {
+          width: 90%;
+     }
+}

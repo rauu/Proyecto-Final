@@ -1,0 +1,38 @@
+.noticediv, .comments {
+     width: 80%;
+     margin: auto;
+}
+
+.typography {
+}
+
+.noticeImage {
+     width: 100%;
+     max-height: 300px;
+}
+
+.noticeContent img {
+     width: 100% !important;
+}
+
+.noticeComment {
+     width: 80% !important;
+     margin: auto
+}
+
+.commentSend {
+     margin: left !important;
+     text-align: left !important;
+     align-items: left !important;
+}
+
+.comment {
+     margin: left !important;
+     text-align: left !important;
+     align-items: left !important;
+}
+
+.comments{
+     box-shadow: 0.5px 1px 5px var(--primary-color) !important;
+
+}

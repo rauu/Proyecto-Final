@@ -1,0 +1,24 @@
+.videos-dashboard {
+     height: 200px;
+     width: 250px;
+}
+
+.video {
+     width: 100%;
+}
+
+.card:hover{
+     box-shadow: 2px 2px 10px var(--primary-color);
+     cursor: pointer;
+
+}
+
+.card{
+     min-height: 300px;
+     cursor: pointer;
+}
+
+.dashboardVideos {
+     width: 95% !important;
+     margin: auto !important;
+}
