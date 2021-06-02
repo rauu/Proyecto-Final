@@ -11,7 +11,6 @@ export const GetPlans = () => {
   const headers = { headers: { "Access-Control-Allow-Origin": "*" } };
 
   return axios.get(url + "subscribe/getPlans").then((response) => {
-    console.log(response);
     return response;
   });
 };
@@ -36,7 +35,6 @@ export const SubscribeUserService = (
       expiryDate: expiryDate,
     })
     .then((response) => {
-      console.log(response);
       return response;
     });
 };

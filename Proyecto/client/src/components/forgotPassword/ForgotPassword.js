@@ -51,7 +51,7 @@ const ForgotPassword = () => {
         setSnackbarExists(true);
         setEmailValueError({
           error: true,
-          errorMessage: "Email dosen't exists",
+          errorMessage: "Email doesn't exists",
         })
       } else if(res.data === "check your email"){
         setEmailValueError({
@@ -203,7 +203,7 @@ const ForgotPassword = () => {
         onClose={handleClose}
       >
         <Alert autoHideDuration={3000} onClose={handleClose} severity="error">
-          Email dosen't exist
+          Email doesn't exist
         </Alert>
       </Snackbar>
     </div>

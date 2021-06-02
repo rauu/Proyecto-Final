@@ -22,7 +22,6 @@ export const userUpdateProfile = (
       userID: userID,
     })
     .then((request, response) => {
-      console.log(request);
       let userData = request.data;
       let newCookie = {
         dob: userData.dob,
@@ -37,7 +36,6 @@ export const userUpdateProfile = (
       };
       sessionStorage.removeItem("user");
       sessionStorage.setItem("user", JSON.stringify(newCookie));
-      console.log(newCookie);
       return request;
     });
 };

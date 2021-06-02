@@ -42,7 +42,7 @@ function App() {
               <Route exact path="/contactUs" component={ContactUs} />
               <Route exact path="/pricing" component={Pricing} />
               <Route exact path="/dashboard" component={Dashboard} />
-              <Route exact path="/notices" component={Notices} />
+              <Route exact path="/news" component={Notices} />
               <Route exact path="/uploadVideos" component={UploadVideos} />
               <Route exact path="/uploadNotice" component={UploadNotices} />
               <Route exact path="/forgotPassword" component={ForgotPassword} />
@@ -55,7 +55,7 @@ function App() {
               <Route exact path="/trainer/*" component={TrainerProfile} />
               <Route exact path="/subscribe/*" component={SubscribeUser} />
               <Route exact path="/video/*" component={Video} />
-              <Route exact path="/notices/*" component={Notice} />
+              <Route exact path="/news/*" component={Notice} />
 
               <Route path="/error" component={NotFound} />
               <Route path="/*" component={NotFound} />

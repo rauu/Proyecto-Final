@@ -26,7 +26,6 @@ const AllTrainers = () => {
   function ourTrainers() {
     GetTrainers().then((res) => {
       setTrainerList(res.data);
-
     });
   }
   const handleSearchUser = (event) => {
@@ -86,9 +85,7 @@ const AllTrainers = () => {
                             alt="profile_image"
                             className="profile_image"
                           />
-                          <Typography variant="body">
-                            {val.name} {val.surname}
-                          </Typography>
+                          <Typography variant="body">{val.username}</Typography>
                         </LinkA>
                       </div>
                     </>

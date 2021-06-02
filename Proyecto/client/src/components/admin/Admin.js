@@ -614,7 +614,7 @@ const Admin = () => {
       setConfirmPasswordVlueError({
         ...confirmPasswordValueError,
         error: true,
-        errorMessage: "Your password dosen't match",
+        errorMessage: "Your password doesn't match",
       });
       cPassBool = false;
     } else {

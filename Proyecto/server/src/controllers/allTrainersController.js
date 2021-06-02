@@ -37,7 +37,7 @@ function index(req, res) {
    
      let username = req.query.username;
      console.log(req.query.username);
-     const getUsers = "SELECT * FROM users WHERE username LIKE ? AND role_user = 'role_trainer';";
+     const getUsers = "SELECT * FROM users WHERE username LIKE ? AND (role_user = 'role_trainer' OR role_user = 'role_admin');";
      db.query(getUsers, [username + "%"], (err, result) => {
        //res.send(result);
        if (err) {
