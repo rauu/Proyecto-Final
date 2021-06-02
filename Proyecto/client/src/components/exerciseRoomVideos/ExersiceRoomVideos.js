@@ -41,6 +41,7 @@ const ExerciseRoomVideo = () => {
       setVideos(res.data);
     });
     roomName(pathname).then((res) => {
+      setRoom(res.data);
     });
   }, []);
 

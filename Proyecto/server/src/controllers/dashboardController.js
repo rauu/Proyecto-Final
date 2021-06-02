@@ -86,7 +86,11 @@ function index(req, res) {
                         });
                         console.log(allVideos);
                         /*                         console.log(allVideos);
-                         */ res.send(videos);
+                         */ res.send(
+                          videos.sort(
+                            (a, b) => (a.id_video < b.id_video && 1) || -1
+                          )
+                        );
                       }
                     });
                     console.log("get");

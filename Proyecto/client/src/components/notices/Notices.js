@@ -103,7 +103,7 @@ const Notices = () => {
                           lg={4}
                           key={val.id_news}
                         >
-                          <Link to={`/notices/${val.id_news}`}>
+                          <Link to={`/news/${val.id_news}`}>
                             <Card className="card">
                               <CardContent className="video-card">
                                 {/*  <video

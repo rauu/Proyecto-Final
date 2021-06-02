@@ -22,7 +22,6 @@ export const registerUser = (
       password: password,
     })
     .then((request, response) => {
-      console.log(request);
       return request;
     });
 };
@@ -31,7 +30,6 @@ export const getUser = (username) => {
   const params = {
     username: username,
   };
-  console.log(username);
   const headers = { headers: { "Access-Control-Allow-Origin": "*" } };
 
   return axios.get(url + "users/getUser/", { params }).then((response) => {

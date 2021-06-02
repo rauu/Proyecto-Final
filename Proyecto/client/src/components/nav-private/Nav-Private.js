@@ -284,11 +284,11 @@ const NavPrivate = () => {
                               <Divider />
                               <NavLink
                                 className="navbar-brand dashboard-link"
-                                to="/notices"
+                                to="/news"
                                 activeClassName="selected"
                               >
                                 <ListItem button className="list">
-                                  <ListItemText>Notices</ListItemText>
+                                  <ListItemText>News</ListItemText>
                                 </ListItem>
                               </NavLink>
 
@@ -378,7 +378,7 @@ const NavPrivate = () => {
                                           className="dashboard-link"
                                         >
                                           <ListItemText>
-                                            Upload Notices
+                                            Upload News
                                           </ListItemText>
                                         </ListItem>
                                       </NavLink>

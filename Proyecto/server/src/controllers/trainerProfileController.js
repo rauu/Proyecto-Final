@@ -10,7 +10,7 @@ function index(req, res) {
   let username = req.query.username;
 
   const getTrainer =
-    "SELECT * FROM users WHERE username = ? AND role_user = 'role_trainer' OR role_user = 'role_admin'";
+    "SELECT * FROM users WHERE username = ? AND (role_user = 'role_trainer' OR role_user = 'role_admin')";
 
   db.query(getTrainer, [username], (err, result) => {
     if (err) {
@@ -18,6 +18,7 @@ function index(req, res) {
       res.send(false);
     } else {
       if (result.length > 0) {
+        console.log(result);
         trainer = {
           userExists: true,
           username: result[0],
@@ -30,7 +31,6 @@ function index(req, res) {
         };
         res.send(trainer);
       } else {
-        console.log(result);
         trainer = {
           userExists: false,
         };
@@ -77,8 +77,6 @@ function update(req, res) {
           console.log(err);
           res.send(false);
         } else {
-          console.log(result);
-
           res.send(true);
         }
       }
@@ -96,7 +94,6 @@ function update(req, res) {
 }
 
 function userSubscribed(req, res) {
-  console.log(req.query);
   let id_user = req.query.id_user;
   let trainerName = req.query.trainerName;
 
@@ -159,8 +156,6 @@ function userSubscribed(req, res) {
                 privateVideos: PrivateVideos,
               };
               res.send(InfoSend);
-              console.log(InfoSend);
-              console.log(sub + "SUB");
             }
           });
         }

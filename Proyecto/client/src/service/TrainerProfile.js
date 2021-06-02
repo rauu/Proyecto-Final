@@ -14,7 +14,6 @@ export const dataExists = (username) => {
   const headers = { headers: { "Access-Control-Allow-Origin": "*" } };
 
   return axios.get(url + "trainer/", { params }).then((response) => {
-    console.log(response);
     return response;
   });
 };
@@ -29,7 +28,6 @@ export const updateProfile = (id_user, profileImage, description) => {
       description: description,
     })
     .then((response) => {
-      console.log(response);
       return response;
     });
 };
