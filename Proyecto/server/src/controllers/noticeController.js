@@ -1,6 +1,7 @@
 const db = require("../config/db_connection");
 const Moment = require("moment");
 const MomentRange = require("moment-range");
+const fs = require("fs");
 var crypto = require("crypto"),
   algorithm = "aes-256-ctr",
   password = "d6F3Efeq";
@@ -35,14 +36,27 @@ function deleteNotice(req, res) {
   console.log(req.query);
   let idNotice = req.query.id_notice;
 
+  const getSQL = "SELECT * FROM  news WHERE id_news = ?";
+
   const deleteSQL = "DELETE  FROM news WHERE id_news = ?;";
 
-  db.query(deleteSQL, [idNotice], (err, result) => {
+  db.query(getSQL, [idNotice], (err, result) => {
     if (err) {
       res.send(false);
       console.log(err);
     } else {
-      res.send(true);
+      if (result.length > 0) {
+        const path = result[0].image_uploded;
+        fs.unlinkSync("src/uploads/" + path);
+        db.query(deleteSQL, [idNotice], (err, result) => {
+          if (err) {
+            res.send(false);
+            console.log(err);
+          } else {
+            res.send(true);
+          }
+        });
+      }
     }
   });
 }

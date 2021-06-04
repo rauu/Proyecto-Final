@@ -1,6 +1,7 @@
 const db = require("../config/db_connection");
 const Moment = require("moment");
 const MomentRange = require("moment-range");
+const fs = require("fs");
 
 const moment = MomentRange.extendMoment(Moment);
 
@@ -31,8 +32,11 @@ function index(req, res) {
                   moment(val.start_date).format("YYYY-MM-DD"),
                   moment(val.expire_date).format("YYYY-MM-DD")
                 );
-                if (range.contains(moment()) && trainerID == val.id_user_trainer) {
-                     console.log( val.id_user_trainer)
+                if (
+                  range.contains(moment()) &&
+                  trainerID == val.id_user_trainer
+                ) {
+                  console.log(val.id_user_trainer);
                   count++;
                   res.send(resultVideo[0]);
                   break;
@@ -47,11 +51,10 @@ function index(req, res) {
                 console.log(userId);
                 if (resultVideo[0].id_user == userId) {
                   res.send(resultVideo[0]);
-                }else{
-                    console.log("w");
+                } else {
+                  console.log("w");
 
-                    res.send(false);
-
+                  res.send(false);
                 }
               }
             }
@@ -70,13 +73,25 @@ function videoDelete(req, res) {
   let idVideo = req.query.idVideo;
 
   const deleteSQL = "DELETE  FROM videos WHERE id_video = ?;";
+  const getVideo = "SELECT * FROM videos WHERE id_video = ?;";
 
-  db.query(deleteSQL, [idVideo], (err, resultVideo) => {
+  db.query(getVideo, [idVideo], (err, result) => {
     if (err) {
       res.send(false);
       console.log(err);
     } else {
-      res.send(true);
+      if (result.length > 0) {
+        const path = result[0].video;
+        fs.unlinkSync("src/uploads/" + path);
+        db.query(deleteSQL, [idVideo], (err, resultVideo) => {
+          if (err) {
+            res.send(false);
+            console.log(err);
+          } else {
+            res.send(true);
+          }
+        });
+      }
     }
   });
 }
