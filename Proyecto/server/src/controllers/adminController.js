@@ -184,14 +184,34 @@ function updateUserType(req, res) {
 function deleteUser(req, res) {
   let id_user = req.query.id_user;
   console.log(req.query.id_user);
-  const getUsers = "DELETE FROM users WHERE id_user = ?";
-  db.query(getUsers, [id_user], (err, result) => {
-    //res.send(result);
+  const getNotices = "SELECT * FROM news WHERE id_user = ?";
+  const getVideos = "SELECT * FROM videos WHERE id_user = ?";
+  const deleteUsers = "DELETE FROM users WHERE id_user = ?";
+  db.query(getNotices, [id_user], (err, result) => {
     if (err) {
       console.log(err);
-      res.send(false);
+      re.send(false);
     } else {
-      res.send(true);
+      for (let val of result) {
+        let path = val.image_uploded;
+        fs.unlinkSync("src/uploads/" + path);
+      }
+
+      db.query(getVideos, [id_user], (err, result) => {
+        for (let val of result) {
+          let path = val.video;
+          fs.unlinkSync("src/uploads/" + path);
+        }
+        db.query(deleteUsers, [id_user], (err, result) => {
+          //res.send(result);
+          if (err) {
+            console.log(err);
+            res.send(false);
+          } else {
+            res.send(true);
+          }
+        });
+      });
     }
   });
 }
@@ -233,14 +253,24 @@ function deleteCV(req, res) {
   let id = req.query.id;
   console.log(req.query);
   console.log(req.query.username);
-  const getUsers = "DELETE FROM work_with_us WHERE id = ?;";
-  db.query(getUsers, [id], (err, result) => {
-    //res.send(result);
+  const getCV = "SELECT * FROM work_with_us where id = ?";
+  const deleteCV = "DELETE FROM work_with_us WHERE id = ?;";
+  db.query(getCV, [id], (err, result) => {
     if (err) {
       console.log(err);
       res.send(false);
     } else {
-      res.send(result);
+      const path = result[0].file_location;
+      fs.unlinkSync("src/uploads/" + path);
+      db.query(deleteCV, [id], (err, result) => {
+        //res.send(result);
+        if (err) {
+          console.log(err);
+          res.send(false);
+        } else {
+          res.send(result);
+        }
+      });
     }
   });
 }

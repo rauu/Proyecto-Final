@@ -114,7 +114,7 @@ const SetMetting = () => {
         <Fade right>
           <br />
           <Typography variant="h2" className="white">
-            Write this form to set a meetig with your subscribers
+            Write this form to send a message to your subscribers
           </Typography>
 
           <br />

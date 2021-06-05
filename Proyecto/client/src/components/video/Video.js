@@ -159,7 +159,7 @@ const Video = () => {
                     className="showVideo"
                     controls
                   >
-                    <source src={`http://192.168.1.38:3001/${video.video}`} />
+                    <source src={`http://localhost:3001/${video.video}`} />
                   </video>{" "}
                 </div>
               </Grid>

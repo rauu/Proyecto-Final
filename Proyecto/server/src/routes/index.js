@@ -20,7 +20,7 @@ function router(app) {
   app.use("/notice", require("./src/notice"));
   app.use("/comments", require("./src/comments"));
   app.use("/video", require("./src/video"));
-  app.use("/setMetting", require("./src/setMetting"));
+  app.use("/sendMessage", require("./src/setMetting"));
 
   app.use(express.static("src/uploads"));
 }

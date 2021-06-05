@@ -67,7 +67,7 @@ const DashBoard = () => {
                                 className="video controls"
                               >
                                 <source
-                                  src={`http://192.168.1.38:3001/${val.video}`}
+                                  src={`http://localhost:3001/${val.video}`}
                                 />
                               </video>
                               <br />

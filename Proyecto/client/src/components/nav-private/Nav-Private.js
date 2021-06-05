@@ -384,7 +384,7 @@ const NavPrivate = () => {
                                       </NavLink>
                                       <NavLink
                                         className="navbar-brand dashboard-link"
-                                        to="/setMetting"
+                                        to="/sendMessage"
                                         activeClassName="selected"
                                       >
                                         <ListItem
@@ -392,7 +392,7 @@ const NavPrivate = () => {
                                           className="dashboard-link"
                                         >
                                           <ListItemText>
-                                            Set Meeting
+                                            Send Message
                                           </ListItemText>
                                         </ListItem>
                                       </NavLink>
