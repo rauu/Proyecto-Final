@@ -8,7 +8,7 @@ import Home from "./components/home/Home";
 import theme from "./CoustumTheme";
 import Register from "./components/Register/Register";
 import WorkWithUS from "./components/work-with-us/WorkWithUs";
-import Login from "./components/Login/Login";
+import Login from "./components/login/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import ContactUs from "./components/contactUs/ContactUs";
 import Pricing from "./components/pricing/Pricing";
@@ -50,7 +50,7 @@ function App() {
               <Route exact path="/admin" component={Admin} />
               <Route exact path="/trainers" component={AllTrainers} />
               <Route exact path="/exerciseRooms" component={ExerciseRooms} />
-              <Route exact path="/setMetting" component={SetMetting} />
+              <Route exact path="/sendMessage" component={SetMetting} />
               <Route exact path="/exerciseRooms/*" component={ExerciseRoomVideo} />
               <Route exact path="/trainer/*" component={TrainerProfile} />
               <Route exact path="/subscribe/*" component={SubscribeUser} />

@@ -111,7 +111,7 @@ const Notice = () => {
     if (window.confirm("Do you really want to delete this video?")) {
       DeleteNotice(id_news).then((res) => {
         if (res === true) {
-          history.push("/notices");
+          history.push("/news");
         }
       });
     }

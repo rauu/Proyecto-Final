@@ -1,5 +1,5 @@
 import React from "react";
-import "./Notices.css";
+import "./notices.css";
 import NavPrivate from "../nav-private/Nav-Private";
 import { Fade } from "react-reveal";
 import Link from "react-router-dom/Link";

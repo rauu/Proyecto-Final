@@ -11,7 +11,7 @@ export const postMetting = (userID, message, subject) => {
   const headers = { headers: { "Access-Control-Allow-Origin": "*" } };
 
   return axios
-    .post(url + "setMetting/", {
+    .post(url + "sendMessage/", {
       userID: userID,
       message: message,
       subject: subject,

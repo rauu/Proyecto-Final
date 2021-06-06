@@ -1409,7 +1409,7 @@ const Admin = () => {
                       <br />
 
                       <iframe
-                        src={`http://192.168.1.38:3001/${val.file_location}`}
+                        src={`http://localhost:3001/${val.file_location}`}
                         width="100%"
                         height="600px"
                         allowfullscreen
