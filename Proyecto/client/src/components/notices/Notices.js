@@ -1,5 +1,5 @@
 import React from "react";
-import "./notices.css";
+import "./Notices.css";
 import NavPrivate from "../nav-private/Nav-Private";
 import { Fade } from "react-reveal";
 import Link from "react-router-dom/Link";
@@ -15,6 +15,8 @@ import {
   CardContent,
   Grid,
 } from "@material-ui/core/";
+import serverURL from "../../utils/serverURL";
+const url = serverURL;
 const moment = require("moment-timezone");
 var crypto = require("crypto"),
   algorithm = "aes-256-ctr",
@@ -111,11 +113,11 @@ const Notices = () => {
                                   className="video controls"
                                 >
                                   <source
-                                    src={`http://192.168.1.38:3001/${val.video}`}
+                                    src={`https://server.gymooze.com:4321/${val.video}`}
                                   />
                                 </video> */}
                                 <img
-                                  src={`http://192.168.1.38:3001/${val.image_uploded}`}
+                                  src={url + val.image_uploded}
                                   alt={val.id_news}
                                   className="news-image"
                                 />

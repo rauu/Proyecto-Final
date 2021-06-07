@@ -26,6 +26,9 @@ import {
   Card,
   CardContent,
 } from "@material-ui/core/";
+import serverURL from "../../utils/serverURL";
+const url = serverURL;
+
 const moment = require("moment-timezone");
 
 const useStyles = makeStyles((theme) => ({
@@ -131,7 +134,7 @@ const TrainerProfile = () => {
         setTrainerExists(res.data.userExists);
         setTrainerInfo(res.data);
         setEditProfileimage(
-          `http://192.168.1.38:3001/${res.data.profile_image}`
+          `${url + res.data.profile_image}`
         );
         setEditProfile({
           ...editProfile,
@@ -153,7 +156,6 @@ const TrainerProfile = () => {
        */
     });
   }
-  console.log(videoInfo);
 
   const getAllPrivateVideoTrainer = () => {
     /*     console.log("videos");
@@ -217,7 +219,7 @@ const TrainerProfile = () => {
             <Grid item xs={12} sm={12} md={4} lg={2}>
               <>
                 <img
-                  src={`http://192.168.1.38:3001/${trainerInfo.profile_image}`}
+                  src={url + trainerInfo.profile_image}
                   alt="trainerImage"
                   className="trainerImage"
                 />
@@ -444,9 +446,7 @@ const TrainerProfile = () => {
                                     onContextMenu={(e) => e.preventDefault()}
                                     className="video controls"
                                   >
-                                    <source
-                                      src={`http://192.168.1.38:3001/${val.video}`}
-                                    />
+                                    <source src={url + val.video} />
                                   </video>
                                   <br />
                                   <Typography variant="h5">
@@ -508,9 +508,7 @@ const TrainerProfile = () => {
                                         }
                                         className="video controls"
                                       >
-                                        <source
-                                          src={`http://192.168.1.38:3001/${val.video}`}
-                                        />
+                                        <source src={url + val.video} />
                                       </video>
                                       <br />
                                       <Typography variant="h5">
@@ -564,9 +562,7 @@ const TrainerProfile = () => {
                                           }
                                           className="video notSubscribedVideo controls"
                                         >
-                                          <source
-                                            src={`http://192.168.1.38:3001/${val.video}`}
-                                          />
+                                          <source src={url + val.video} />
                                         </video>
                                         <Typography
                                           variant="body2"

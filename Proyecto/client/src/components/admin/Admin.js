@@ -57,7 +57,8 @@ import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
 import { getUser, getEmail } from "../../service/User";
-
+import serverURL from "../utils/serverURL";
+const url = serverURL;
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -299,7 +300,6 @@ const Admin = () => {
         [event.target.name]: event.target.value,
       });
     }
-
   };
 
   const handleChangeDeleteRoom = (event) => {
@@ -323,7 +323,6 @@ const Admin = () => {
   };
 
   const userChange = (id_user, username, id) => {
-
     let role_user = document
       .getElementsByName("typeUserModify")
       [id].getAttribute("value");
@@ -344,7 +343,6 @@ const Admin = () => {
     }
   };
   const deleteCV = (i) => {
-
     let cvDelete = window.confirm(
       "Are you sure that you want to delete this CV?"
     );
@@ -745,7 +743,6 @@ const Admin = () => {
   function getRooms() {
     GetExersiceRooms().then((res) => {
       setRoomslist(res);
-
     });
   }
 
@@ -1409,7 +1406,7 @@ const Admin = () => {
                       <br />
 
                       <iframe
-                        src={`http://localhost:3001/${val.file_location}`}
+                        src={url + val.file_location}
                         width="100%"
                         height="600px"
                         allowfullscreen

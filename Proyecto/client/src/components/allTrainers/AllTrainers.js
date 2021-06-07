@@ -13,6 +13,9 @@ import {
 import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
 import LinkA from "react-router-dom/Link";
 
+import serverURL from "../../utils/serverURL";
+const url = serverURL;
+
 const AllTrainers = () => {
   const [trainerList, setTrainerList] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState({
@@ -81,7 +84,7 @@ const AllTrainers = () => {
                           className="a_link"
                         >
                           <img
-                            src={`http://192.168.1.38:3001/${val.profile_image}`}
+                            src={url + val.profile_image}
                             alt="profile_image"
                             className="profile_image"
                           />
