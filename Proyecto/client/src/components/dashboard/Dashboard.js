@@ -12,6 +12,8 @@ import {
   CardContent,
   Grid,
 } from "@material-ui/core/";
+import serverURL from "../../utils/serverURL";
+const url = serverURL;
 const moment = require("moment-timezone");
 
 const DashBoard = () => {
@@ -67,7 +69,7 @@ const DashBoard = () => {
                                 className="video controls"
                               >
                                 <source
-                                  src={`http://localhost:3001/${val.video}`}
+                                  src={url + val.video}
                                 />
                               </video>
                               <br />

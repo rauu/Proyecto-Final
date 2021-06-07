@@ -31,6 +31,8 @@ import {
   NewsComment,
   DeleteNewsComment,
 } from "../../service/Comments";
+import serverURL from "../../utils/serverURL";
+const url = serverURL;
 const moment = require("moment-timezone");
 var crypto = require("crypto"),
   algorithm = "aes-256-ctr",
@@ -160,7 +162,7 @@ const Notice = () => {
               <br />
               <div className="noticediv">
                 <img
-                  src={`http://192.168.1.38:3001/${notice.image_uploded}`}
+                  src={url + notice.image_uploded}
                   alt={notice.id_news}
                   className="noticeImage"
                 />

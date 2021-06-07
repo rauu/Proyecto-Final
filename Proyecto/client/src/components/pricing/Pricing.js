@@ -10,6 +10,9 @@ import Footer from "../footer/Footer";
 import { Typography, Grid, Card, CardContent } from "@material-ui/core";
 import { AllPlans } from "../../service/Plans";
 
+import serverURL from "../../utils/serverURL";
+const url = serverURL;
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",

@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import NotFound from "../notFound/NotFound";
 
+
 import {
   Typography,
   Backdrop,
@@ -16,6 +17,8 @@ import {
   CardContent,
   Grid,
 } from "@material-ui/core/";
+import serverURL from "../../utils/serverURL";
+const url = serverURL;
 const moment = require("moment-timezone");
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -101,7 +104,7 @@ const ExerciseRoomVideo = () => {
                                   className="video controls"
                                 >
                                   <source
-                                    src={`http://192.168.1.38:3001/${val.video}`}
+                                    src={url + val.video}
                                   />
                                 </video>
                                 <br />

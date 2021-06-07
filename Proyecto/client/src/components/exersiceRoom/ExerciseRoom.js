@@ -11,7 +11,8 @@ import {
   CardContent,
   Grid,
 } from "@material-ui/core/";
-
+import serverURL from "../../utils/serverURL";
+const url = serverURL;
 const ExerciseRooms = () => {
   const [allRooms, setAllRooms] = useState(null);
 
@@ -45,7 +46,7 @@ const ExerciseRooms = () => {
                         <Card className="cardImage">
                           <CardContent className="image-card">
                             <img
-                              src={`http://192.168.1.38:3001/${val.background_image}`}
+                              src={url + val.background_image}
                               alt="roomImage" className="imageCard"
                             />
                             <br />

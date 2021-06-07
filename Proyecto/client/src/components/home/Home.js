@@ -37,6 +37,8 @@ import Fitness5 from "../../assets/fitness-4.png";
 import Fitness6 from "../../assets/fitness-5.png";
 import Person1 from "../../assets/raunak.png";
 import Person2 from "../../assets/person.png";
+import serverURL from "../../utils/serverURL";
+const url = serverURL;
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
