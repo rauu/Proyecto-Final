@@ -29,6 +29,7 @@ import {
   VideoComment,
   DeleteVideoComment,
 } from "../../service/Comments";
+import serverURL from "../../utils/serverURL";
 const moment = require("moment-timezone");
 
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "20px",
   },
 }));
+const url = serverURL;
 
 const Video = () => {
   const history = useHistory();
@@ -159,8 +161,8 @@ const Video = () => {
                     className="showVideo"
                     controls
                   >
-                    <source src={`http://localhost:3001/${video.video}`} />
-                  </video>{" "}
+                    <source src={url + video.video} />
+                  </video>
                 </div>
               </Grid>
               <Grid item xs={12} sm={12} md={12} lg={12} className="videoInfo">
