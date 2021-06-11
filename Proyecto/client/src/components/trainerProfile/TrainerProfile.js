@@ -25,6 +25,7 @@ import {
   Fade,
   Card,
   CardContent,
+  Tooltip,
 } from "@material-ui/core/";
 import serverURL from "../../utils/serverURL";
 const url = serverURL;
@@ -133,9 +134,7 @@ const TrainerProfile = () => {
        */ if (res.data.userExists) {
         setTrainerExists(res.data.userExists);
         setTrainerInfo(res.data);
-        setEditProfileimage(
-          `${url + res.data.profile_image}`
-        );
+        setEditProfileimage(`${url + res.data.profile_image}`);
         setEditProfile({
           ...editProfile,
           description: res.data.description,
@@ -148,12 +147,9 @@ const TrainerProfile = () => {
 
   function userSubs() {
     userSubscribed(userInfo.id_user, pathname).then((res) => {
-      /*       console.log(res);
-       */ setVideoInfo(res.data);
+      setVideoInfo(res.data);
       setPrivateVideos(res.data.privateVideos);
       setPublicVideos(res.data.publicVideos);
-      /*       console.log(videoInfo);
-       */
     });
   }
 
@@ -440,22 +436,32 @@ const TrainerProfile = () => {
                           >
                             <Link to={`/video/${val.id_video}`}>
                               <Card>
-                                <CardContent className="video-card">
-                                  <video
-                                    /*  onClick={(e) => e.preventDefault()} */
-                                    onContextMenu={(e) => e.preventDefault()}
-                                    className="video controls"
-                                  >
-                                    <source src={url + val.video} />
-                                  </video>
-                                  <br />
-                                  <Typography variant="h5">
-                                    {val.video_name}
-                                  </Typography>
-                                  <Typography variant="body2">
-                                    {moment(val.date_upload).format("DD.MM.YY")}
-                                  </Typography>
-                                </CardContent>
+                                <Tooltip
+                                  title={
+                                    <small style={{ fontSize: "14px" }}>
+                                      {val.video_name}
+                                    </small>
+                                  }
+                                >
+                                  <CardContent className="video-card">
+                                    <video
+                                      /*  onClick={(e) => e.preventDefault()} */
+                                      onContextMenu={(e) => e.preventDefault()}
+                                      className="video controls"
+                                    >
+                                      <source src={url + val.video} />
+                                    </video>
+                                    <br />
+                                    <Typography variant="h5" noWrap>
+                                      {val.video_name}
+                                    </Typography>
+                                    <Typography variant="body2">
+                                      {moment(val.date_upload).format(
+                                        "DD.MM.YY"
+                                      )}
+                                    </Typography>
+                                  </CardContent>
+                                </Tooltip>
                               </Card>
                             </Link>
                           </Grid>
@@ -501,25 +507,33 @@ const TrainerProfile = () => {
                               >
                                 <Link to={`/video/${val.id_video}`}>
                                   <Card>
-                                    <CardContent className="video-card">
-                                      <video
-                                        onContextMenu={(e) =>
-                                          e.preventDefault()
-                                        }
-                                        className="video controls"
-                                      >
-                                        <source src={url + val.video} />
-                                      </video>
-                                      <br />
-                                      <Typography variant="h5">
-                                        {val.video_name}
-                                      </Typography>
-                                      <Typography variant="body2">
-                                        {moment(val.date_upload).format(
-                                          "DD.MM.YY"
-                                        )}
-                                      </Typography>
-                                    </CardContent>
+                                    <Tooltip
+                                      title={
+                                        <small style={{ fontSize: "14px" }}>
+                                          {val.video_name}
+                                        </small>
+                                      }
+                                    >
+                                      <CardContent className="video-card">
+                                        <video
+                                          onContextMenu={(e) =>
+                                            e.preventDefault()
+                                          }
+                                          className="video controls"
+                                        >
+                                          <source src={url + val.video} />
+                                        </video>
+                                        <br />
+                                        <Typography variant="h5" noWrap>
+                                          {val.video_name}
+                                        </Typography>
+                                        <Typography variant="body2">
+                                          {moment(val.date_upload).format(
+                                            "DD.MM.YY"
+                                          )}
+                                        </Typography>
+                                      </CardContent>
+                                    </Tooltip>
                                   </Card>
                                 </Link>
                               </Grid>
@@ -554,36 +568,44 @@ const TrainerProfile = () => {
                               >
                                 <Link to={`/subscribe/${trainerInfo.username}`}>
                                   <Card>
-                                    <CardContent className="video-card overlayCard">
-                                      <div className="notSubscribed">
-                                        <video
-                                          onContextMenu={(e) =>
-                                            e.preventDefault()
-                                          }
-                                          className="video notSubscribedVideo controls"
-                                        >
-                                          <source src={url + val.video} />
-                                        </video>
-                                        <Typography
-                                          variant="body2"
-                                          className="white"
-                                        >
-                                          Your need to subscribe to{" "}
-                                          {trainerInfo.username} in order to
-                                          watch his videos
-                                        </Typography>
-                                      </div>
+                                    <Tooltip
+                                      title={
+                                        <small style={{ fontSize: "14px" }}>
+                                          {val.video_name}
+                                        </small>
+                                      }
+                                    >
+                                      <CardContent className="video-card overlayCard">
+                                        <div className="notSubscribed">
+                                          <video
+                                            onContextMenu={(e) =>
+                                              e.preventDefault()
+                                            }
+                                            className="video notSubscribedVideo controls"
+                                          >
+                                            <source src={url + val.video} />
+                                          </video>
+                                          <Typography
+                                            variant="body2"
+                                            className="white"
+                                          >
+                                            Your need to subscribe to{" "}
+                                            {trainerInfo.username} in order to
+                                            watch his videos
+                                          </Typography>
+                                        </div>
 
-                                      <br />
-                                      <Typography variant="h5">
-                                        {val.video_name}
-                                      </Typography>
-                                      <Typography variant="body2">
-                                        {moment(val.date_upload).format(
-                                          "DD.MM.YY"
-                                        )}
-                                      </Typography>
-                                    </CardContent>
+                                        <br />
+                                        <Typography variant="h5" noWrap>
+                                          {val.video_name}
+                                        </Typography>
+                                        <Typography variant="body2">
+                                          {moment(val.date_upload).format(
+                                            "DD.MM.YY"
+                                          )}
+                                        </Typography>
+                                      </CardContent>
+                                    </Tooltip>
                                   </Card>
                                 </Link>
                               </Grid>
@@ -598,7 +620,7 @@ const TrainerProfile = () => {
                         <br />
                         <br />
                         <Typography variant="body1">
-                          <i>No public videos available</i>
+                          <i>No private videos available</i>
                         </Typography>
                       </>
                     )}
