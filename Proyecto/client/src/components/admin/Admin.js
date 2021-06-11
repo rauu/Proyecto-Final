@@ -57,7 +57,7 @@ import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 import SearchRoundedIcon from "@material-ui/icons/SearchRounded";
 import { getUser, getEmail } from "../../service/User";
-import serverURL from "../utils/serverURL";
+import serverURL from "../../utils/serverURL";
 const url = serverURL;
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;

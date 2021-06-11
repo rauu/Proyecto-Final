@@ -11,6 +11,7 @@ import {
   Card,
   CardContent,
   Grid,
+  Tooltip,
 } from "@material-ui/core/";
 import serverURL from "../../utils/serverURL";
 const url = serverURL;
@@ -24,9 +25,8 @@ const DashBoard = () => {
     AllVideos();
   } */
 
-
   React.useEffect(() => {
-    AllVideos(userInfo.username,userInfo.id_user ).then((res) => {
+    AllVideos(userInfo.username, userInfo.id_user).then((res) => {
       setVideos(res.data);
     });
   }, []);
@@ -61,26 +61,26 @@ const DashBoard = () => {
                           key={val.id_video}
                         >
                           <Link to={`/video/${val.id_video}`}>
-                          <Card className="card">
-                            <CardContent className="video-card">
-                              <video
-                                /*  onClick={(e) => e.preventDefault()} */
-                                onContextMenu={(e) => e.preventDefault()}
-                                className="video controls"
-                              >
-                                <source
-                                  src={url + val.video}
-                                />
-                              </video>
-                              <br />
-                              <Typography variant="h5">
-                                {val.video_name}
-                              </Typography>
-                              <Typography variant="body2">
-                                {moment(val.date_upload).format("DD.MM.YY")}
-                              </Typography>
-                            </CardContent>
-                          </Card>
+                            <Card className="card">
+                              <Tooltip title={<small style={{ fontSize: "14px" }}>{val.video_name}</small>}> 
+                                <CardContent className="video-card">
+                                  <video
+                                    /*  onClick={(e) => e.preventDefault()} */
+                                    onContextMenu={(e) => e.preventDefault()}
+                                    className="video controls"
+                                  >
+                                    <source src={url + val.video} />
+                                  </video>
+                                  <br />
+                                  <Typography variant="h5" noWrap>
+                                    {val.video_name}
+                                  </Typography>
+                                  <Typography variant="body2">
+                                    {moment(val.date_upload).format("DD.MM.YY")}
+                                  </Typography>
+                                </CardContent>
+                              </Tooltip>
+                            </Card>
                           </Link>
                         </Grid>
                       </>
